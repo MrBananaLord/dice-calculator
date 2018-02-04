@@ -1,7 +1,7 @@
 INSERT_REGEX = /INSERT\([^)]*\)/
 
 result = File.open('compiled.js', 'w')
-# result.write("javascript(function(){\n")
+result.write("javascript(function(){\n")
 
 def compile_file(result_file, file_name)
   file = File.open(file_name)
@@ -20,5 +20,5 @@ end
 
 compile_file(result, 'main.js')
 
-# result.write('}())')
+result.write('}())')
 result.close
