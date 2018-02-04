@@ -1,3 +1,4 @@
+javascript:(function(){
 $("head").append(`
 <style media="screen" type="text/css">
 #calculator {
@@ -136,9 +137,10 @@ class Calculator {
   }
 }
 
-var calculator = new Calculator(); // global because I am lazy
+var calculator = new Calculator();
 var rollableElements = $(".character-ability-stat-value");
 
 $.map(rollableElements, function(element) {
   new RollableElement(element);
 });
+}());
