@@ -6,7 +6,9 @@ var calculator = new Calculator();
 var rollableElements = [
   ".character-ability-modifier",
   ".character-ability-save",
-  ".skill-item-modifier"
+  ".skill-item-modifier",
+  ".attack-item-callout-tohit",
+  ".attack-item-callout-dmg"
 ];
 
 $.map(rollableElements, function(selector) {
