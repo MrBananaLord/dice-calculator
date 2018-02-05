@@ -1,23 +1,28 @@
 javascript:(function(){
 $("head").append(`
-<style media="screen" type="text/css">
+<style type="text/css">
 #calculator {
   z-index: 1000;
   position: fixed;
-  left: 50%;
-  top:50%;
-  margin-left: -150px;
-  margin-top: -125px;
-  min-width: 300px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+#calculator .box {
+  background-color: Pink;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
   box-shadow: 0px 0px 20px 2px rgb(0, 0, 0);
   border-radius: 2px;
+  margin-top: 100px;
   background-color: #2a313a;
 }
-
 #calculator.hidden {
   display: none;
 }
-
 #calculator .header {
   text-align: left;
   font-size: 20px;
@@ -28,19 +33,15 @@ $("head").append(`
   background-image: none;
   padding: 15px;
 }
-
 #calculator .body {
   border: none;
   border-radius: 0 0 1px 1px;
-  /* min-height: 200px; */
   background-color: white;
   padding: 15px;
 }
-
 #calculator .result {
-  /* margin: 15px; */
+  margin: 15px;
 }
-
 #calculator .reroll {
   border-radius: 2px;
   background-color: #96bf6b;
@@ -54,7 +55,6 @@ $("head").append(`
   margin-top: 15px;
   text-align: center;
 }
-
 #calculator .close {
   float: right;
   color: inherit;
@@ -63,7 +63,6 @@ $("head").append(`
   margin-top: -4px;
   cursor: pointer;
 }
-
 .rollableElement {
   color: #96bf6a;
   cursor: pointer;
@@ -89,13 +88,15 @@ class Calculator {
   constructor() {
     $("body").append(`
 <div id="calculator" class="hidden">
-  <div class="header">
-    Roll result
-    <a href="#" class="close" role="button"><span>×</span></a>
-  </div>
-  <div class="body">
-    <div class="result"></div>
-    <a href="#" class="reroll" role="button"><span>Roll Again</span></a>
+  <div class="box">
+    <div class="header">
+      Roll result
+      <a href="#" class="close" role="button"><span>×</span></a>
+    </div>
+    <div class="body">
+      <div class="result"></div>
+      <a href="#" class="reroll" role="button"><span>Roll Again</span></a>
+    </div>
   </div>
 </div>
     `);
