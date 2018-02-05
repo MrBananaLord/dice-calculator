@@ -67,17 +67,20 @@ $("head").append(`
   color: #96bf6a;
   cursor: pointer;
 }
+.rollableElement:hover {
+  color: #5a862b;
+}
 </style>
 `);
 class RollableElement {
-  constructor(element) {
-    this.element = $(element);
+  constructor(selector) {
+    this.element = $(selector);
 
     this.element.addClass("rollableElement");
     this.element.click((e) => { this.click() });
 
     this.dice = [20];
-    this.bonus = parseInt(this.element.html());
+    this.bonus = parseInt(this.element.find("[class*=value]").html());
   }
 
   click() {
@@ -90,7 +93,7 @@ class Calculator {
 <div id="calculator" class="hidden">
   <div class="box">
     <div class="header">
-      Roll result
+      <span class="headline">Roll result</span>
       <a href="#" class="close" role="button"><span>×</span></a>
     </div>
     <div class="body">
@@ -139,9 +142,13 @@ class Calculator {
 }
 
 var calculator = new Calculator();
-var rollableElements = $(".character-ability-stat-value");
+var rollableElements = [
+  ".character-ability-modifier",
+  ".character-ability-save",
+  ".skill-item-modifier"
+];
 
-$.map(rollableElements, function(element) {
-  new RollableElement(element);
+$.map(rollableElements, function(selector) {
+  new RollableElement(selector);
 });
 }());

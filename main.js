@@ -3,8 +3,12 @@ INSERT(models/rollable_element.js)
 INSERT(models/calculator.js)
 
 var calculator = new Calculator();
-var rollableElements = $(".character-ability-stat-value");
+var rollableElements = [
+  ".character-ability-modifier",
+  ".character-ability-save",
+  ".skill-item-modifier"
+];
 
-$.map(rollableElements, function(element) {
-  new RollableElement(element);
+$.map(rollableElements, function(selector) {
+  new RollableElement(selector);
 });

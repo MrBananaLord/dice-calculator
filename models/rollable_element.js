@@ -1,12 +1,12 @@
 class RollableElement {
-  constructor(element) {
-    this.element = $(element);
+  constructor(selector) {
+    this.element = $(selector);
 
     this.element.addClass("rollableElement");
     this.element.click((e) => { this.click() });
 
     this.dice = [20];
-    this.bonus = parseInt(this.element.html());
+    this.bonus = parseInt(this.element.find("[class*=value]").html());
   }
 
   click() {
