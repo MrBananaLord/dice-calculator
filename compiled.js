@@ -146,8 +146,7 @@ var rollableElements = [
   ".character-ability-modifier",
   ".character-ability-save",
   ".skill-item-modifier",
-  ".attack-item-callout-tohit",
-  ".attack-item-callout-dmg"
+  ".attack-item-callout-tohit"
 ];
 
 $.map(rollableElements, function(selector) {
