@@ -1,8 +1,7 @@
 class Calculator {
   constructor() {
-    $("body").append(`
-      INSERT(templates/calculator.html)
-    `);
+    insertHTML(`INSERT(templates/calculator.html)`);
+    insertCSS(`INSERT(styles/calculator.css)`);
 
     this.element = $("#calculator");
     this.element.find(".close").click(e => this.hide(e));

@@ -1,0 +1,11 @@
+#rollingStonesMenu {
+  background-color: #fff;
+  border: 1px solid #d4d0ce;
+  border-left: none;
+  border-radius: 2px;
+  position: fixed;
+  top: 100px;
+  left: 0;
+  height: 50px;
+  line-height: 50px;
+}

@@ -1,0 +1,8 @@
+
+.rollableElement {
+  color: #96bf6a;
+  cursor: pointer;
+}
+.rollableElement:hover {
+  color: #5a862b;
+}

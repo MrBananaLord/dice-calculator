@@ -1,3 +1,4 @@
+javascript:(function(){
 insertCSS = function(styles) {
   $("head").append(`
 <style type="text/css">
@@ -287,3 +288,4 @@ class Calculator {
 
 
 var calculator = new Menu();
+}());

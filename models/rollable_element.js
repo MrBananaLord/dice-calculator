@@ -1,5 +1,8 @@
 class RollableElement {
   constructor(selector) {
+    insertHTML(`INSERT(templates/rollable_element.html)`);
+    insertCSS(`INSERT(styles/rollable_element.css)`);
+
     this.element = $(selector);
 
     this.element.addClass("rollableElement");
