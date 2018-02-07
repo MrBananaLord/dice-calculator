@@ -73,7 +73,7 @@ class Menu {
 class Calculator {
   constructor() {
     insertHTML(`
-<div id="rollingStonesCalculator" class="rollingStones">
+<div id="rollingStonesCalculator" class="rollingStones hidden">
   <div class="box">
     <div class="header">
       <span class="headline">Roll calculator</span>
@@ -134,7 +134,7 @@ class Calculator {
       </div>
       <div class="row">
         <div class="key">d20</div>
-        <div class="key calculate" data-action="calculate">=</div>
+        <div class="key calculate upcased" data-action="calculate">Roll</div>
       </div>
     </div>
   </div>
@@ -210,12 +210,7 @@ class Calculator {
 }
 #rollingStonesCalculator .key.calculate {
   width: 200px;
-}
-#rollingStonesCalculator .key:hover {
-  background-color: #d6d6d6;
-}
-#rollingStonesCalculator .key.active {
-  background-color: #d6d6d6;
+  background-color: #96bf6a;
 }
 #rollingStonesCalculator .upcased {
   text-transform: uppercase;
@@ -239,6 +234,7 @@ class Calculator {
 #rollingStonesCalculator .display .equasion {
   padding: 0 5px 0 10px;
   float: left;
+  font-weight: normal;
 }
 #rollingStonesCalculator .display .result {
   float: right;
@@ -342,19 +338,10 @@ class Calculator {
   }
 
   roll(dice, bonus) {
-    this.dice = dice;
-    this.bonus = bonus;
-
-    var rolls1 = dice.map(d => Math.floor(Math.random() * d) + 1);
-    var result1 = rolls1.reduce((a,b) => (a + b)) + bonus;
-    var rolls2 = dice.map(d => Math.floor(Math.random() * d) + 1);
-    var result2 = rolls2.reduce((a,b) => (a + b)) + bonus;
-
-    this.show(`
-      <p>Roll: ${dice.map(d => 'd' + d).join(' + ')} + (${bonus})</p>
-      <p>Result 1: ${rolls1.join(' + ')} + (${bonus}) = <b>${result1}</b></p>
-      <p>Result 2: ${rolls2.join(' + ')} + (${bonus}) = <b>${result2}</b></p>
-    `);
+    this.element.removeClass("hidden");
+    this.queue = [dice, "+", bonus];
+    this.updateEquasion();
+    this.calculate();
   }
 
   show(html) {
@@ -368,7 +355,46 @@ class Calculator {
   }
 }
 
+class RollableElement {
+  constructor(selector) {
+    insertCSS(`
+
+.rollableElement {
+  color: #96bf6a;
+  cursor: pointer;
+}
+.rollableElement:hover {
+  color: #5a862b;
+}
+`);
+
+    this.element = $(selector);
+
+    this.element.addClass("rollableElement");
+    this.element.click((e) => { this.click() });
+
+    this.dice = [20];
+    this.bonus = parseInt(this.element.find("[class*=value]").html());
+  }
+
+  click() {
+    calculator.roll(this.dice, this.bonus);
+  }
+}
+
 
 var calculator = new Calculator();
 var menu = new Menu(calculator);
+
+var rollableElements = [
+  ".character-ability-modifier",
+  ".character-ability-save",
+  ".skill-item-modifier",
+  ".attack-item-callout-tohit",
+  ".attack-item-callout-dmg"
+];
+
+$.map(rollableElements, function(selector) {
+  new RollableElement(selector);
+});
 }());

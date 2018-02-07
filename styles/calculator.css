@@ -67,12 +67,7 @@
 }
 #rollingStonesCalculator .key.calculate {
   width: 200px;
-}
-#rollingStonesCalculator .key:hover {
-  background-color: #d6d6d6;
-}
-#rollingStonesCalculator .key.active {
-  background-color: #d6d6d6;
+  background-color: #96bf6a;
 }
 #rollingStonesCalculator .upcased {
   text-transform: uppercase;
@@ -96,6 +91,7 @@
 #rollingStonesCalculator .display .equasion {
   padding: 0 5px 0 10px;
   float: left;
+  font-weight: normal;
 }
 #rollingStonesCalculator .display .result {
   float: right;
