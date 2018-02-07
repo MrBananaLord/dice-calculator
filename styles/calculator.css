@@ -107,13 +107,13 @@
   text-align: center;
 }
 #rollingStonesCalculator .display .result .values .advantage {
-  color: green;
+  color: #96bf6a;
   height: 24px;
   border-bottom: 1px solid #d6d6d6;
   float: none;
 }
 #rollingStonesCalculator .display .result .values .disadvantage {
-  color: red;
+  color: #d23f40;
   height: 24px;
   border-top: 1px solid #d6d6d6;
   float: none;
@@ -124,9 +124,4 @@
 #rollingStonesCalculator .display .result .values .special {
   line-height: 25px;
   padding-left: 5px;
-}
-#rollingStonesCalculator .display .result .values .special .rolls {
-  color: #d6d6d6;
-  padding-left: 5px;
-  font-weight: normal;
 }

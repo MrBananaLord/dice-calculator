@@ -6,6 +6,67 @@ class Calculator {
     this.element = $("#rollingStonesCalculator");
     this.element.find(".close").click(e => this.hide(e));
     this.element.find(".reroll").click(e => this.reroll(e));
+    this.element.find(".button").click(e => this.buttonClick(e));
+
+    this.displayElement = this.element.find(".display .value");
+    this.resultElement = this.element.find(".display .result");
+
+    this.queue = [];
+    this.mode  = "input";
+  }
+
+  buttonClick(e) {
+    let target = $(e.target);
+    let action = target.data("action");
+
+    if (action == null) {
+      if (this.mode == "result") {
+        this.inputMode();
+      }
+
+      this.push(target.html());
+    } else {
+      this[action]();
+    }
+
+    this.updateEquasion();
+  }
+
+  inputMode() {
+    this.mode = "input";
+    this.queue = [];
+    this.resultElement.addClass("hidden");
+  }
+  
+  push(value) {
+    this.queue.push(value);
+  }
+
+  updateEquasion() {
+    this.displayElement.text(this.equasion());
+  }
+
+  equasion() {
+    return this.queue.join(" ");
+  }
+
+  calculate() {
+    let firstRoll = this.resolveEquasion();
+    let secondRoll = this.resolveEquasion();
+
+    this.updateResults(firstRoll, secondRoll);
+    this.mode = "result";
+  }
+
+  resolveEquasion() {
+    return Math.floor(Math.random() * 20) + 1;
+  }
+
+  updateResults(firstRoll, secondRoll) {
+    this.resultElement.removeClass("hidden");
+    this.resultElement.find(".regular").text(firstRoll);
+    this.resultElement.find(".advantage").text(Math.max(firstRoll, secondRoll));
+    this.resultElement.find(".disadvantage").text(Math.min(firstRoll, secondRoll));
   }
 
   reroll(e) {

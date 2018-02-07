@@ -72,7 +72,7 @@ class Menu {
 class Calculator {
   constructor() {
     insertHTML(`
-<div id="rollingStonesCalculator" class="rollingStones hidden">
+<div id="rollingStonesCalculator" class="rollingStones">
   <div class="box">
     <div class="header">
       <span class="headline">Roll calculator</span>
@@ -84,13 +84,13 @@ class Calculator {
           <div class="equasion">
             <span class="value">alkjsdbasjhd balkjsdba sjhdbalkjsdbasjhdba lkjsdbasjhdbalkjsdbasjhdb</span>
           </div>
-          <div class="result">
+          <div class="result hidden">
             <div>=</div>
             <div class="values">
               <div class="regular">13</div>
               <div class="special">
-                <div class="advantage">13<span class="rolls">(13, 10)</span></div>
-                <div class="disadvantage">10<span class="rolls">(13, 10)</span></div>
+                <div class="advantage">13</div>
+                <div class="disadvantage">10</div>
               </div>
             </div>
           </div>
@@ -100,8 +100,8 @@ class Calculator {
         <div class="button">d4</div>
         <div class="button">d%</div>
         <div class="button">d?</div>
-        <div class="button upcased">del</div>
-        <div class="button upcased">clr</div>
+        <div class="button upcased" data-action="revert">del</div>
+        <div class="button upcased" data-action="clear">clr</div>
       </div>
       <div class="row">
         <div class="button">d6</div>
@@ -133,7 +133,7 @@ class Calculator {
       </div>
       <div class="row">
         <div class="button">d20</div>
-        <div class="button calculate">=</div>
+        <div class="button calculate" data-action="calculate">=</div>
       </div>
     </div>
   </div>
@@ -249,13 +249,13 @@ class Calculator {
   text-align: center;
 }
 #rollingStonesCalculator .display .result .values .advantage {
-  color: green;
+  color: #96bf6a;
   height: 24px;
   border-bottom: 1px solid #d6d6d6;
   float: none;
 }
 #rollingStonesCalculator .display .result .values .disadvantage {
-  color: red;
+  color: #d23f40;
   height: 24px;
   border-top: 1px solid #d6d6d6;
   float: none;
@@ -267,16 +267,72 @@ class Calculator {
   line-height: 25px;
   padding-left: 5px;
 }
-#rollingStonesCalculator .display .result .values .special .rolls {
-  color: #d6d6d6;
-  padding-left: 5px;
-  font-weight: normal;
-}
 `);
 
     this.element = $("#rollingStonesCalculator");
     this.element.find(".close").click(e => this.hide(e));
     this.element.find(".reroll").click(e => this.reroll(e));
+    this.element.find(".button").click(e => this.buttonClick(e));
+
+    this.displayElement = this.element.find(".display .value");
+    this.resultElement = this.element.find(".display .result");
+
+    this.queue = [];
+    this.mode  = "input";
+  }
+
+  buttonClick(e) {
+    let target = $(e.target);
+    let action = target.data("action");
+
+    if (action == null) {
+      if (this.mode == "result") {
+        this.inputMode();
+      }
+
+      this.push(target.html());
+    } else {
+      this[action]();
+    }
+
+    this.updateEquasion();
+  }
+
+  inputMode() {
+    this.mode = "input";
+    this.queue = [];
+    this.resultElement.addClass("hidden");
+  }
+  
+  push(value) {
+    this.queue.push(value);
+  }
+
+  updateEquasion() {
+    this.displayElement.text(this.equasion());
+  }
+
+  equasion() {
+    return this.queue.join(" ");
+  }
+
+  calculate() {
+    let firstRoll = this.resolveEquasion();
+    let secondRoll = this.resolveEquasion();
+
+    this.updateResults(firstRoll, secondRoll);
+    this.mode = "result";
+  }
+
+  resolveEquasion() {
+    return Math.floor(Math.random() * 20) + 1;
+  }
+
+  updateResults(firstRoll, secondRoll) {
+    this.resultElement.removeClass("hidden");
+    this.resultElement.find(".regular").text(firstRoll);
+    this.resultElement.find(".advantage").text(Math.max(firstRoll, secondRoll));
+    this.resultElement.find(".disadvantage").text(Math.min(firstRoll, secondRoll));
   }
 
   reroll(e) {
