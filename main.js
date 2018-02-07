@@ -4,15 +4,14 @@ insertCSS = function(styles) {
 ${styles}
 </style>
   `);
-}
+};
 insertHTML = function(html) {
   $("body").append(html);
-}
+};
 
 insertCSS(`INSERT(styles/shared.css)`);
 
 INSERT(models/menu.js)
-INSERT(models/calculator.js)
 
-var calculator = new Calculator();
+var calculator = "asd";
 var menu = new Menu(calculator);

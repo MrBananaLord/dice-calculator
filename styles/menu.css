@@ -1,4 +1,5 @@
 #rollingStonesMenu {
+  z-index: 1000;
   background-color: #fff;
   border: 1px solid #d4d0ce;
   border-left: none;
