@@ -65,9 +65,19 @@
   background-color: #f1f1f1;
   cursor: pointer;
 }
+#rollingStonesCalculator .key.red {
+  color: #bc0f0e;
+}
+#rollingStonesCalculator .key.orange {
+  color: #e68412;
+}
+#rollingStonesCalculator .key.blue {
+  color: #127bc4;
+}
 #rollingStonesCalculator .key.calculate {
   width: 200px;
   background-color: #96bf6a;
+  color: white;
 }
 #rollingStonesCalculator .upcased {
   text-transform: uppercase;
