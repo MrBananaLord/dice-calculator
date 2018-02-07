@@ -3,7 +3,7 @@ class Calculator {
     insertHTML(`INSERT(templates/calculator.html)`);
     insertCSS(`INSERT(styles/calculator.css)`);
 
-    this.element = $("#calculator");
+    this.element = $("#rollingStonesCalculator");
     this.element.find(".close").click(e => this.hide(e));
     this.element.find(".reroll").click(e => this.reroll(e));
   }

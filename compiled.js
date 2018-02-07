@@ -9,11 +9,28 @@ insertHTML = function(html) {
   $("body").append(html);
 }
 
+insertCSS(`
+.rollingStones {
+  font-family: "Roboto Condensed",Roboto,Helvetica,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: white;
+  color: inherit;
+}
+.rollingStones .hidden, .rollingStones.hidden {
+  display: none !important;
+}
+.rollingStones a {
+  text-decoration: none;
+  color: inherit;
+}
+`);
+
 class Menu {
-  constructor() {
+  constructor(calculator) {
     insertHTML(`
-<div id="rollingStonesMenu">
-  <a href="#">Calculator</a>
+<div id="rollingStonesMenu" class="rollingStones">
+  <a href="#" data-target="calculator">Calc</a>
 </div>
 `);
     insertCSS(`
@@ -28,14 +45,33 @@ class Menu {
   height: 50px;
   line-height: 50px;
 }
+#rollingStonesMenu a {
+  display: inline-block;
+  text-transform: uppercase;
+  margin: 0 5px;
+}
 `);
+
+    this.calculator = calculator;
+
+    this.element = $("#rollingStonesMenu");
+    this.element.find("a").click(e => this.itemClick(e));
+  }
+
+  itemClick(e) {
+    e.preventDefault();
+
+    let target = this[$(e.target).data("target")];
+    if (target != null) {
+      target.show();
+    }
   }
 }
 
 class Calculator {
   constructor() {
     insertHTML(`
-<div id="calculator">
+<div id="rollingStonesCalculator" class="rollingStones hidden">
   <div class="box">
     <div class="header">
       <span class="headline">Roll calculator</span>
@@ -103,7 +139,7 @@ class Calculator {
 </div>
 `);
     insertCSS(`
-#calculator {
+#rollingStonesCalculator {
   z-index: 1000;
   position: fixed;
   top: 0;
@@ -111,12 +147,8 @@ class Calculator {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.35);
-  font-family: "Roboto Condensed",Roboto,Helvetica,sans-serif;
-  font-size: 14px;
-  font-weight: bold;
 }
-#calculator .box {
-  background-color: Pink;
+#rollingStonesCalculator .box {
   margin-left: auto;
   margin-right: auto;
   width: 250px;
@@ -125,24 +157,20 @@ class Calculator {
   margin-top: 100px;
   background-color: #2a313a;
 }
-#calculator .hidden {
-  display: none !important;
-}
-#calculator .header {
+#rollingStonesCalculator .header {
   text-align: left;
   font-size: 20px;
   text-transform: uppercase;
   font-weight: bold;
   color: #fff;
-  background-image: none;
   padding: 15px;
 }
-#calculator .body {
+#rollingStonesCalculator .body {
   border: none;
   border-radius: 0 0 1px 1px;
   background-color: white;
 }
-#calculator .reroll {
+#rollingStonesCalculator .reroll {
   border-radius: 2px;
   background-color: #96bf6b;
   color: #fff;
@@ -155,100 +183,97 @@ class Calculator {
   margin-top: 15px;
   text-align: center;
 }
-#calculator .close {
+#rollingStonesCalculator .close {
   float: right;
   color: inherit;
   font-size: larger;
   margin-top: -4px;
   cursor: pointer;
 }
-#calculator a {
-  text-decoration: none;
-}
-#calculator .row {
+#rollingStonesCalculator .row {
   height: 50px;
   width: 250px;
   text-align: center;
   line-height: 50px;
 }
-#calculator .display {
+#rollingStonesCalculator .display {
   background-color: #fff;
 }
-#calculator .button {
+#rollingStonesCalculator .button {
   float: left;
   width: 50px;
   height: 50px;
   background-color: #f1f1f1;
   cursor: pointer;
 }
-#calculator .button.calculate {
+#rollingStonesCalculator .button.calculate {
   width: 200px;
 }
-#calculator .button:hover {
+#rollingStonesCalculator .button:hover {
   background-color: #d6d6d6;
 }
-#calculator .button.active {
+#rollingStonesCalculator .button.active {
   background-color: #d6d6d6;
 }
-#calculator .upcased {
+#rollingStonesCalculator .upcased {
   text-transform: uppercase;
 }
-#calculator .display {
+#rollingStonesCalculator .display {
   text-align: right;
   overflow: scroll;
   width: 250px;
   direction: rtl;
   position: relative;
 }
-#calculator .display div {
+#rollingStonesCalculator .display div {
   direction: ltr;
 }
-#calculator .display .scrollable {
+#rollingStonesCalculator .display .scrollable {
   width: max-content;
   height: 50px;
   white-space: nowrap;
   overflow: unset;
 }
-#calculator .display .equasion {
+#rollingStonesCalculator .display .equasion {
   padding: 0 5px 0 10px;
   float: left;
 }
-#calculator .display .result {
+#rollingStonesCalculator .display .result {
   float: right;
   padding-right: 10px;
   height: 50px;
 }
-#calculator .display .result div {
+#rollingStonesCalculator .display .result div {
   float: left;
   text-align: center;
 }
-#calculator .display .result .values .advantage {
+#rollingStonesCalculator .display .result .values .advantage {
   color: green;
   height: 24px;
   border-bottom: 1px solid #d6d6d6;
   float: none;
 }
-#calculator .display .result .values .disadvantage {
+#rollingStonesCalculator .display .result .values .disadvantage {
   color: red;
   height: 24px;
   border-top: 1px solid #d6d6d6;
   float: none;
 }
-#calculator .display .result .values .regular {
+#rollingStonesCalculator .display .result .values .regular {
   padding-left: 5px;
 }
-#calculator .display .result .values .special {
+#rollingStonesCalculator .display .result .values .special {
   line-height: 25px;
   padding-left: 5px;
 }
-#calculator .display .result .values .special .rolls {
+#rollingStonesCalculator .display .result .values .special .rolls {
   color: #d6d6d6;
   padding-left: 5px;
   font-weight: normal;
 }
 `);
 
-    this.element = $("#calculator");
+    this.element = $("#rollingStonesCalculator");
     this.element.find(".close").click(e => this.hide(e));
     this.element.find(".reroll").click(e => this.reroll(e));
   }
@@ -286,4 +311,5 @@ class Calculator {
 }
 
 
-var calculator = new Menu();
+var calculator = new Calculator();
+var menu = new Menu(calculator);

@@ -9,7 +9,10 @@ insertHTML = function(html) {
   $("body").append(html);
 }
 
+insertCSS(`INSERT(styles/shared.css)`);
+
 INSERT(models/menu.js)
 INSERT(models/calculator.js)
 
-var calculator = new Menu();
+var calculator = new Calculator();
+var menu = new Menu(calculator);
