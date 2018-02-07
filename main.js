@@ -12,6 +12,7 @@ insertHTML = function(html) {
 insertCSS(`INSERT(styles/shared.css)`);
 
 INSERT(models/menu.js)
+INSERT(models/calculator.js)
 
-var calculator = "asd";
+var calculator = new Calculator();
 var menu = new Menu(calculator);

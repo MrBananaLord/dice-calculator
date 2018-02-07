@@ -6,7 +6,7 @@ class Calculator {
     this.element = $("#rollingStonesCalculator");
     this.element.find(".close").click(e => this.hide(e));
     this.element.find(".reroll").click(e => this.reroll(e));
-    this.element.find(".button").click(e => this.buttonClick(e));
+    this.element.find(".key").click(e => this.keyClick(e));
 
     this.displayElement = this.element.find(".display .value");
     this.resultElement = this.element.find(".display .result");
@@ -15,7 +15,7 @@ class Calculator {
     this.mode  = "input";
   }
 
-  buttonClick(e) {
+  keyClick(e) {
     let target = $(e.target);
     let action = target.data("action");
 
@@ -37,7 +37,7 @@ class Calculator {
     this.queue = [];
     this.resultElement.addClass("hidden");
   }
-  
+
   push(value) {
     this.queue.push(value);
   }
