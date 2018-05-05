@@ -5,6 +5,8 @@ For fun reasons I want to provide bookmarklet with some hacks for Beyond DnD web
 Create new bookmark in your browser with any name and with url copied from `compiled.js`. Basically url is huge javascript.
 ### Compiling
 If you want to add something or hack around, change files like you want and then run `ruby compile.rb` which will create one big javascript file (`compiled.js`).
+### Running server
+You might want to run the server to be able to connect to development environment. Just run `npm install connect serve-static` and `node server.js`.
 ## TODO's
 - add dice rolls to character page
 - add dice rolls to other pages
