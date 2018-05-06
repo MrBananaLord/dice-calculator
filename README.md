@@ -6,7 +6,7 @@ Create new bookmark in your browser with any name and with url copied from `comp
 ### Compiling
 If you want to add something or hack around, change files like you want and then run `ruby compile.rb` which will create one big javascript file (`compiled.js`).
 ### Running server
-You might want to run the server to be able to connect to development environment. Just run `npm install connect serve-static` and `node server.js`.
+You might want to run the server to be able to connect to development environment. Just run `yarn` and then `node server.js` (you need to have both yarn and node installed).
 ### Running guard
 You can have automatic compiling if you want. Just run `bundle exec guard`
 ## TODO's
