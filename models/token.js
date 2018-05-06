@@ -4,7 +4,7 @@ module.exports = class Token {
   }
 
   number() {
-    return !!parseInt(this.value);
+    return Number.isInteger(parseInt(this.value));
   }
 
   operator() {

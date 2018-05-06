@@ -4,9 +4,9 @@ var assert   = require('assert');
 describe('Equasion', function() {
   describe('#toPostfix()', function() {
     it('converts infix to postfix', function() {
-      var equasion = new Equasion('3 + 4 * (2 - 1)');
+      var equasion = new Equasion('301 + 4 * (20 - 1)');
 
-      assert.equal(equasion.toPostfix(), '3 4 2 1 - * +');
+      assert.equal(equasion.toPostfix(), '301 4 20 1 - * +');
     });
   });
 
