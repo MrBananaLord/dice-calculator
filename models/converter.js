@@ -1,4 +1,4 @@
-module.exports = class Converter {
+class Converter {
   constructor() {
     this.output    = [];
     this.operators = [];

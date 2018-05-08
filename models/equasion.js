@@ -1,7 +1,4 @@
-const Tokenizer = require('./tokenizer.js');
-const Converter = require('./converter.js');
-
-module.exports = class Equasion {
+class Equasion {
   constructor(string) {
     this.infixTokens = new Tokenizer(string).run();
   }

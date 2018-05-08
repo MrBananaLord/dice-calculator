@@ -1,6 +1,4 @@
-const Token = require('./token.js');
-
-module.exports = class Bracket extends Token {
+class Bracket extends Token {
   static get openingBrackets() {
     return ['(', '[', '{'];
   }

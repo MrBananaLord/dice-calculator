@@ -6,11 +6,9 @@
   "author": "Jan Bator <jan.bator@xing.com>",
   "license": "MIT",
   "dependencies": {
+    "chai": "^4.1.2",
     "connect": "^3.6.6",
     "mocha": "^5.1.1",
     "serve-static": "^1.13.2"
-  },
-  "scripts": {
-    "test": "mocha --recursive"
   }
 }

@@ -1,12 +1,4 @@
-const Token      = require('./tokens/token.js');
-const Adder      = require('./tokens/adder.js');
-const Bracket    = require('./tokens/bracket.js');
-const Divider    = require('./tokens/divider.js');
-const Multiplier = require('./tokens/multiplier.js');
-const Numeral    = require('./tokens/numeral.js');
-const Subtractor = require('./tokens/subtractor.js');
-
-module.exports = class Tokenizer {
+class Tokenizer {
   constructor(string) {
     this.string = string;
     this.tokens = [];

@@ -1,4 +1,4 @@
-module.exports = class Token {
+class Token {
   constructor(value) {
     this.value = value;
   }

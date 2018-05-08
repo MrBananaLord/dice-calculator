@@ -1,6 +1,4 @@
-const Operator = require('./operator.js');
-
-module.exports = class Divider extends Operator {
+class Divider extends Operator {
   static canBeInstanciatedFrom(value) {
     return ['/', '÷'].includes(value);
   }

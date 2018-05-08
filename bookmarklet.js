@@ -27,6 +27,249 @@ insertCSS(`
 }
 `);
 
+class Token {
+  constructor(value) {
+    this.value = value;
+  }
+
+  static canBeInstanciatedFrom(value) {
+    return true;
+  }
+
+  get type() {
+    return 'token';
+  }
+
+  get number() {
+    return this.type === 'number';
+  }
+
+  get operator() {
+    return this.type === 'operator';
+  }
+
+  get bracket() {
+    return this.type === 'bracket';
+  }
+}
+
+class Operator extends Token {
+  get type() {
+    return 'operator';
+  }
+
+  get precedenceScore() {
+    return 1;
+  }
+
+  precedences(otherToken) {
+    return this.precedenceScore > otherToken.precedenceScore;
+  }
+
+  hasHigherPriorityThan(otherToken) {
+    return (this.precedences(otherToken) || (
+      this.precedenceScore == otherToken.precedenceScore &&
+      this.isLeftAssociative()
+    ))
+  }
+
+  isLeftAssociative() {
+    return true;
+  }
+}
+
+class Adder extends Operator {
+  static canBeInstanciatedFrom(value) {
+    return value === '+';
+  }
+
+  get type() {
+    return 'operator';
+  }
+
+  get precedenceScore() {
+    return 1;
+  }
+}
+
+class Bracket extends Token {
+  static get openingBrackets() {
+    return ['(', '[', '{'];
+  }
+
+  static get closingBrackets() {
+    return [')', ']', '}'];
+  }
+
+  static canBeInstanciatedFrom(value) {
+    return (this.openingBrackets.concat(this.closingBrackets)).includes(value);
+  }
+
+  get type() {
+    return 'bracket';
+  }
+
+  get opening() {
+    return this.constructor.openingBrackets.includes(this.value);
+  }
+
+  get closing() {
+    return this.constructor.closingBrackets.includes(this.value);
+  }
+}
+
+class Divider extends Operator {
+  static canBeInstanciatedFrom(value) {
+    return ['/', '÷'].includes(value);
+  }
+
+  get type() {
+    return 'operator';
+  }
+
+  get precedenceScore() {
+    return 2;
+  }
+}
+
+class Multiplier extends Operator {
+  static canBeInstanciatedFrom(value) {
+    return ['*', '×'].includes(value);
+  }
+
+  get type() {
+    return 'operator';
+  }
+
+  get precedenceScore() {
+    return 2;
+  }
+}
+
+class Numeral extends Token {
+  static canBeInstanciatedFrom(value) {
+    return Number.isInteger(parseInt(value));
+  }
+
+  get type() {
+    return 'number';
+  }
+}
+
+class Subtractor extends Operator {
+  static canBeInstanciatedFrom(value) {
+    return value === '-';
+  }
+
+  get type() {
+    return 'operator';
+  }
+
+  get precedenceScore() {
+    return 1;
+  }
+}
+
+
+class Converter {
+  constructor() {
+    this.output    = [];
+    this.operators = [];
+  }
+
+  get lastOperator() {
+    return this.operators[this.operators.length - 1];
+  }
+
+  lastOperatorIsNotOpeningBracket() {
+    let lastOperator = this.lastOperator;
+
+    return lastOperator && !(lastOperator.bracket && lastOperator.opening);
+  }
+
+  infixToPostfix(tokens) {
+    tokens.forEach((token) => {
+      if (token.number) {
+        this.output.push(token);
+      }
+      else if (token.operator) {
+        while (this.lastOperatorIsNotOpeningBracket() && this.lastOperator.hasHigherPriorityThan(token)) {
+          this.output.push(this.operators.pop());
+        }
+
+        this.operators.push(token);
+      }
+      else if (token.bracket && token.opening) {
+        this.operators.push(token);
+      }
+      else if (token.bracket && token.closing) {
+        while (this.lastOperatorIsNotOpeningBracket()) {
+          this.output.push(this.operators.pop());
+        }
+
+        this.operators.pop();
+      }
+    });
+
+    while (this.operators.length) {
+      this.output.push(this.operators.pop());
+    }
+
+    return this.output;
+  }
+}
+
+class Tokenizer {
+  constructor(string) {
+    this.string = string;
+    this.tokens = [];
+  }
+
+  static get tokens() {
+    return([ Adder, Divider, Multiplier, Subtractor, Bracket, Numeral, Token ]);
+  }
+
+  static buildToken(value) {
+    let klass = this.tokens.find((klass) => klass.canBeInstanciatedFrom(value));
+
+    return new klass(value);
+  }
+
+  lastToken() {
+    return this.tokens[this.tokens.length - 1];
+  }
+
+  run() {
+    this.string.split('').forEach((character) => {
+      let token = this.constructor.buildToken(character);
+
+      if (token.number && this.lastToken() && this.lastToken().number) {
+        token = this.constructor.buildToken(this.tokens.pop().value + token.value);
+      }
+
+      this.tokens.push(token);
+    });
+
+    return this.tokens;
+  }
+}
+
+class Equasion {
+  constructor(string) {
+    this.infixTokens = new Tokenizer(string).run();
+  }
+
+  get postfixTokens() {
+    return new Converter().infixToPostfix(this.infixTokens);
+  }
+
+  get postfix() {
+    return this.postfixTokens.map((t) => t.value).join(' ');
+  }
+}
+
+
+
 class Menu {
   constructor(calculator) {
     insertHTML(`

@@ -1,6 +1,4 @@
-const Operator = require('./operator.js');
-
-module.exports = class Adder extends Operator {
+class Adder extends Operator {
   static canBeInstanciatedFrom(value) {
     return value === '+';
   }

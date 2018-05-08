@@ -1,0 +1,47 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mocha Tests</title>
+  <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="mocha"></div>
+
+  <script src="node_modules/mocha/mocha.js"></script>
+  <script src="node_modules/chai/chai.js"></script>
+
+  <script src="models/tokens/token.js"></script>
+  <script src="models/tokens/operator.js"></script>
+  <script src="models/tokens/adder.js"></script>
+  <script src="models/tokens/bracket.js"></script>
+  <script src="models/tokens/divider.js"></script>
+  <script src="models/tokens/multiplier.js"></script>
+  <script src="models/tokens/numeral.js"></script>
+  <script src="models/tokens/subtractor.js"></script>
+
+  <script src="models/tokenizer.js"></script>
+  <script src="models/converter.js"></script>
+  <script src="models/equasion.js"></script>
+
+  <script>mocha.setup('bdd')</script>
+
+  <script src="test/equasion.js"></script>
+  <script src="test/tokenizer.js"></script>
+  <!-- <script src="test/converter.js"></script> -->
+
+  <script src="test/tokens/token.js"></script>
+  <!-- <script src="test/tokens/operator.js"></script> -->
+  <script src="test/tokens/adder.js"></script>
+  <script src="test/tokens/bracket.js"></script>
+  <script src="test/tokens/divider.js"></script>
+  <script src="test/tokens/multiplier.js"></script>
+  <script src="test/tokens/numeral.js"></script>
+  <script src="test/tokens/subtractor.js"></script>
+
+  <script>
+    mocha.checkLeaks();
+    mocha.globals(['jQuery']);
+    mocha.run();
+  </script>
+</body>
+</html>

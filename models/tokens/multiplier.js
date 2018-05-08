@@ -1,6 +1,4 @@
-const Operator = require('./operator.js');
-
-module.exports = class Multiplier extends Operator {
+class Multiplier extends Operator {
   static canBeInstanciatedFrom(value) {
     return ['*', '×'].includes(value);
   }

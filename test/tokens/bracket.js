@@ -1,37 +1,34 @@
-const Bracket = require('../../models/tokens/Bracket.js');
-var assert  = require('assert');
-
 describe('Bracket', function() {
   describe('.openingBrackets', function() {
     it('returns opening brackets', function() {
-      assert.deepStrictEqual(Bracket.openingBrackets, ['(', '[', '{']);
+      chai.assert.deepStrictEqual(Bracket.openingBrackets, ['(', '[', '{']);
     });
   });
 
   describe('.closingBrackets', function() {
     it('returns closing brackets', function() {
-      assert.deepStrictEqual(Bracket.closingBrackets, [')', ']', '}']);
+      chai.assert.deepStrictEqual(Bracket.closingBrackets, [')', ']', '}']);
     });
   });
 
   describe('.canBeInstanciatedFrom()', function() {
     context('for all brackets', function() {
       it('returns true', function() {
-        assert.equal(Bracket.canBeInstanciatedFrom('('), true);
-        assert.equal(Bracket.canBeInstanciatedFrom('['), true);
-        assert.equal(Bracket.canBeInstanciatedFrom('{'), true);
-        assert.equal(Bracket.canBeInstanciatedFrom('}'), true);
-        assert.equal(Bracket.canBeInstanciatedFrom(']'), true);
-        assert.equal(Bracket.canBeInstanciatedFrom(')'), true);
+        chai.assert.equal(Bracket.canBeInstanciatedFrom('('), true);
+        chai.assert.equal(Bracket.canBeInstanciatedFrom('['), true);
+        chai.assert.equal(Bracket.canBeInstanciatedFrom('{'), true);
+        chai.assert.equal(Bracket.canBeInstanciatedFrom('}'), true);
+        chai.assert.equal(Bracket.canBeInstanciatedFrom(']'), true);
+        chai.assert.equal(Bracket.canBeInstanciatedFrom(')'), true);
       });
     });
 
     context('for other characters', function() {
       it('returns false', function() {
-        assert.equal(Bracket.canBeInstanciatedFrom('0'), false);
-        assert.equal(Bracket.canBeInstanciatedFrom(''), false);
-        assert.equal(Bracket.canBeInstanciatedFrom(' '), false);
-        assert.equal(Bracket.canBeInstanciatedFrom('+'), false);
+        chai.assert.equal(Bracket.canBeInstanciatedFrom('0'), false);
+        chai.assert.equal(Bracket.canBeInstanciatedFrom(''), false);
+        chai.assert.equal(Bracket.canBeInstanciatedFrom(' '), false);
+        chai.assert.equal(Bracket.canBeInstanciatedFrom('+'), false);
       });
     });
   });
@@ -40,7 +37,7 @@ describe('Bracket', function() {
     it('returns "bracket"', function() {
       let bracket = new Bracket('[');
 
-      assert.equal(bracket.type, 'bracket');
+      chai.assert.equal(bracket.type, 'bracket');
     });
   });
 
@@ -49,7 +46,7 @@ describe('Bracket', function() {
       it('returns true', function() {
         let bracket = new Bracket('[');
 
-        assert.equal(bracket.opening, true);
+        chai.assert.equal(bracket.opening, true);
       });
     });
 
@@ -57,7 +54,7 @@ describe('Bracket', function() {
       it('returns false', function() {
         let bracket = new Bracket(']');
 
-        assert.equal(bracket.opening, false);
+        chai.assert.equal(bracket.opening, false);
       });
     });
   });
@@ -67,7 +64,7 @@ describe('Bracket', function() {
       it('returns false', function() {
         let bracket = new Bracket('[');
 
-        assert.equal(bracket.closing, false);
+        chai.assert.equal(bracket.closing, false);
       });
     });
 
@@ -75,7 +72,7 @@ describe('Bracket', function() {
       it('returns true', function() {
         let bracket = new Bracket(']');
 
-        assert.equal(bracket.closing, true);
+        chai.assert.equal(bracket.closing, true);
       });
     });
   });

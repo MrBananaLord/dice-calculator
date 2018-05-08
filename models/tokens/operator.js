@@ -1,6 +1,4 @@
-const Token = require('./token.js');
-
-module.exports = class Operator extends Token {
+class Operator extends Token {
   get type() {
     return 'operator';
   }
