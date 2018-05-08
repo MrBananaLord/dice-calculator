@@ -34,6 +34,6 @@ module.exports = class Token {
   }
 
   leftAssociative() {
-    return ['/', '-'].includes(this.value);
+    return true;
   }
 }
