@@ -4,24 +4,23 @@ module.exports = class Converter {
     this.operators = [];
   }
 
-  lastOperator() {
+  get lastOperator() {
     return this.operators[this.operators.length - 1];
   }
 
   lastOperatorIsNotOpeningBracket() {
-    let lastOperator = this.lastOperator();
+    let lastOperator = this.lastOperator;
 
     return lastOperator && !(lastOperator.bracket && lastOperator.opening);
   }
 
   infixToPostfix(tokens) {
-
     tokens.forEach((token) => {
       if (token.number) {
         this.output.push(token);
       }
       else if (token.operator) {
-        while (this.lastOperatorIsNotOpeningBracket() && (this.lastOperator().precedences(token) || (this.lastOperator().hasEqualPrecedence(token) && this.lastOperator().leftAssociative()))) {
+        while (this.lastOperatorIsNotOpeningBracket() && this.lastOperator.hasHigherPriorityThan(token)) {
           this.output.push(this.operators.pop());
         }
 

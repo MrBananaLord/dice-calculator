@@ -13,11 +13,14 @@ module.exports = class Operator extends Token {
     return this.precedenceScore > otherToken.precedenceScore;
   }
 
-  hasEqualPrecedence(otherToken) {
-    return this.precedenceScore == otherToken.precedenceScore;
+  hasHigherPriorityThan(otherToken) {
+    return (this.precedences(otherToken) || (
+      this.precedenceScore == otherToken.precedenceScore &&
+      this.isLeftAssociative()
+    ))
   }
 
-  leftAssociative() {
+  isLeftAssociative() {
     return true;
   }
 }
