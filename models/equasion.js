@@ -3,10 +3,14 @@ const Converter = require('./converter.js');
 
 module.exports = class Equasion {
   constructor(string) {
-    this.tokens = new Tokenizer(string).run();
+    this.infixTokens = new Tokenizer(string).run();
   }
 
-  toPostfix() {
-    return new Converter().infixToPostfix(this.tokens).map((t) => t.value).join(' ');
+  get postfixTokens() {
+    return new Converter().infixToPostfix(this.infixTokens);
+  }
+
+  get postfix() {
+    return this.postfixTokens.map((t) => t.value).join(' ');
   }
 }

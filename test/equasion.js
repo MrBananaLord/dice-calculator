@@ -2,11 +2,11 @@ var Equasion = require('../models/equasion.js');
 var assert   = require('assert');
 
 describe('Equasion', function() {
-  describe('#toPostfix()', function() {
-    it('converts infix to postfix', function() {
+  describe('#postfix', function() {
+    it('returns postfix', function() {
       var equasion = new Equasion('301 + 4 * (20 - 1)');
 
-      assert.equal(equasion.toPostfix(), '301 4 20 1 - * +');
+      assert.equal(equasion.postfix, '301 4 20 1 - * +');
     });
   });
 
