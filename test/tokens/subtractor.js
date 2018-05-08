@@ -23,7 +23,7 @@ describe('Subtractor', function() {
     it('returns "operator"', function() {
       let subtractor = new Subtractor('-');
 
-      assert.equal(Subtractor.type, 'operator');
+      assert.equal(subtractor.type, 'operator');
     });
   });
 });

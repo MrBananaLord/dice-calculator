@@ -29,7 +29,7 @@ describe('Multiplier', function() {
     it('returns "operator"', function() {
       let multiplier = new Multiplier('*');
 
-      assert.equal(Multiplier.type, 'operator');
+      assert.equal(multiplier.type, 'operator');
     });
   });
 });
