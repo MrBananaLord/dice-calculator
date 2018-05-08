@@ -21,7 +21,7 @@ module.exports = class Converter {
         this.output.push(token);
       }
       else if (token.operator) {
-        while (this.lastOperatorIsNotOpeningBracket() && (this.lastOperator().precedences(token) || (this.lastOperator().equalPrecedence(token) && this.lastOperator().leftAssociative()))) {
+        while (this.lastOperatorIsNotOpeningBracket() && (this.lastOperator().precedences(token) || (this.lastOperator().hasEqualPrecedence(token) && this.lastOperator().leftAssociative()))) {
           this.output.push(this.operators.pop());
         }
 

@@ -22,18 +22,4 @@ module.exports = class Token {
   get bracket() {
     return this.type === 'bracket';
   }
-
-  precedences(otherToken) {
-    return ['+', '-'].includes(otherToken.value) &&
-           ['*', '/'].includes(this.value)
-  }
-
-  equalPrecedence(otherToken) {
-    return (['+', '-'].includes(otherToken.value) && ['+', '-'].includes(this.value)) ||
-           (['*', '/'].includes(otherToken.value) && ['*', '/'].includes(this.value))
-  }
-
-  leftAssociative() {
-    return true;
-  }
 }

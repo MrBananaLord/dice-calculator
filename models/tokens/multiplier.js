@@ -1,11 +1,15 @@
-const Token = require('./token.js');
+const Operator = require('./operator.js');
 
-module.exports = class Multiplier extends Token {
+module.exports = class Multiplier extends Operator {
   static canBeInstanciatedFrom(value) {
     return ['*', '×'].includes(value);
   }
 
   get type() {
     return 'operator';
+  }
+
+  get precedenceScore() {
+    return 2;
   }
 }
