@@ -1,22 +1,26 @@
 module.exports = class Token {
-  constructor(token) {
-    this.value = token;
+  constructor(value) {
+    this.value = value;
   }
 
-  number() {
-    return Number.isInteger(parseInt(this.value));
+  static canBeInstanciatedFrom(value) {
+    return true;
   }
 
-  operator() {
-    return ['*', '/', '+', '-'].includes(this.value);
+  get type() {
+    return 'token';
   }
 
-  leftBracket() {
-    return this.value === '(';
+  get number() {
+    return this.type === 'number';
   }
 
-  rightBracket() {
-    return this.value === ')';
+  get operator() {
+    return this.type === 'operator';
+  }
+
+  get bracket() {
+    return this.type === 'bracket';
   }
 
   precedences(otherToken) {

@@ -8,23 +8,30 @@ module.exports = class Converter {
     return this.operators[this.operators.length - 1];
   }
 
+  lastOperatorIsNotOpeningBracket() {
+    let lastOperator = this.lastOperator();
+
+    return lastOperator && !(lastOperator.bracket && lastOperator.opening);
+  }
+
   infixToPostfix(tokens) {
+
     tokens.forEach((token) => {
-      if (token.number()) {
+      if (token.number) {
         this.output.push(token);
       }
-      else if (token.operator()) {
-        while (this.lastOperator() && !this.lastOperator().leftBracket() && (this.lastOperator().precedences(token) || (this.lastOperator().equalPrecedence(token) && this.lastOperator().leftAssociative()))) {
+      else if (token.operator) {
+        while (this.lastOperatorIsNotOpeningBracket() && (this.lastOperator().precedences(token) || (this.lastOperator().equalPrecedence(token) && this.lastOperator().leftAssociative()))) {
           this.output.push(this.operators.pop());
         }
 
         this.operators.push(token);
       }
-      else if (token.leftBracket()) {
+      else if (token.bracket && token.opening) {
         this.operators.push(token);
       }
-      else if (token.rightBracket()) {
-        while (this.lastOperator() && !this.lastOperator().leftBracket()) {
+      else if (token.bracket && token.closing) {
+        while (this.lastOperatorIsNotOpeningBracket()) {
           this.output.push(this.operators.pop());
         }
 
