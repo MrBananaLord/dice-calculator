@@ -9,6 +9,8 @@ If you want to add something or hack around, change files like you want and then
 You might want to run the server to be able to connect to development environment. Just run `yarn` and then `node server.js` (you need to have both yarn and node installed).
 ### Running guard
 You can have automatic compiling if you want. Just run `bundle exec guard`
+### Running unit tests
+Visit `localhost:8080/tests.html` after starting the server.
 ## TODO's
 - add dice rolls to character page
 - add dice rolls to other pages
