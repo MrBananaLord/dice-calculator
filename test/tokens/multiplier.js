@@ -1,23 +1,23 @@
 describe('Multiplier', function() {
-  describe('.canBeInstanciatedFrom()', function() {
+  describe('.canBeInstantiatedFrom()', function() {
     context('for *', function() {
       it('returns true', function() {
-        chai.assert.equal(Multiplier.canBeInstanciatedFrom('*'), true);
+        chai.assert.equal(Multiplier.canBeInstantiatedFrom('*'), true);
       });
     });
 
     context('for ×', function() {
       it('returns true', function() {
-        chai.assert.equal(Multiplier.canBeInstanciatedFrom('×'), true);
+        chai.assert.equal(Multiplier.canBeInstantiatedFrom('×'), true);
       });
     });
 
     context('for other character', function() {
       it('returns false', function() {
-        chai.assert.equal(Multiplier.canBeInstanciatedFrom(']'), false);
-        chai.assert.equal(Multiplier.canBeInstanciatedFrom(' '), false);
-        chai.assert.equal(Multiplier.canBeInstanciatedFrom('+'), false);
-        chai.assert.equal(Multiplier.canBeInstanciatedFrom(''), false);
+        chai.assert.equal(Multiplier.canBeInstantiatedFrom(']'), false);
+        chai.assert.equal(Multiplier.canBeInstantiatedFrom(' '), false);
+        chai.assert.equal(Multiplier.canBeInstantiatedFrom('+'), false);
+        chai.assert.equal(Multiplier.canBeInstantiatedFrom(''), false);
       });
     });
   });

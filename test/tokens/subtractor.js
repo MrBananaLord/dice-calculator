@@ -1,17 +1,17 @@
 describe('Subtractor', function() {
-  describe('.canBeInstanciatedFrom()', function() {
+  describe('.canBeInstantiatedFrom()', function() {
     context('for -', function() {
       it('returns true', function() {
-        chai.assert.equal(Subtractor.canBeInstanciatedFrom('-'), true);
+        chai.assert.equal(Subtractor.canBeInstantiatedFrom('-'), true);
       });
     });
 
     context('for other character', function() {
       it('returns false', function() {
-        chai.assert.equal(Subtractor.canBeInstanciatedFrom(']'), false);
-        chai.assert.equal(Subtractor.canBeInstanciatedFrom(' '), false);
-        chai.assert.equal(Subtractor.canBeInstanciatedFrom('+'), false);
-        chai.assert.equal(Subtractor.canBeInstanciatedFrom(''), false);
+        chai.assert.equal(Subtractor.canBeInstantiatedFrom(']'), false);
+        chai.assert.equal(Subtractor.canBeInstantiatedFrom(' '), false);
+        chai.assert.equal(Subtractor.canBeInstantiatedFrom('+'), false);
+        chai.assert.equal(Subtractor.canBeInstantiatedFrom(''), false);
       });
     });
   });

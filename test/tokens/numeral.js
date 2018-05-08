@@ -1,17 +1,17 @@
 describe('Numeral', function() {
-  describe('.canBeInstanciatedFrom()', function() {
+  describe('.canBeInstantiatedFrom()', function() {
     context('for number', function() {
       it('returns true', function() {
-        chai.assert.equal(Numeral.canBeInstanciatedFrom('4823'), true);
-        chai.assert.equal(Numeral.canBeInstanciatedFrom('0'), true);
+        chai.assert.equal(Numeral.canBeInstantiatedFrom('4823'), true);
+        chai.assert.equal(Numeral.canBeInstantiatedFrom('0'), true);
       });
     });
 
     context('for other character', function() {
       it('returns false', function() {
-        chai.assert.equal(Numeral.canBeInstanciatedFrom(']'), false);
-        chai.assert.equal(Numeral.canBeInstanciatedFrom(' '), false);
-        chai.assert.equal(Numeral.canBeInstanciatedFrom(''), false);
+        chai.assert.equal(Numeral.canBeInstantiatedFrom(']'), false);
+        chai.assert.equal(Numeral.canBeInstantiatedFrom(' '), false);
+        chai.assert.equal(Numeral.canBeInstantiatedFrom(''), false);
       });
     });
   });

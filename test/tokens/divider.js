@@ -1,23 +1,23 @@
 describe('Divider', function() {
-  describe('.canBeInstanciatedFrom()', function() {
+  describe('.canBeInstantiatedFrom()', function() {
     context('for /', function() {
       it('returns true', function() {
-        chai.assert.equal(Divider.canBeInstanciatedFrom('/'), true);
+        chai.assert.equal(Divider.canBeInstantiatedFrom('/'), true);
       });
     });
 
     context('for ÷', function() {
       it('returns true', function() {
-        chai.assert.equal(Divider.canBeInstanciatedFrom('÷'), true);
+        chai.assert.equal(Divider.canBeInstantiatedFrom('÷'), true);
       });
     });
 
     context('for other character', function() {
       it('returns false', function() {
-        chai.assert.equal(Divider.canBeInstanciatedFrom(']'), false);
-        chai.assert.equal(Divider.canBeInstanciatedFrom(' '), false);
-        chai.assert.equal(Divider.canBeInstanciatedFrom('+'), false);
-        chai.assert.equal(Divider.canBeInstanciatedFrom(''), false);
+        chai.assert.equal(Divider.canBeInstantiatedFrom(']'), false);
+        chai.assert.equal(Divider.canBeInstantiatedFrom(' '), false);
+        chai.assert.equal(Divider.canBeInstantiatedFrom('+'), false);
+        chai.assert.equal(Divider.canBeInstantiatedFrom(''), false);
       });
     });
   });

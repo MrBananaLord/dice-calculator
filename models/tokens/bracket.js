@@ -7,7 +7,7 @@ class Bracket extends Token {
     return [')', ']', '}'];
   }
 
-  static canBeInstanciatedFrom(value) {
+  static canBeInstantiatedFrom(value) {
     return (this.openingBrackets.concat(this.closingBrackets)).includes(value);
   }
 

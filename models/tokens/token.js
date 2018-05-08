@@ -3,7 +3,7 @@ class Token {
     this.value = value;
   }
 
-  static canBeInstanciatedFrom(value) {
+  static canBeInstantiatedFrom(value) {
     return true;
   }
 

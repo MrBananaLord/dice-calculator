@@ -9,7 +9,7 @@ class Tokenizer {
   }
 
   static buildToken(value) {
-    let klass = this.tokens.find((klass) => klass.canBeInstanciatedFrom(value));
+    let klass = this.tokens.find((klass) => klass.canBeInstantiatedFrom(value));
 
     return new klass(value);
   }

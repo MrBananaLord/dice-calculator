@@ -1,17 +1,17 @@
 describe('Adder', function() {
-  describe('.canBeInstanciatedFrom()', function() {
+  describe('.canBeInstantiatedFrom()', function() {
     context('for +', function() {
       it('returns true', function() {
-        chai.assert.equal(Adder.canBeInstanciatedFrom('+'), true);
+        chai.assert.equal(Adder.canBeInstantiatedFrom('+'), true);
       });
     });
 
     context('for other character', function() {
       it('returns false', function() {
-        chai.assert.equal(Adder.canBeInstanciatedFrom(']'), false);
-        chai.assert.equal(Adder.canBeInstanciatedFrom(' '), false);
-        chai.assert.equal(Adder.canBeInstanciatedFrom('1'), false);
-        chai.assert.equal(Adder.canBeInstanciatedFrom(''), false);
+        chai.assert.equal(Adder.canBeInstantiatedFrom(']'), false);
+        chai.assert.equal(Adder.canBeInstantiatedFrom(' '), false);
+        chai.assert.equal(Adder.canBeInstantiatedFrom('1'), false);
+        chai.assert.equal(Adder.canBeInstantiatedFrom(''), false);
       });
     });
   });

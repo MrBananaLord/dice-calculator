@@ -11,24 +11,24 @@ describe('Bracket', function() {
     });
   });
 
-  describe('.canBeInstanciatedFrom()', function() {
+  describe('.canBeInstantiatedFrom()', function() {
     context('for all brackets', function() {
       it('returns true', function() {
-        chai.assert.equal(Bracket.canBeInstanciatedFrom('('), true);
-        chai.assert.equal(Bracket.canBeInstanciatedFrom('['), true);
-        chai.assert.equal(Bracket.canBeInstanciatedFrom('{'), true);
-        chai.assert.equal(Bracket.canBeInstanciatedFrom('}'), true);
-        chai.assert.equal(Bracket.canBeInstanciatedFrom(']'), true);
-        chai.assert.equal(Bracket.canBeInstanciatedFrom(')'), true);
+        chai.assert.equal(Bracket.canBeInstantiatedFrom('('), true);
+        chai.assert.equal(Bracket.canBeInstantiatedFrom('['), true);
+        chai.assert.equal(Bracket.canBeInstantiatedFrom('{'), true);
+        chai.assert.equal(Bracket.canBeInstantiatedFrom('}'), true);
+        chai.assert.equal(Bracket.canBeInstantiatedFrom(']'), true);
+        chai.assert.equal(Bracket.canBeInstantiatedFrom(')'), true);
       });
     });
 
     context('for other characters', function() {
       it('returns false', function() {
-        chai.assert.equal(Bracket.canBeInstanciatedFrom('0'), false);
-        chai.assert.equal(Bracket.canBeInstanciatedFrom(''), false);
-        chai.assert.equal(Bracket.canBeInstanciatedFrom(' '), false);
-        chai.assert.equal(Bracket.canBeInstanciatedFrom('+'), false);
+        chai.assert.equal(Bracket.canBeInstantiatedFrom('0'), false);
+        chai.assert.equal(Bracket.canBeInstantiatedFrom(''), false);
+        chai.assert.equal(Bracket.canBeInstantiatedFrom(' '), false);
+        chai.assert.equal(Bracket.canBeInstantiatedFrom('+'), false);
       });
     });
   });

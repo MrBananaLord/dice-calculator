@@ -1,5 +1,5 @@
 class Numeral extends Token {
-  static canBeInstanciatedFrom(value) {
+  static canBeInstantiatedFrom(value) {
     return Number.isInteger(parseInt(value));
   }
 

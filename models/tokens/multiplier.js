@@ -1,5 +1,5 @@
 class Multiplier extends Operator {
-  static canBeInstanciatedFrom(value) {
+  static canBeInstantiatedFrom(value) {
     return ['*', '×'].includes(value);
   }
 

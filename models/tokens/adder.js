@@ -1,5 +1,5 @@
 class Adder extends Operator {
-  static canBeInstanciatedFrom(value) {
+  static canBeInstantiatedFrom(value) {
     return value === '+';
   }
 
