@@ -32,4 +32,17 @@ describe('Numeral', function() {
     });
   });
 
+  describe('#toInt', function() {
+    it('returns appropriate integer', function() {
+      let numeral = new Numeral('1');
+
+      chai.assert.equal(numeral.toInt, 1);
+    });
+
+    it('returns appropriate integer', function() {
+      let numeral = new Numeral('134');
+
+      chai.assert.equal(numeral.toInt, 134);
+    });
+  });
 });

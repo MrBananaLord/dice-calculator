@@ -29,4 +29,18 @@ describe('Divider', function() {
       chai.assert.equal(divider.type, 'operator');
     });
   });
+
+  describe('#resolve(a,b)', function() {
+    it('returns result of a / b', function() {
+      let adder = new Divider('/');
+
+      chai.assert.equal(adder.resolve(1, 2), 0.5);
+    });
+
+    it('returns result of a + b', function() {
+      let adder = new Divider('/');
+
+      chai.assert.equal(adder.resolve(9, 3), 3);
+    });
+  });
 });

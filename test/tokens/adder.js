@@ -23,4 +23,18 @@ describe('Adder', function() {
       chai.assert.equal(adder.type, 'operator');
     });
   });
+
+  describe('#resolve(a,b)', function() {
+    it('returns result of a + b', function() {
+      let adder = new Adder('+');
+
+      chai.assert.equal(adder.resolve(1, 3.5), 4.5);
+    });
+
+    it('returns result of a + b', function() {
+      let adder = new Adder('+');
+
+      chai.assert.equal(adder.resolve(1.0, 0), 1);
+    });
+  });
 });

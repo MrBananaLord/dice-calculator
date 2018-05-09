@@ -29,4 +29,18 @@ describe('Multiplier', function() {
       chai.assert.equal(multiplier.type, 'operator');
     });
   });
+
+  describe('#resolve(a,b)', function() {
+    it('returns result of a * b', function() {
+      let adder = new Multiplier('*');
+
+      chai.assert.equal(adder.resolve(1, 0), 0);
+    });
+
+    it('returns result of a + b', function() {
+      let adder = new Multiplier('*');
+
+      chai.assert.equal(adder.resolve(9.25, 0.5), 4.625);
+    });
+  });
 });

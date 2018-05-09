@@ -10,4 +10,8 @@ class Subtractor extends Operator {
   get precedenceScore() {
     return 1;
   }
+
+  resolve(a,b) {
+    return a - b;
+  }
 }

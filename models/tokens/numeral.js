@@ -6,4 +6,8 @@ class Numeral extends Token {
   get type() {
     return 'number';
   }
+
+  get toInt() {
+    return parseInt(this.value);
+  }
 }

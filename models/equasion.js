@@ -10,4 +10,8 @@ class Equasion {
   get postfix() {
     return this.postfixTokens.map((t) => t.value).join(' ');
   }
+
+  get result() {
+    return new Resolver(this.postfixTokens).run();
+  }
 }

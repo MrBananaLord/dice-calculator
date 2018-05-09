@@ -23,4 +23,18 @@ describe('Subtractor', function() {
       chai.assert.equal(subtractor.type, 'operator');
     });
   });
+
+  describe('#resolve(a,b)', function() {
+    it('returns result of a / b', function() {
+      let adder = new Subtractor('-');
+
+      chai.assert.equal(adder.resolve(1, 2), -1);
+    });
+
+    it('returns result of a + b', function() {
+      let adder = new Subtractor('-');
+
+      chai.assert.equal(adder.resolve(9, 3), 6);
+    });
+  });
 });
