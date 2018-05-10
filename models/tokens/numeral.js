@@ -10,4 +10,8 @@ class Numeral extends Token {
   get toInt() {
     return parseInt(this.value);
   }
+
+  mergableWith(otherToken) {
+    return otherToken.number || otherToken.roll;
+  }
 }

@@ -7,6 +7,10 @@ class Token {
     return true;
   }
 
+  mergableWith(otherToken) {
+    return false;
+  }
+
   get type() {
     return 'token';
   }
@@ -21,5 +25,13 @@ class Token {
 
   get bracket() {
     return this.type === 'bracket';
+  }
+
+  get roll() {
+    return this.type === 'roll';
+  }
+
+  get token() {
+    return this.type === 'token';
   }
 }

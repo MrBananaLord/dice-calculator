@@ -1,9 +1,9 @@
 describe('Token', function() {
-  describe('#number', function() {
-    it('returns false', function() {
+  describe('#type', function() {
+    it('returns "token"', function() {
       let token = new Token('');
 
-      chai.assert.equal(token.number, false);
+      chai.assert.equal(token.type, "token");
     });
   });
 });
