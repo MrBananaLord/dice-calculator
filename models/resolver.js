@@ -7,10 +7,10 @@ class Resolver {
   run() {
     this.tokens.forEach((token) => {
       console.debug();
-      if (token.number) {
+      if (token.isNumber()) {
         this.stack.push(token.toInt);
       }
-      else if (token.operator) {
+      else if (token.isOperator()) {
         let lastValue = this.stack.pop();
         let secondToLastValue = this.stack.pop();
 

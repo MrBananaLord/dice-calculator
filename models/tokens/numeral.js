@@ -12,6 +12,6 @@ class Numeral extends Token {
   }
 
   mergableWith(otherToken) {
-    return otherToken.number || otherToken.roll;
+    return otherToken.isNumber() || otherToken.isRoll();
   }
 }

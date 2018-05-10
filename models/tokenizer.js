@@ -22,9 +22,9 @@ class Tokenizer {
     this.string.split('').forEach((character) => {
       let token = this.constructor.buildToken(character);
 
-      if (token.token) { return; }
+      if (token.isToken()) { return; }
 
-      if ((token.number || token.roll) && this.lastToken && this.lastToken.mergableWith(token)) {
+      if ((token.isNumber() || token.isRoll()) && this.lastToken && this.lastToken.mergableWith(token)) {
         token = this.constructor.buildToken(this.tokens.pop().value + token.value);
       }
 

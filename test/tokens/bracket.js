@@ -46,7 +46,7 @@ describe('Bracket', function() {
       it('returns true', function() {
         let bracket = new Bracket('[');
 
-        chai.assert.equal(bracket.opening, true);
+        chai.assert.equal(bracket.isOpening(), true);
       });
     });
 
@@ -54,7 +54,7 @@ describe('Bracket', function() {
       it('returns false', function() {
         let bracket = new Bracket(']');
 
-        chai.assert.equal(bracket.opening, false);
+        chai.assert.equal(bracket.isOpening(), false);
       });
     });
   });
@@ -64,7 +64,7 @@ describe('Bracket', function() {
       it('returns false', function() {
         let bracket = new Bracket('[');
 
-        chai.assert.equal(bracket.closing, false);
+        chai.assert.equal(bracket.isClosing(), false);
       });
     });
 
@@ -72,7 +72,7 @@ describe('Bracket', function() {
       it('returns true', function() {
         let bracket = new Bracket(']');
 
-        chai.assert.equal(bracket.closing, true);
+        chai.assert.equal(bracket.isClosing(), true);
       });
     });
   });

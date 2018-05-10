@@ -12,6 +12,6 @@ class Roll extends Token {
   }
 
   mergableWith(otherToken) {
-    return otherToken.number;
+    return otherToken.isNumber();
   }
 }

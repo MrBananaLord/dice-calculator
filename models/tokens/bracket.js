@@ -15,11 +15,11 @@ class Bracket extends Token {
     return 'bracket';
   }
 
-  get opening() {
+  isOpening() {
     return this.constructor.openingBrackets.includes(this.value);
   }
 
-  get closing() {
+  isClosing() {
     return this.constructor.closingBrackets.includes(this.value);
   }
 }

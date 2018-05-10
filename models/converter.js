@@ -8,29 +8,27 @@ class Converter {
     return this.operators[this.operators.length - 1];
   }
 
-  lastOperatorIsNotOpeningBracket() {
-    let lastOperator = this.lastOperator;
-
-    return lastOperator && !(lastOperator.bracket && lastOperator.opening);
+  isLastOperatorOpeningBracket() {
+    return this.lastOperator.isBracket() && this.lastOperator.isOpening();
   }
 
   infixToPostfix(tokens) {
     tokens.forEach((token) => {
-      if (token.number) {
+      if (token.isNumber()) {
         this.output.push(token);
       }
-      else if (token.operator) {
-        while (this.lastOperatorIsNotOpeningBracket() && this.lastOperator.hasHigherPriorityThan(token)) {
+      else if (token.isOperator()) {
+        while (this.lastOperator && !this.isLastOperatorOpeningBracket() && this.lastOperator.hasHigherPriorityThan(token)) {
           this.output.push(this.operators.pop());
         }
 
         this.operators.push(token);
       }
-      else if (token.bracket && token.opening) {
+      else if (token.isBracket() && token.isOpening()) {
         this.operators.push(token);
       }
-      else if (token.bracket && token.closing) {
-        while (this.lastOperatorIsNotOpeningBracket()) {
+      else if (token.isBracket() && token.isClosing()) {
+        while (this.lastOperator && !this.isLastOperatorOpeningBracket()) {
           this.output.push(this.operators.pop());
         }
 

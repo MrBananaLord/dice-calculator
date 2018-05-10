@@ -15,23 +15,23 @@ class Token {
     return 'token';
   }
 
-  get number() {
+  isNumber() {
     return this.type === 'number';
   }
 
-  get operator() {
+  isOperator() {
     return this.type === 'operator';
   }
 
-  get bracket() {
+  isBracket() {
     return this.type === 'bracket';
   }
 
-  get roll() {
+  isRoll() {
     return this.type === 'roll';
   }
 
-  get token() {
+  isToken() {
     return this.type === 'token';
   }
 }

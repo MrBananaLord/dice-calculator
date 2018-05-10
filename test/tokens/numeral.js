@@ -28,7 +28,7 @@ describe('Numeral', function() {
     it('returns true', function() {
       let numeral = new Numeral('1');
 
-      chai.assert.equal(numeral.number, true);
+      chai.assert.equal(numeral.isNumber(), true);
     });
   });
 
