@@ -4,7 +4,7 @@ class Equasion {
   }
 
   get postfixTokens() {
-    return new Converter().infixToPostfix(this.infixTokens);
+    return new Converter(this.infixTokens).run();
   }
 
   get postfix() {
@@ -12,6 +12,12 @@ class Equasion {
   }
 
   get result() {
-    return new Resolver(this.postfixTokens).run();
+    let result = new Resolver(this.postfixTokens).run();
+
+    if (isNaN(result)) {
+      throw new Error("Invalid syntax!");
+    }
+
+    return result;
   }
 }

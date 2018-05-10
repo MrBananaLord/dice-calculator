@@ -1,5 +1,6 @@
 class Converter {
-  constructor() {
+  constructor(tokens) {
+    this.tokens    = tokens;
     this.output    = [];
     this.operators = [];
   }
@@ -8,17 +9,13 @@ class Converter {
     return this.operators[this.operators.length - 1];
   }
 
-  isLastOperatorOpeningBracket() {
-    return this.lastOperator.isBracket() && this.lastOperator.isOpening();
-  }
-
-  infixToPostfix(tokens) {
-    tokens.forEach((token) => {
+  run() {
+    this.tokens.forEach((token) => {
       if (token.isNumber()) {
         this.output.push(token);
       }
       else if (token.isOperator()) {
-        while (this.lastOperator && !this.isLastOperatorOpeningBracket() && this.lastOperator.hasHigherPriorityThan(token)) {
+        while (this.lastOperator && !this.lastOperator.isBracket() && this.lastOperator.hasHigherPriorityThan(token)) {
           this.output.push(this.operators.pop());
         }
 
@@ -28,8 +25,12 @@ class Converter {
         this.operators.push(token);
       }
       else if (token.isBracket() && token.isClosing()) {
-        while (this.lastOperator && !this.isLastOperatorOpeningBracket()) {
+        while (this.lastOperator && !this.lastOperator.isBracket()) {
           this.output.push(this.operators.pop());
+        }
+
+        if (this.operators.length == 0) {
+          throw new Error("Invalid syntax!");
         }
 
         this.operators.pop();
@@ -37,6 +38,10 @@ class Converter {
     });
 
     while (this.operators.length) {
+      if (this.lastOperator.isBracket()) {
+        throw new Error("Invalid syntax!");
+      }
+
       this.output.push(this.operators.pop());
     }
 

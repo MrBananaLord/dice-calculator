@@ -54,5 +54,11 @@ describe('Tokenizer', function() {
 
       chai.expect(tokenizer.run().length).to.equal(10);
     });
+
+    it('ignores unknown tokens', function() {
+      let tokenizer = new Tokenizer('qwlekj ;]./"d"');
+
+      chai.expect(tokenizer.run().length).to.equal(3);
+    });
   });
 });
