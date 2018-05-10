@@ -90,6 +90,12 @@ describe('Equasion', () => {
 
         chai.expect(equasion.postfix).to.equal('10 20 + 30 + 20 * 8 4 / -');
       });
+
+      it('returns postfix', () => {
+        var equasion = new Equasion('d5');
+
+        chai.expect(equasion.postfix).to.equal('d5');
+      });
     });
 
     context('for invalid syntax', () => {

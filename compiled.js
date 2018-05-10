@@ -26,6 +26,375 @@ insertCSS(`
 }
 `);
 
+class Token {
+  constructor(value) {
+    this.value = value;
+  }
+
+  static canBeInstantiatedFrom(value) {
+    return true;
+  }
+
+  mergableWith(otherToken) {
+    return false;
+  }
+
+  get type() {
+    return 'token';
+  }
+
+  isNumber() {
+    return this.type === 'number';
+  }
+
+  isOperator() {
+    return this.type === 'operator';
+  }
+
+  isBracket() {
+    return this.type === 'bracket';
+  }
+
+  isRoll() {
+    return this.type === 'roll';
+  }
+
+  isToken() {
+    return this.type === 'token';
+  }
+}
+
+class Operator extends Token {
+  get type() {
+    return 'operator';
+  }
+
+  get precedenceScore() {
+    return 1;
+  }
+
+  precedences(otherToken) {
+    return this.precedenceScore > otherToken.precedenceScore;
+  }
+
+  hasHigherPriorityThan(otherToken) {
+    return (this.precedences(otherToken) || (
+      this.precedenceScore == otherToken.precedenceScore &&
+      this.isLeftAssociative()
+    ))
+  }
+
+  isLeftAssociative() {
+    return true;
+  }
+}
+
+class Adder extends Operator {
+  static canBeInstantiatedFrom(value) {
+    return value === '+';
+  }
+
+  get type() {
+    return 'operator';
+  }
+
+  get precedenceScore() {
+    return 1;
+  }
+
+  resolve(a, b) {
+    return a + b;
+  }
+}
+
+class Bracket extends Token {
+  static get openingBrackets() {
+    return ['(', '[', '{'];
+  }
+
+  static get closingBrackets() {
+    return [')', ']', '}'];
+  }
+
+  static canBeInstantiatedFrom(value) {
+    return (this.openingBrackets.concat(this.closingBrackets)).includes(value);
+  }
+
+  get type() {
+    return 'bracket';
+  }
+
+  isOpening() {
+    return this.constructor.openingBrackets.includes(this.value);
+  }
+
+  isClosing() {
+    return this.constructor.closingBrackets.includes(this.value);
+  }
+}
+
+class Divider extends Operator {
+  static canBeInstantiatedFrom(value) {
+    return ['/', '÷'].includes(value);
+  }
+
+  get type() {
+    return 'operator';
+  }
+
+  get precedenceScore() {
+    return 2;
+  }
+
+  resolve(a, b) {
+    return a / b;
+  }
+}
+
+class Multiplier extends Operator {
+  static canBeInstantiatedFrom(value) {
+    return ['*', '×'].includes(value);
+  }
+
+  get type() {
+    return 'operator';
+  }
+
+  get precedenceScore() {
+    return 2;
+  }
+
+  resolve(a, b) {
+    return a * b;
+  }
+}
+
+class Numeral extends Token {
+  static canBeInstantiatedFrom(value) {
+    return Number.isInteger(parseInt(value));
+  }
+
+  get type() {
+    return 'number';
+  }
+
+  get toInt() {
+    return parseInt(this.value);
+  }
+
+  mergableWith(otherToken) {
+    return otherToken.isNumber() || otherToken.isRoll();
+  }
+}
+
+class Roll extends Token {
+  static canBeInstantiatedFrom(value) {
+    return value.match(/^\d*d\d*$/) != null;
+  }
+
+  get type() {
+    return 'roll';
+  }
+
+  get dieSize() {
+    let result = this.value.match(/\d+$/);
+
+    if (result) {
+      return parseInt(result[0]);
+    }
+    else {
+      return 1;
+    }
+  }
+
+  get diceQuantity() {
+    let result = this.value.match(/^\d+/);
+
+    if (result) {
+      return parseInt(result[0]);
+    }
+    else {
+      return 1;
+    }
+  }
+
+  resolve() {
+    let result = 0;
+
+    for (let rollIndex = 0; rollIndex < this.diceQuantity; rollIndex++) {
+      result += this.rollOneDie();
+    }
+
+    return result;
+  }
+
+  rollOneDie() {
+    return Math.floor(Math.random() * Math.floor(this.dieSize)) + 1;
+  }
+
+  mergableWith(otherToken) {
+    return otherToken.isNumber();
+  }
+}
+
+class Subtractor extends Operator {
+  static canBeInstantiatedFrom(value) {
+    return value === '-';
+  }
+
+  get type() {
+    return 'operator';
+  }
+
+  get precedenceScore() {
+    return 1;
+  }
+
+  resolve(a,b) {
+    return a - b;
+  }
+}
+
+
+class Tokenizer {
+  constructor(string) {
+    this.string = string;
+    this.tokens = [];
+  }
+
+  static get tokens() {
+    return([ Adder, Divider, Multiplier, Subtractor, Bracket, Numeral, Roll, Token ]);
+  }
+
+  static buildToken(value) {
+    let klass = this.tokens.find((klass) => klass.canBeInstantiatedFrom(value));
+
+    return new klass(value);
+  }
+
+  get lastToken() {
+    return this.tokens[this.tokens.length - 1];
+  }
+
+  run() {
+    this.string.split('').forEach((character) => {
+      let token = this.constructor.buildToken(character);
+
+      if (token.isToken()) { return; }
+
+      if ((token.isNumber() || token.isRoll()) && this.lastToken && this.lastToken.mergableWith(token)) {
+        token = this.constructor.buildToken(this.tokens.pop().value + token.value);
+      }
+
+      this.tokens.push(token);
+    });
+
+    return this.tokens;
+  }
+}
+
+class Converter {
+  constructor(tokens) {
+    this.tokens    = tokens;
+    this.output    = [];
+    this.operators = [];
+  }
+
+  get lastOperator() {
+    return this.operators[this.operators.length - 1];
+  }
+
+  run() {
+    this.tokens.forEach((token) => {
+      if (token.isNumber() || token.isRoll()) {
+        this.output.push(token);
+      }
+      else if (token.isOperator()) {
+        while (this.lastOperator && !this.lastOperator.isBracket() && this.lastOperator.hasHigherPriorityThan(token)) {
+          this.output.push(this.operators.pop());
+        }
+
+        this.operators.push(token);
+      }
+      else if (token.isBracket() && token.isOpening()) {
+        this.operators.push(token);
+      }
+      else if (token.isBracket() && token.isClosing()) {
+        while (this.lastOperator && !this.lastOperator.isBracket()) {
+          this.output.push(this.operators.pop());
+        }
+
+        if (this.operators.length == 0) {
+          throw new Error("Invalid syntax!");
+        }
+
+        this.operators.pop();
+      }
+    });
+
+    while (this.operators.length) {
+      if (this.lastOperator.isBracket()) {
+        throw new Error("Invalid syntax!");
+      }
+
+      this.output.push(this.operators.pop());
+    }
+
+    return this.output;
+  }
+}
+
+class Resolver {
+  constructor(tokens) {
+    this.tokens = tokens;
+    this.stack  = [];
+  }
+
+  run() {
+    this.tokens.forEach((token) => {
+      if (token.isNumber()) {
+        this.stack.push(token.toInt);
+      }
+      else if (token.isRoll()) {
+        this.stack.push(token.resolve());
+      }
+      else if (token.isOperator()) {
+        let lastValue = this.stack.pop();
+        let secondToLastValue = this.stack.pop();
+
+        this.stack.push(token.resolve(secondToLastValue, lastValue));
+      }
+    });
+
+    return this.stack[0];
+  }
+}
+
+class Equasion {
+  constructor(string) {
+    this.infixTokens = new Tokenizer(string).run();
+  }
+
+  get postfixTokens() {
+    return new Converter(this.infixTokens).run();
+  }
+
+  get postfix() {
+    return this.postfixTokens.map((t) => t.value).join(' ');
+  }
+
+  get result() {
+    let result = new Resolver(this.postfixTokens).run();
+
+    if (isNaN(result)) {
+      throw new Error("Invalid syntax!");
+    }
+
+    return result;
+  }
+}
+
+
 class Menu {
   constructor(calculator) {
     insertHTML(`
@@ -331,7 +700,7 @@ class Calculator {
   }
 
   resolveEquasion() {
-    return Math.floor(Math.random() * 20) + 1;
+    return new Equasion(this.equasion()).result;
   }
 
   updateResults(firstRoll, secondRoll) {

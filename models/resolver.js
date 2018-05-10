@@ -6,9 +6,11 @@ class Resolver {
 
   run() {
     this.tokens.forEach((token) => {
-      console.debug();
       if (token.isNumber()) {
         this.stack.push(token.toInt);
+      }
+      else if (token.isRoll()) {
+        this.stack.push(token.resolve());
       }
       else if (token.isOperator()) {
         let lastValue = this.stack.pop();

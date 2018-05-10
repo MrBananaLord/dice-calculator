@@ -11,7 +11,7 @@ class Converter {
 
   run() {
     this.tokens.forEach((token) => {
-      if (token.isNumber()) {
+      if (token.isNumber() || token.isRoll()) {
         this.output.push(token);
       }
       else if (token.isOperator()) {

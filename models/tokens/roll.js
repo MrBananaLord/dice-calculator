@@ -7,8 +7,40 @@ class Roll extends Token {
     return 'roll';
   }
 
+  get dieSize() {
+    let result = this.value.match(/\d+$/);
+
+    if (result) {
+      return parseInt(result[0]);
+    }
+    else {
+      return 1;
+    }
+  }
+
+  get diceQuantity() {
+    let result = this.value.match(/^\d+/);
+
+    if (result) {
+      return parseInt(result[0]);
+    }
+    else {
+      return 1;
+    }
+  }
+
   resolve() {
-    return 0;
+    let result = 0;
+
+    for (let rollIndex = 0; rollIndex < this.diceQuantity; rollIndex++) {
+      result += this.rollOneDie();
+    }
+
+    return result;
+  }
+
+  rollOneDie() {
+    return Math.floor(Math.random() * Math.floor(this.dieSize)) + 1;
   }
 
   mergableWith(otherToken) {

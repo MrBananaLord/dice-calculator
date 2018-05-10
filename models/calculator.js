@@ -59,7 +59,7 @@ class Calculator {
   }
 
   resolveEquasion() {
-    return Math.floor(Math.random() * 20) + 1;
+    return new Equasion(this.equasion()).result;
   }
 
   updateResults(firstRoll, secondRoll) {
