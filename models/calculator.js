@@ -51,10 +51,9 @@ class Calculator {
   }
 
   calculate() {
-    let firstRoll = this.resolveEquasion();
-    let secondRoll = this.resolveEquasion();
+    let roll = this.resolveEquasion();
 
-    this.updateResults(firstRoll, secondRoll);
+    this.updateResults(roll);
     this.mode = "result";
   }
 
@@ -62,11 +61,9 @@ class Calculator {
     return new Equasion(this.equasion()).result;
   }
 
-  updateResults(firstRoll, secondRoll) {
+  updateResults(roll) {
     this.resultElement.removeClass("hidden");
-    this.resultElement.find(".regular").text(firstRoll);
-    this.resultElement.find(".advantage").text(Math.max(firstRoll, secondRoll));
-    this.resultElement.find(".disadvantage").text(Math.min(firstRoll, secondRoll));
+    this.resultElement.find(".regular").text(roll);
   }
 
   reroll(e) {

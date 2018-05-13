@@ -457,10 +457,6 @@ class Calculator {
             <div>=</div>
             <div class="values">
               <div class="regular">13</div>
-              <div class="special">
-                <div class="advantage">13</div>
-                <div class="disadvantage">10</div>
-              </div>
             </div>
           </div>
         </div>
@@ -595,7 +591,7 @@ class Calculator {
 }
 #rollingStonesCalculator .display {
   text-align: right;
-  overflow: scroll;
+  overflow: hidden;
   width: 250px;
   direction: rtl;
   position: relative;
@@ -623,23 +619,7 @@ class Calculator {
   float: left;
   text-align: center;
 }
-#rollingStonesCalculator .display .result .values .advantage {
-  color: #96bf6a;
-  height: 24px;
-  border-bottom: 1px solid #d6d6d6;
-  float: none;
-}
-#rollingStonesCalculator .display .result .values .disadvantage {
-  color: #d23f40;
-  height: 24px;
-  border-top: 1px solid #d6d6d6;
-  float: none;
-}
 #rollingStonesCalculator .display .result .values .regular {
-  padding-left: 5px;
-}
-#rollingStonesCalculator .display .result .values .special {
-  line-height: 25px;
   padding-left: 5px;
 }
 `);
@@ -692,10 +672,9 @@ class Calculator {
   }
 
   calculate() {
-    let firstRoll = this.resolveEquasion();
-    let secondRoll = this.resolveEquasion();
+    let roll = this.resolveEquasion();
 
-    this.updateResults(firstRoll, secondRoll);
+    this.updateResults(roll);
     this.mode = "result";
   }
 
@@ -703,11 +682,9 @@ class Calculator {
     return new Equasion(this.equasion()).result;
   }
 
-  updateResults(firstRoll, secondRoll) {
+  updateResults(roll) {
     this.resultElement.removeClass("hidden");
-    this.resultElement.find(".regular").text(firstRoll);
-    this.resultElement.find(".advantage").text(Math.max(firstRoll, secondRoll));
-    this.resultElement.find(".disadvantage").text(Math.min(firstRoll, secondRoll));
+    this.resultElement.find(".regular").text(roll);
   }
 
   reroll(e) {
