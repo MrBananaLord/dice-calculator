@@ -73,15 +73,19 @@ class Operator extends Token {
     return 1;
   }
 
-  precedences(otherToken) {
-    return this.precedenceScore > otherToken.precedenceScore;
+  precedences(otherOperator) {
+    return this.precedenceScore > otherOperator.precedenceScore;
   }
 
-  hasHigherPriorityThan(otherToken) {
-    return (this.precedences(otherToken) || (
-      this.precedenceScore == otherToken.precedenceScore &&
-      this.isLeftAssociative()
-    ))
+  hasSamePrecedenceAs(otherOperator) {
+    return this.precedenceScore == otherOperator.precedenceScore;
+  }
+
+  hasHigherPriorityThan(otherOperator) {
+    return (
+      this.precedences(otherOperator) ||
+      (this.hasSamePrecedenceAs(otherOperator) && this.isLeftAssociative())
+    )
   }
 
   isLeftAssociative() {
