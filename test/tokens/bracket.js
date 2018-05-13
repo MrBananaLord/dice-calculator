@@ -1,19 +1,19 @@
-describe('Bracket', function() {
-  describe('.openingBrackets', function() {
-    it('returns opening brackets', function() {
+describe('Bracket', () => {
+  describe('.openingBrackets', () => {
+    it('returns opening brackets', () => {
       chai.assert.deepStrictEqual(Bracket.openingBrackets, ['(', '[', '{']);
     });
   });
 
-  describe('.closingBrackets', function() {
-    it('returns closing brackets', function() {
+  describe('.closingBrackets', () => {
+    it('returns closing brackets', () => {
       chai.assert.deepStrictEqual(Bracket.closingBrackets, [')', ']', '}']);
     });
   });
 
-  describe('.canBeInstantiatedFrom()', function() {
-    context('for all brackets', function() {
-      it('returns true', function() {
+  describe('.canBeInstantiatedFrom()', () => {
+    context('for all brackets', () => {
+      it('returns true', () => {
         chai.expect(Bracket.canBeInstantiatedFrom('(')).to.equal(true);
         chai.expect(Bracket.canBeInstantiatedFrom('[')).to.equal(true);
         chai.expect(Bracket.canBeInstantiatedFrom('{')).to.equal(true);
@@ -23,8 +23,8 @@ describe('Bracket', function() {
       });
     });
 
-    context('for other characters', function() {
-      it('returns false', function() {
+    context('for other characters', () => {
+      it('returns false', () => {
         chai.expect(Bracket.canBeInstantiatedFrom('0')).to.equal(false);
         chai.expect(Bracket.canBeInstantiatedFrom('')).to.equal(false);
         chai.expect(Bracket.canBeInstantiatedFrom(' ')).to.equal(false);
@@ -33,25 +33,25 @@ describe('Bracket', function() {
     });
   });
 
-  describe('#type', function() {
-    it('returns "bracket"', function() {
+  describe('#type', () => {
+    it('returns "bracket"', () => {
       let bracket = new Bracket('[');
 
       chai.expect(bracket.type).to.equal('bracket');
     });
   });
 
-  describe('#opening', function() {
-    context('for opening bracket', function() {
-      it('returns true', function() {
+  describe('#isOpening()', () => {
+    context('for opening bracket', () => {
+      it('returns true', () => {
         let bracket = new Bracket('[');
 
         chai.expect(bracket.isOpening()).to.equal(true);
       });
     });
 
-    context('for closing bracket', function() {
-      it('returns false', function() {
+    context('for closing bracket', () => {
+      it('returns false', () => {
         let bracket = new Bracket(']');
 
         chai.expect(bracket.isOpening()).to.equal(false);
@@ -59,17 +59,17 @@ describe('Bracket', function() {
     });
   });
 
-  describe('#closing', function() {
-    context('for opening bracket', function() {
-      it('returns false', function() {
+  describe('#isClosing()', () => {
+    context('for opening bracket', () => {
+      it('returns false', () => {
         let bracket = new Bracket('[');
 
         chai.expect(bracket.isClosing()).to.equal(false);
       });
     });
 
-    context('for closing bracket', function() {
-      it('returns true', function() {
+    context('for closing bracket', () => {
+      it('returns true', () => {
         let bracket = new Bracket(']');
 
         chai.expect(bracket.isClosing()).to.equal(true);
