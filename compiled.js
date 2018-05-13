@@ -94,10 +94,6 @@ class Adder extends Operator {
     return value === '+';
   }
 
-  get type() {
-    return 'operator';
-  }
-
   get precedenceScore() {
     return 1;
   }
@@ -138,10 +134,6 @@ class Divider extends Operator {
     return ['/', '÷'].includes(value);
   }
 
-  get type() {
-    return 'operator';
-  }
-
   get precedenceScore() {
     return 2;
   }
@@ -154,10 +146,6 @@ class Divider extends Operator {
 class Multiplier extends Operator {
   static canBeInstantiatedFrom(value) {
     return ['*', '×'].includes(value);
-  }
-
-  get type() {
-    return 'operator';
   }
 
   get precedenceScore() {
@@ -240,10 +228,6 @@ class Roll extends Token {
 class Subtractor extends Operator {
   static canBeInstantiatedFrom(value) {
     return value === '-';
-  }
-
-  get type() {
-    return 'operator';
   }
 
   get precedenceScore() {

@@ -14,21 +14,21 @@ describe('Bracket', function() {
   describe('.canBeInstantiatedFrom()', function() {
     context('for all brackets', function() {
       it('returns true', function() {
-        chai.assert.equal(Bracket.canBeInstantiatedFrom('('), true);
-        chai.assert.equal(Bracket.canBeInstantiatedFrom('['), true);
-        chai.assert.equal(Bracket.canBeInstantiatedFrom('{'), true);
-        chai.assert.equal(Bracket.canBeInstantiatedFrom('}'), true);
-        chai.assert.equal(Bracket.canBeInstantiatedFrom(']'), true);
-        chai.assert.equal(Bracket.canBeInstantiatedFrom(')'), true);
+        chai.expect(Bracket.canBeInstantiatedFrom('(')).to.equal(true);
+        chai.expect(Bracket.canBeInstantiatedFrom('[')).to.equal(true);
+        chai.expect(Bracket.canBeInstantiatedFrom('{')).to.equal(true);
+        chai.expect(Bracket.canBeInstantiatedFrom('}')).to.equal(true);
+        chai.expect(Bracket.canBeInstantiatedFrom(']')).to.equal(true);
+        chai.expect(Bracket.canBeInstantiatedFrom(')')).to.equal(true);
       });
     });
 
     context('for other characters', function() {
       it('returns false', function() {
-        chai.assert.equal(Bracket.canBeInstantiatedFrom('0'), false);
-        chai.assert.equal(Bracket.canBeInstantiatedFrom(''), false);
-        chai.assert.equal(Bracket.canBeInstantiatedFrom(' '), false);
-        chai.assert.equal(Bracket.canBeInstantiatedFrom('+'), false);
+        chai.expect(Bracket.canBeInstantiatedFrom('0')).to.equal(false);
+        chai.expect(Bracket.canBeInstantiatedFrom('')).to.equal(false);
+        chai.expect(Bracket.canBeInstantiatedFrom(' ')).to.equal(false);
+        chai.expect(Bracket.canBeInstantiatedFrom('+')).to.equal(false);
       });
     });
   });
@@ -37,7 +37,7 @@ describe('Bracket', function() {
     it('returns "bracket"', function() {
       let bracket = new Bracket('[');
 
-      chai.assert.equal(bracket.type, 'bracket');
+      chai.expect(bracket.type).to.equal('bracket');
     });
   });
 
@@ -46,7 +46,7 @@ describe('Bracket', function() {
       it('returns true', function() {
         let bracket = new Bracket('[');
 
-        chai.assert.equal(bracket.isOpening(), true);
+        chai.expect(bracket.isOpening()).to.equal(true);
       });
     });
 
@@ -54,7 +54,7 @@ describe('Bracket', function() {
       it('returns false', function() {
         let bracket = new Bracket(']');
 
-        chai.assert.equal(bracket.isOpening(), false);
+        chai.expect(bracket.isOpening()).to.equal(false);
       });
     });
   });
@@ -64,7 +64,7 @@ describe('Bracket', function() {
       it('returns false', function() {
         let bracket = new Bracket('[');
 
-        chai.assert.equal(bracket.isClosing(), false);
+        chai.expect(bracket.isClosing()).to.equal(false);
       });
     });
 
@@ -72,7 +72,7 @@ describe('Bracket', function() {
       it('returns true', function() {
         let bracket = new Bracket(']');
 
-        chai.assert.equal(bracket.isClosing(), true);
+        chai.expect(bracket.isClosing()).to.equal(true);
       });
     });
   });

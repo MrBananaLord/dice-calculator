@@ -2,16 +2,16 @@ describe('Numeral', function() {
   describe('.canBeInstantiatedFrom()', function() {
     context('for number', function() {
       it('returns true', function() {
-        chai.assert.equal(Numeral.canBeInstantiatedFrom('4823'), true);
-        chai.assert.equal(Numeral.canBeInstantiatedFrom('0'), true);
+        chai.expect(Numeral.canBeInstantiatedFrom('4823')).to.equal(true);
+        chai.expect(Numeral.canBeInstantiatedFrom('0')).to.equal(true);
       });
     });
 
     context('for other character', function() {
       it('returns false', function() {
-        chai.assert.equal(Numeral.canBeInstantiatedFrom(']'), false);
-        chai.assert.equal(Numeral.canBeInstantiatedFrom(' '), false);
-        chai.assert.equal(Numeral.canBeInstantiatedFrom(''), false);
+        chai.expect(Numeral.canBeInstantiatedFrom(']')).to.equal(false);
+        chai.expect(Numeral.canBeInstantiatedFrom(' ')).to.equal(false);
+        chai.expect(Numeral.canBeInstantiatedFrom('')).to.equal(false);
       });
     });
   });
@@ -20,7 +20,7 @@ describe('Numeral', function() {
     it('returns "number"', function() {
       let numeral = new Numeral('1');
 
-      chai.assert.equal(numeral.type, 'number');
+      chai.expect(numeral.type).to.equal('number');
     });
   });
 
@@ -28,7 +28,7 @@ describe('Numeral', function() {
     it('returns true', function() {
       let numeral = new Numeral('1');
 
-      chai.assert.equal(numeral.isNumber(), true);
+      chai.expect(numeral.isNumber()).to.equal(true);
     });
   });
 
@@ -36,13 +36,13 @@ describe('Numeral', function() {
     it('returns appropriate integer', function() {
       let numeral = new Numeral('1');
 
-      chai.assert.equal(numeral.toInt, 1);
+      chai.expect(numeral.toInt).to.equal(1);
     });
 
     it('returns appropriate integer', function() {
       let numeral = new Numeral('134');
 
-      chai.assert.equal(numeral.toInt, 134);
+      chai.expect(numeral.toInt).to.equal(134);
     });
   });
 });

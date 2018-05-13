@@ -3,7 +3,7 @@ describe('Token', function() {
     it('returns "token"', function() {
       let token = new Token('');
 
-      chai.assert.equal(token.type, "token");
+      chai.expect(token.type).to.equal("token");
     });
   });
 });
