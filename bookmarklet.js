@@ -36,12 +36,12 @@ class Token {
     return true;
   }
 
-  mergableWith(otherToken) {
-    return false;
-  }
-
   get type() {
     return 'token';
+  }
+
+  mergableWith(otherToken) {
+    return false;
   }
 
   isNumber() {
