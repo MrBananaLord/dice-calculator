@@ -1,8 +1,8 @@
-describe('Token', () => {
+describe('Token(value)', () => {
   let token = new Token('loloo');
 
   describe('.canBeInstantiatedFrom(value)', () => {
-    it('returns "token"', () => {
+    it('returns true', () => {
       chai.expect(Token.canBeInstantiatedFrom('')).to.equal(true);
     });
   });
