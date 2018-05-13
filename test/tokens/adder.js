@@ -1,26 +1,32 @@
 describe('Adder', function() {
+  it('inherits from Operator', function() {
+    let adder = new Adder('+');
+
+    chai.expect(adder instanceof Operator).to.equal(true);
+  });
+
   describe('.canBeInstantiatedFrom()', function() {
     context('for +', function() {
       it('returns true', function() {
-        chai.assert.equal(Adder.canBeInstantiatedFrom('+'), true);
+        chai.expect(Adder.canBeInstantiatedFrom('+')).to.equal(true);
       });
     });
 
     context('for other character', function() {
       it('returns false', function() {
-        chai.assert.equal(Adder.canBeInstantiatedFrom(']'), false);
-        chai.assert.equal(Adder.canBeInstantiatedFrom(' '), false);
-        chai.assert.equal(Adder.canBeInstantiatedFrom('1'), false);
-        chai.assert.equal(Adder.canBeInstantiatedFrom(''), false);
+        chai.expect(Adder.canBeInstantiatedFrom(']')).to.equal(false);
+        chai.expect(Adder.canBeInstantiatedFrom(' ')).to.equal(false);
+        chai.expect(Adder.canBeInstantiatedFrom('1')).to.equal(false);
+        chai.expect(Adder.canBeInstantiatedFrom('')).to.equal(false);
       });
     });
   });
 
-  describe('#type', function() {
-    it('returns "operator"', function() {
+  describe('#precedenceScore', () => {
+    it('returns 1', () => {
       let adder = new Adder('+');
 
-      chai.assert.equal(adder.type, 'operator');
+      chai.expect(adder.precedenceScore).to.equal(1);
     });
   });
 
@@ -28,13 +34,13 @@ describe('Adder', function() {
     it('returns result of a + b', function() {
       let adder = new Adder('+');
 
-      chai.assert.equal(adder.resolve(1, 3.5), 4.5);
+      chai.expect(adder.resolve(1, 3.5)).to.equal(4.5);
     });
 
     it('returns result of a + b', function() {
       let adder = new Adder('+');
 
-      chai.assert.equal(adder.resolve(1.0, 0), 1);
+      chai.expect(adder.resolve(1.0, 0)).to.equal(1);
     });
   });
 });

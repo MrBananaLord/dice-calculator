@@ -1,46 +1,52 @@
 describe('Divider', function() {
+  it('inherits from Operator', function() {
+    let divider = new Divider('+');
+
+    chai.expect(divider instanceof Operator).to.equal(true);
+  });
+
   describe('.canBeInstantiatedFrom()', function() {
     context('for /', function() {
       it('returns true', function() {
-        chai.assert.equal(Divider.canBeInstantiatedFrom('/'), true);
+        chai.expect(Divider.canBeInstantiatedFrom('/')).to.equal(true);
       });
     });
 
     context('for ÷', function() {
       it('returns true', function() {
-        chai.assert.equal(Divider.canBeInstantiatedFrom('÷'), true);
+        chai.expect(Divider.canBeInstantiatedFrom('÷')).to.equal(true);
       });
     });
 
     context('for other character', function() {
       it('returns false', function() {
-        chai.assert.equal(Divider.canBeInstantiatedFrom(']'), false);
-        chai.assert.equal(Divider.canBeInstantiatedFrom(' '), false);
-        chai.assert.equal(Divider.canBeInstantiatedFrom('+'), false);
-        chai.assert.equal(Divider.canBeInstantiatedFrom(''), false);
+        chai.expect(Divider.canBeInstantiatedFrom(']')).to.equal(false);
+        chai.expect(Divider.canBeInstantiatedFrom(' ')).to.equal(false);
+        chai.expect(Divider.canBeInstantiatedFrom('+')).to.equal(false);
+        chai.expect(Divider.canBeInstantiatedFrom('')).to.equal(false);
       });
     });
   });
 
-  describe('#type', function() {
-    it('returns "operator"', function() {
-      let divider = new Divider('/');
+  describe('#precedenceScore', () => {
+    it('returns 2', () => {
+      let divider = new Divider('-');
 
-      chai.assert.equal(divider.type, 'operator');
+      chai.expect(divider.precedenceScore).to.equal(2);
     });
   });
 
   describe('#resolve(a,b)', function() {
     it('returns result of a / b', function() {
-      let adder = new Divider('/');
+      let divider = new Divider('/');
 
-      chai.assert.equal(adder.resolve(1, 2), 0.5);
+      chai.expect(divider.resolve(1, 2)).to.equal(0.5);
     });
 
     it('returns result of a + b', function() {
-      let adder = new Divider('/');
+      let divider = new Divider('/');
 
-      chai.assert.equal(adder.resolve(9, 3), 3);
+      chai.expect(divider.resolve(9, 3)).to.equal(3);
     });
   });
 });

@@ -1,40 +1,46 @@
-describe('Subtractor', function() {
-  describe('.canBeInstantiatedFrom()', function() {
-    context('for -', function() {
-      it('returns true', function() {
-        chai.assert.equal(Subtractor.canBeInstantiatedFrom('-'), true);
+describe('Subtractor', () => {
+  it('inherits from Operator', () => {
+    let subtractor = new Subtractor('+');
+
+    chai.expect(subtractor instanceof Operator).to.equal(true);
+  });
+
+  describe('.canBeInstantiatedFrom()', () => {
+    context('for -', () => {
+      it('returns true', () => {
+        chai.expect(Subtractor.canBeInstantiatedFrom('-')).to.equal(true);
       });
     });
 
-    context('for other character', function() {
-      it('returns false', function() {
-        chai.assert.equal(Subtractor.canBeInstantiatedFrom(']'), false);
-        chai.assert.equal(Subtractor.canBeInstantiatedFrom(' '), false);
-        chai.assert.equal(Subtractor.canBeInstantiatedFrom('+'), false);
-        chai.assert.equal(Subtractor.canBeInstantiatedFrom(''), false);
+    context('for other character', () => {
+      it('returns false', () => {
+        chai.expect(Subtractor.canBeInstantiatedFrom(']')).to.equal(false);
+        chai.expect(Subtractor.canBeInstantiatedFrom(' ')).to.equal(false);
+        chai.expect(Subtractor.canBeInstantiatedFrom('+')).to.equal(false);
+        chai.expect(Subtractor.canBeInstantiatedFrom('')).to.equal(false);
       });
     });
   });
 
-  describe('#type', function() {
-    it('returns "operator"', function() {
+  describe('#precedenceScore', () => {
+    it('returns 1', () => {
       let subtractor = new Subtractor('-');
 
-      chai.assert.equal(subtractor.type, 'operator');
+      chai.expect(subtractor.precedenceScore).to.equal(1);
     });
   });
 
-  describe('#resolve(a,b)', function() {
-    it('returns result of a / b', function() {
-      let adder = new Subtractor('-');
+  describe('#resolve(a,b)', () => {
+    it('returns result of a / b', () => {
+      let subtractor = new Subtractor('-');
 
-      chai.assert.equal(adder.resolve(1, 2), -1);
+      chai.expect(subtractor.resolve(1, 2)).to.equal(-1);
     });
 
-    it('returns result of a + b', function() {
-      let adder = new Subtractor('-');
+    it('returns result of a + b', () => {
+      let subtractor = new Subtractor('-');
 
-      chai.assert.equal(adder.resolve(9, 3), 6);
+      chai.expect(subtractor.resolve(9, 3)).to.equal(6);
     });
   });
 });

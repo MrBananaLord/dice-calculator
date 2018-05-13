@@ -1,46 +1,52 @@
 describe('Multiplier', function() {
+  it('inherits from Operator', function() {
+    let multiplier = new Multiplier('+');
+
+    chai.expect(multiplier instanceof Operator).to.equal(true);
+  });
+
   describe('.canBeInstantiatedFrom()', function() {
     context('for *', function() {
       it('returns true', function() {
-        chai.assert.equal(Multiplier.canBeInstantiatedFrom('*'), true);
+        chai.expect(Multiplier.canBeInstantiatedFrom('*')).to.equal(true);
       });
     });
 
     context('for ×', function() {
       it('returns true', function() {
-        chai.assert.equal(Multiplier.canBeInstantiatedFrom('×'), true);
+        chai.expect(Multiplier.canBeInstantiatedFrom('×')).to.equal(true);
       });
     });
 
     context('for other character', function() {
       it('returns false', function() {
-        chai.assert.equal(Multiplier.canBeInstantiatedFrom(']'), false);
-        chai.assert.equal(Multiplier.canBeInstantiatedFrom(' '), false);
-        chai.assert.equal(Multiplier.canBeInstantiatedFrom('+'), false);
-        chai.assert.equal(Multiplier.canBeInstantiatedFrom(''), false);
+        chai.expect(Multiplier.canBeInstantiatedFrom(']')).to.equal(false);
+        chai.expect(Multiplier.canBeInstantiatedFrom(' ')).to.equal(false);
+        chai.expect(Multiplier.canBeInstantiatedFrom('+')).to.equal(false);
+        chai.expect(Multiplier.canBeInstantiatedFrom('')).to.equal(false);
       });
     });
   });
 
-  describe('#type', function() {
-    it('returns "operator"', function() {
-      let multiplier = new Multiplier('*');
+  describe('#precedenceScore', () => {
+    it('returns 1', () => {
+      let multiplier = new Multiplier('-');
 
-      chai.assert.equal(multiplier.type, 'operator');
+      chai.expect(multiplier.precedenceScore).to.equal(2);
     });
   });
 
   describe('#resolve(a,b)', function() {
     it('returns result of a * b', function() {
-      let adder = new Multiplier('*');
+      let multiplier = new Multiplier('*');
 
-      chai.assert.equal(adder.resolve(1, 0), 0);
+      chai.expect(multiplier.resolve(1, 0)).to.equal(0);
     });
 
     it('returns result of a + b', function() {
-      let adder = new Multiplier('*');
+      let multiplier = new Multiplier('*');
 
-      chai.assert.equal(adder.resolve(9.25, 0.5), 4.625);
+      chai.expect(multiplier.resolve(9.25, 0.5)).to.equal(4.625);
     });
   });
 });
