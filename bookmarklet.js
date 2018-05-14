@@ -271,7 +271,7 @@ class Tokenizer {
 
       if (token.isToken()) { return; }
 
-      if ((token.isNumber() || token.isRoll()) && this.lastToken && this.lastToken.mergableWith(token)) {
+      if (this.lastToken && this.lastToken.mergableWith(token)) {
         token = this.constructor.buildToken(this.tokens.pop().value + token.value);
       }
 
