@@ -14,7 +14,7 @@ class Roll extends Token {
       return parseInt(result[0]);
     }
     else {
-      return 1;
+      return 0;
     }
   }
 
@@ -40,7 +40,7 @@ class Roll extends Token {
   }
 
   rollOneDie() {
-    return Math.floor(Math.random() * Math.floor(this.dieSize)) + 1;
+    return Math.floor(Math.random() * this.dieSize) + 1;
   }
 
   mergableWith(otherToken) {
