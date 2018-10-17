@@ -5,10 +5,11 @@ describe('Tokenizer', () => {
     });
   });
 
-  describe('.buildToken(string)', () => {
+  describe('#buildToken(string)', () => {
+    let tokenizer = new Tokenizer();
     let FakeToken = class FakeToken extends Token {};
     let canInstantiateStub = sinon.stub(FakeToken, 'canBeInstantiatedFrom');
-    let tokensStub = sinon.stub(Tokenizer, 'tokens');
+    let tokensStub = sinon.stub(tokenizer, 'tokens');
 
     before(() => { tokensStub.get(() => [FakeToken, Token]) });
     before(() => { tokensStub.restore() });
@@ -17,7 +18,7 @@ describe('Tokenizer', () => {
       it('instantiates and returns appropriate token', () => {
         canInstantiateStub.returns(true);
 
-        chai.expect(Tokenizer.buildToken('foo')).to.deep.equal(new FakeToken('foo'));
+        chai.expect(tokenizer.buildToken('foo')).to.deep.equal(new FakeToken('foo'));
       });
     });
 
@@ -25,52 +26,86 @@ describe('Tokenizer', () => {
       it('instantiates basic Token', () => {
         canInstantiateStub.returns(false);
 
-        chai.expect(Tokenizer.buildToken('foo')).to.deep.equal(new Token('foo'));
+        chai.expect(tokenizer.buildToken('foo')).to.deep.equal(new Token('foo'));
       });
     });
   });
 
   describe('#lastToken', () => {
-    let tokenizer = new Tokenizer('');
+    let tokenizer = new Tokenizer();
 
     context('when there are no tokens', () => {
-      before(() => {
-        tokenizer.tokens = [];
-      });
-
       it('returns undefined', () => {
         chai.expect(tokenizer.lastToken).to.equal(undefined);
       });
     });
 
     context('when there are tokens', () => {
-      before(() => {
-        tokenizer.tokens = [1,2,3];
-      });
-
       it('returns last one', () => {
-        chai.expect(tokenizer.lastToken).to.equal(3);
+        let lastToken = new Numeral('2');
+
+        tokenizer.addToken(new Operator('+'));
+        tokenizer.addToken(lastToken);
+
+        chai.expect(tokenizer.lastToken).to.deep.equal(lastToken);
       });
     });
   });
 
-  describe('#run()', () => {
-    it('converts string to tokens', () => {
-      let tokenizer = new Tokenizer('2* 5d6-1 / (1d+d5 * 3 *2d70)');
+  describe('#addCharacter(character)', () => {
+    it('builds token and adds it to queue', () => {
+      let character = '3';
+      let tokenizer = new Tokenizer();
+      let token = new Token(character);
+      let spy = sinon.spy(tokenizer, 'addToken');
 
-      chai.expect(tokenizer.run().length).to.equal(15);
+      sinon.stub(tokenizer, 'buildToken').withArgs(character).returns(token);
+
+      tokenizer.addCharacter(character);
+
+      sinon.assert.calledWith(spy, token);
+    });
+  });
+
+  describe('#addToken()', () => {
+    let tokenizer = new Tokenizer();
+
+    beforeEach(() => { tokenizer.tokens = []; });
+
+    context('for regular Token', () => {
+      it('does not add Token to queue', () => {
+        tokenizer.addToken(new Token('s'));
+
+        chai.expect(tokenizer.tokens).to.deep.equal([]);
+      });
     });
 
-    it('converts string to tokens', () => {
-      let tokenizer = new Tokenizer('(9d1099((()))+)');
+    context('for other Tokens', () => {
+      it('adds Token to queue', () => {
+        let token = new Numeral('3');
+        tokenizer.addToken(token);
 
-      chai.expect(tokenizer.run().length).to.equal(10);
+        chai.expect(tokenizer.tokens).to.deep.equal([token]);
+      });
+
+      it('adds Token to queue', () => {
+        let token = new Bracket('(');
+        tokenizer.addToken(token);
+
+        chai.expect(tokenizer.tokens).to.deep.equal([token]);
+      });
     });
 
-    it('ignores unknown tokens', () => {
-      let tokenizer = new Tokenizer('qwlekj ;]./"d"');
+    context('when new token can be merged to previous token', () => {
+      it('merges two tokens', () => {
+        let token = new Numeral('6');
+        tokenizer.addToken(token);
 
-      chai.expect(tokenizer.run().length).to.equal(3);
+        let newToken = new Roll('d');
+        tokenizer.addToken(newToken);
+
+        chai.expect(tokenizer.tokens).to.deep.equal([new Roll('6d')]);
+      });
     });
   });
 });

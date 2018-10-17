@@ -163,7 +163,7 @@ class Multiplier extends Operator {
 
 class Numeral extends Token {
   static canBeInstantiatedFrom(value) {
-    return Number.isInteger(parseInt(value));
+    return value.match(/^\d+$/) != null;
   }
 
   get type() {
@@ -245,8 +245,7 @@ class Subtractor extends Operator {
 
 
 class Tokenizer {
-  constructor(string) {
-    this.string = string;
+  constructor() {
     this.tokens = [];
   }
 
@@ -254,8 +253,8 @@ class Tokenizer {
     return([ Adder, Divider, Multiplier, Subtractor, Bracket, Numeral, Roll, Token ]);
   }
 
-  static buildToken(value) {
-    let klass = this.tokens.find((klass) => klass.canBeInstantiatedFrom(value));
+  buildToken(value) {
+    let klass = this.constructor.tokens.find((klass) => klass.canBeInstantiatedFrom(value));
 
     return new klass(value);
   }
@@ -264,20 +263,18 @@ class Tokenizer {
     return this.tokens[this.tokens.length - 1];
   }
 
-  run() {
-    this.string.split('').forEach((character) => {
-      let token = this.constructor.buildToken(character);
+  addCharacter(character) {
+    this.addToken(this.buildToken(character));
+  }
 
-      if (token.isToken()) { return; }
+  addToken(token) {
+    if (token.isToken()) { return; }
 
-      if (this.lastToken && this.lastToken.mergableWith(token)) {
-        token = this.constructor.buildToken(this.tokens.pop().value + token.value);
-      }
+    if (this.lastToken && this.lastToken.mergableWith(token)) {
+      token = this.buildToken(`${this.tokens.pop().value}${token.value}`);
+    }
 
-      this.tokens.push(token);
-    });
-
-    return this.tokens;
+    this.tokens.push(token);
   }
 }
 
@@ -360,7 +357,15 @@ class Resolver {
 
 class Equasion {
   constructor(string) {
-    this.infixTokens = new Tokenizer(string).run();
+    this.tokenizer = new Tokenizer();
+
+    string.split("").forEach((character) => {
+      this.add(character);
+    });
+  }
+
+  get infixTokens() {
+    return this.tokenizer.tokens;
   }
 
   get postfixTokens() {
@@ -379,6 +384,10 @@ class Equasion {
     }
 
     return result;
+  }
+
+  add(character) {
+    this.tokenizer.addCharacter(character);
   }
 }
 

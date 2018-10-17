@@ -1,6 +1,5 @@
 class Tokenizer {
-  constructor(string) {
-    this.string = string;
+  constructor() {
     this.tokens = [];
   }
 
@@ -8,8 +7,8 @@ class Tokenizer {
     return([ Adder, Divider, Multiplier, Subtractor, Bracket, Numeral, Roll, Token ]);
   }
 
-  static buildToken(value) {
-    let klass = this.tokens.find((klass) => klass.canBeInstantiatedFrom(value));
+  buildToken(value) {
+    let klass = this.constructor.tokens.find((klass) => klass.canBeInstantiatedFrom(value));
 
     return new klass(value);
   }
@@ -18,19 +17,17 @@ class Tokenizer {
     return this.tokens[this.tokens.length - 1];
   }
 
-  run() {
-    this.string.split('').forEach((character) => {
-      let token = this.constructor.buildToken(character);
+  addCharacter(character) {
+    this.addToken(this.buildToken(character));
+  }
 
-      if (token.isToken()) { return; }
+  addToken(token) {
+    if (token.isToken()) { return; }
 
-      if (this.lastToken && this.lastToken.mergableWith(token)) {
-        token = this.constructor.buildToken(this.tokens.pop().value + token.value);
-      }
+    if (this.lastToken && this.lastToken.mergableWith(token)) {
+      token = this.buildToken(`${this.tokens.pop().value}${token.value}`);
+    }
 
-      this.tokens.push(token);
-    });
-
-    return this.tokens;
+    this.tokens.push(token);
   }
 }

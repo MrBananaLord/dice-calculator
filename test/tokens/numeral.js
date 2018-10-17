@@ -12,6 +12,7 @@ describe('Numeral', () => {
         chai.expect(Numeral.canBeInstantiatedFrom(']')).to.equal(false);
         chai.expect(Numeral.canBeInstantiatedFrom(' ')).to.equal(false);
         chai.expect(Numeral.canBeInstantiatedFrom('')).to.equal(false);
+        chai.expect(Numeral.canBeInstantiatedFrom('3d')).to.equal(false);
       });
     });
   });

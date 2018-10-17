@@ -1,6 +1,14 @@
 class Equasion {
   constructor(string) {
-    this.infixTokens = new Tokenizer(string).run();
+    this.tokenizer = new Tokenizer();
+
+    string.split("").forEach((character) => {
+      this.add(character);
+    });
+  }
+
+  get infixTokens() {
+    return this.tokenizer.tokens;
   }
 
   get postfixTokens() {
@@ -19,5 +27,9 @@ class Equasion {
     }
 
     return result;
+  }
+
+  add(character) {
+    this.tokenizer.addCharacter(character);
   }
 }
