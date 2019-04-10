@@ -449,7 +449,7 @@ class Calculator {
       <div class="row display">
         <div class="scrollable">
           <div class="equasion">
-            <span class="value">alkjsdbasjhd balkjsdba sjhdbalkjsdbasjhdba lkjsdbasjhdbalkjsdbasjhdb</span>
+            <span class="value"></span>
           </div>
           <div class="result hidden">
             <div>=</div>
@@ -662,22 +662,28 @@ class Calculator {
   }
 
   updateEquasion() {
-    this.displayElement.text(this.equasion());
+    this.displayElement.text(this.equasion().infixTokens.map((t) => t.value).join(""));
   }
 
   equasion() {
-    return this.queue.join(" ");
+    return new Equasion(this.queue.join(""))
   }
 
   calculate() {
-    let roll = this.resolveEquasion();
+    let result = this.equasion().result;
 
-    this.updateResults(roll);
+    this.updateResults(result);
     this.mode = "result";
   }
 
-  resolveEquasion() {
-    return new Equasion(this.equasion()).result;
+  clear() {
+    this.inputMode();
+  }
+
+  revert() {
+    if (this.mode == "input") {
+      this.queue.pop();
+    }
   }
 
   updateResults(roll) {
