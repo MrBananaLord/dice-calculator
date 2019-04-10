@@ -14,7 +14,7 @@ class Menu {
 
     let target = this[$(e.target).data("target")];
     if (target != null) {
-      target.show();
+      target.toggle(e);
     }
   }
 }

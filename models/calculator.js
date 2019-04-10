@@ -4,7 +4,9 @@ class Calculator {
     insertCSS(`INSERT(styles/calculator.css)`);
 
     this.element = $("#rollingStonesCalculator");
-    this.element.find(".close").click(e => this.hide(e));
+    this.element.click(e => this.toggle(e));
+    this.element.find(".box div").click(e => e.stopPropagation());
+    this.element.find(".close").click(e => this.toggle(e));
     this.element.find(".reroll").click(e => this.reroll(e));
     this.element.find(".key").click(e => this.keyClick(e));
 
@@ -30,12 +32,16 @@ class Calculator {
     }
 
     this.updateEquasion();
+
+    e.stopPropagation();
   }
 
   inputMode() {
     this.mode = "input";
     this.queue = [];
     this.resultElement.addClass("hidden");
+    this.resultElement.find(".regular").text();
+    this.updateEquasion()
   }
 
   push(value) {
@@ -47,7 +53,7 @@ class Calculator {
   }
 
   equasion() {
-    return new Equasion(this.queue.join(""))
+    return new Equasion(this.queue.join(""));
   }
 
   calculate() {
@@ -84,13 +90,8 @@ class Calculator {
     this.calculate();
   }
 
-  show(html) {
-    this.element.find(".result").html(html);
-    this.element.removeClass("hidden");
-  }
-
-  hide(e) {
+  toggle(e) {
+    this.element.toggleClass("hidden");
     e.preventDefault();
-    this.element.addClass("hidden");
   }
 }
