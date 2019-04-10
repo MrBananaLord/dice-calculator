@@ -24,7 +24,7 @@ class Tokenizer {
   addToken(token) {
     if (token.isToken()) { return; }
 
-    if (this.lastToken && this.lastToken.mergableWith(token)) {
+    while (this.lastToken && this.lastToken.mergableWith(token)) {
       let lastToken = this.tokens.pop();
 
       token = this.buildToken(lastToken.mergedValuesWith(token));

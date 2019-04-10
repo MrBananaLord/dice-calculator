@@ -230,7 +230,22 @@ class Roll extends Token {
   }
 
   mergableWith(otherToken) {
-    return otherToken.isNumber(); // || (otherToken.isRoll() && otherToken.dieSize == this.dieSize);
+    return otherToken.isNumber() || this.equalDieSizeWith(otherToken);
+  }
+
+  equalDieSizeWith(otherToken) {
+    return otherToken.isRoll() && otherToken.dieSize == this.dieSize;
+  }
+
+  mergedValuesWith(otherToken) {
+    if (this.equalDieSizeWith(otherToken)) {
+      let diceQuantity = this.diceQuantity + otherToken.diceQuantity;
+
+      return `${diceQuantity}d${this.dieSize}`;
+    }
+    else {
+      return super.mergedValuesWith(otherToken);
+    }
   }
 }
 
@@ -275,7 +290,7 @@ class Tokenizer {
   addToken(token) {
     if (token.isToken()) { return; }
 
-    if (this.lastToken && this.lastToken.mergableWith(token)) {
+    while (this.lastToken && this.lastToken.mergableWith(token)) {
       let lastToken = this.tokens.pop();
 
       token = this.buildToken(lastToken.mergedValuesWith(token));

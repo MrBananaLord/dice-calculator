@@ -44,6 +44,21 @@ class Roll extends Token {
   }
 
   mergableWith(otherToken) {
-    return otherToken.isNumber(); // || (otherToken.isRoll() && otherToken.dieSize == this.dieSize);
+    return otherToken.isNumber() || this.equalDieSizeWith(otherToken);
+  }
+
+  equalDieSizeWith(otherToken) {
+    return otherToken.isRoll() && otherToken.dieSize == this.dieSize;
+  }
+
+  mergedValuesWith(otherToken) {
+    if (this.equalDieSizeWith(otherToken)) {
+      let diceQuantity = this.diceQuantity + otherToken.diceQuantity;
+
+      return `${diceQuantity}d${this.dieSize}`;
+    }
+    else {
+      return super.mergedValuesWith(otherToken);
+    }
   }
 }
