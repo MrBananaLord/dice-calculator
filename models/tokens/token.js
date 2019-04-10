@@ -15,6 +15,10 @@ class Token {
     return false;
   }
 
+  mergedValuesWith(otherToken) {
+    return `${this.value}${otherToken.value}`;
+  }
+
   isNumber() {
     return this.type === 'number';
   }

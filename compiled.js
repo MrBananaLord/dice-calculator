@@ -43,6 +43,10 @@ class Token {
     return false;
   }
 
+  mergedValuesWith(otherToken) {
+    return `${this.value}${otherToken.value}`;
+  }
+
   isNumber() {
     return this.type === 'number';
   }
@@ -225,7 +229,7 @@ class Roll extends Token {
   }
 
   mergableWith(otherToken) {
-    return otherToken.isNumber();
+    return otherToken.isNumber(); // || (otherToken.isRoll() && otherToken.dieSize == this.dieSize);
   }
 }
 
@@ -271,7 +275,9 @@ class Tokenizer {
     if (token.isToken()) { return; }
 
     if (this.lastToken && this.lastToken.mergableWith(token)) {
-      token = this.buildToken(`${this.tokens.pop().value}${token.value}`);
+      let lastToken = this.tokens.pop();
+
+      token = this.buildToken(lastToken.mergedValuesWith(token));
     }
 
     this.tokens.push(token);

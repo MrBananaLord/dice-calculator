@@ -44,6 +44,6 @@ class Roll extends Token {
   }
 
   mergableWith(otherToken) {
-    return otherToken.isNumber();
+    return otherToken.isNumber(); // || (otherToken.isRoll() && otherToken.dieSize == this.dieSize);
   }
 }

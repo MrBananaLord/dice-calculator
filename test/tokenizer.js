@@ -97,14 +97,38 @@ describe('Tokenizer', () => {
     });
 
     context('when new token can be merged to previous token', () => {
-      it('merges two tokens', () => {
-        let token = new Numeral('6');
-        tokenizer.addToken(token);
+      context('for dice roll after a number', () => {
+        it('merges two tokens', () => {
+          let token = new Numeral('6');
+          tokenizer.addToken(token);
 
-        let newToken = new Roll('d');
-        tokenizer.addToken(newToken);
+          let newToken = new Roll('d');
+          tokenizer.addToken(newToken);
 
-        chai.expect(tokenizer.tokens).to.deep.equal([new Roll('6d')]);
+          chai.expect(tokenizer.tokens).to.deep.equal([new Roll('6d')]);
+        });
+      });
+
+      context('for dice roll after same dice roll', () => {
+        it('merges two tokens', () => {
+          let token = new Roll('d');
+          tokenizer.addToken(token);
+
+          let newToken = new Roll('d');
+          tokenizer.addToken(newToken);
+
+          chai.expect(tokenizer.tokens).to.deep.equal([new Roll('2d')]);
+        });
+
+        it('merges two tokens', () => {
+          let token = new Roll('d4');
+          tokenizer.addToken(token);
+
+          let newToken = new Roll('d4');
+          tokenizer.addToken(newToken);
+
+          chai.expect(tokenizer.tokens).to.deep.equal([new Roll('2d4')]);
+        });
       });
     });
   });
