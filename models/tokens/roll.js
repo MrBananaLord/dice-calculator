@@ -40,7 +40,13 @@ class Roll extends Token {
   }
 
   rollOneDie() {
-    return Math.floor(Math.random() * this.dieSize) + 1;
+    let result = 0;
+
+    if (this.dieSize > 0) {
+      result = Math.floor(Math.random() * this.dieSize) + 1;
+    }
+
+    return result;
   }
 
   mergableWith(otherToken) {
@@ -55,7 +61,7 @@ class Roll extends Token {
     if (this.equalDieSizeWith(otherToken)) {
       let diceQuantity = this.diceQuantity + otherToken.diceQuantity;
 
-      return `${diceQuantity}d${this.dieSize}`;
+      return this.dieSize == 0 ? `${diceQuantity}d` : `${diceQuantity}d${this.dieSize}`;
     }
     else {
       return super.mergedValuesWith(otherToken);

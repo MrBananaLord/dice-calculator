@@ -88,6 +88,12 @@ describe('Roll', () => {
   describe('#rollOneDie()', () => {
     let randomStub = sinon.stub(Math, 'random');
 
+    it('returns 0 if die size is 0', () => {
+      let roll = new Roll('3d');
+
+      chai.expect(roll.rollOneDie()).to.equal(0);
+    });
+
     it('rolls a die of given size', () => {
       let roll = new Roll('12d6');
 
