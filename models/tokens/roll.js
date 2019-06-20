@@ -67,4 +67,12 @@ class Roll extends Token {
       return super.mergedValuesWith(otherToken);
     }
   }
+
+  requiresPrefixBefore(otherToken) {
+    return otherToken.isRoll() && !this.equalDieSizeWith(otherToken);
+  }
+
+  prefixTokenFor(otherToken) {
+    return new Adder('+');
+  }
 }

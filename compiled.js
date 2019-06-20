@@ -47,6 +47,10 @@ class Token {
     return `${this.value}${otherToken.value}`;
   }
 
+  requiresPrefixBefore(otherToken) {
+    return false;
+  }
+
   isNumber() {
     return this.type === 'number';
   }
@@ -181,6 +185,14 @@ class Numeral extends Token {
   mergableWith(otherToken) {
     return otherToken.isNumber() || otherToken.isRoll();
   }
+
+  requiresPrefixBefore(otherToken) {
+    return otherToken.isBracket() && otherToken.isOpening();
+  }
+
+  prefixTokenFor(otherToken) {
+    return new Multiplier('×');
+  }
 }
 
 class Roll extends Token {
@@ -252,6 +264,14 @@ class Roll extends Token {
       return super.mergedValuesWith(otherToken);
     }
   }
+
+  requiresPrefixBefore(otherToken) {
+    return otherToken.isRoll() && !this.equalDieSizeWith(otherToken);
+  }
+
+  prefixTokenFor(otherToken) {
+    return new Adder('+');
+  }
 }
 
 class Subtractor extends Operator {
@@ -299,6 +319,12 @@ class Tokenizer {
       let lastToken = this.tokens.pop();
 
       token = this.buildToken(lastToken.mergedValuesWith(token));
+    }
+
+    if (this.lastToken && this.lastToken.requiresPrefixBefore(token)) {
+      let infixToken = this.lastToken.prefixTokenFor(token);
+
+      this.tokens.push(infixToken);
     }
 
     this.tokens.push(token);

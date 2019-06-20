@@ -30,6 +30,12 @@ class Tokenizer {
       token = this.buildToken(lastToken.mergedValuesWith(token));
     }
 
+    if (this.lastToken && this.lastToken.requiresPrefixBefore(token)) {
+      let infixToken = this.lastToken.prefixTokenFor(token);
+
+      this.tokens.push(infixToken);
+    }
+
     this.tokens.push(token);
   }
 }

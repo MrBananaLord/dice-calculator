@@ -14,4 +14,12 @@ class Numeral extends Token {
   mergableWith(otherToken) {
     return otherToken.isNumber() || otherToken.isRoll();
   }
+
+  requiresPrefixBefore(otherToken) {
+    return otherToken.isBracket() && otherToken.isOpening();
+  }
+
+  prefixTokenFor(otherToken) {
+    return new Multiplier('×');
+  }
 }

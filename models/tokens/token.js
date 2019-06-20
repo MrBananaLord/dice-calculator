@@ -19,6 +19,10 @@ class Token {
     return `${this.value}${otherToken.value}`;
   }
 
+  requiresPrefixBefore(otherToken) {
+    return false;
+  }
+
   isNumber() {
     return this.type === 'number';
   }
