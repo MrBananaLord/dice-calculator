@@ -1,6 +1,9 @@
 class Converter {
-  constructor(tokens) {
-    this.tokens    = tokens;
+  constructor() {
+    this.reset();
+  }
+
+  reset() {
     this.output    = [];
     this.operators = [];
   }
@@ -9,8 +12,10 @@ class Converter {
     return this.operators[this.operators.length - 1];
   }
 
-  run() {
-    this.tokens.forEach((token) => {
+  run(tokens) {
+    this.reset();
+
+    tokens.forEach((token) => {
       if (token.isNumber() || token.isRoll()) {
         this.output.push(token);
       }

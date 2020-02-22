@@ -350,8 +350,11 @@ class Tokenizer {
 }
 
 class Converter {
-  constructor(tokens) {
-    this.tokens    = tokens;
+  constructor() {
+    this.reset();
+  }
+
+  reset() {
     this.output    = [];
     this.operators = [];
   }
@@ -360,8 +363,10 @@ class Converter {
     return this.operators[this.operators.length - 1];
   }
 
-  run() {
-    this.tokens.forEach((token) => {
+  run(tokens) {
+    this.reset();
+
+    tokens.forEach((token) => {
       if (token.isNumber() || token.isRoll()) {
         this.output.push(token);
       }
@@ -429,10 +434,11 @@ class Resolver {
 class Equasion {
   constructor() {
     this.tokenizer = new Tokenizer();
+    this.converter = new Converter();
   }
 
   get postfixTokens() {
-    return new Converter(this.tokens).run();
+    return this.converter.run(this.tokens);
   }
 
   get postfix() {

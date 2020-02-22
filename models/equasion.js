@@ -1,10 +1,11 @@
 class Equasion {
   constructor() {
     this.tokenizer = new Tokenizer();
+    this.converter = new Converter();
   }
 
   get postfixTokens() {
-    return new Converter(this.tokens).run();
+    return this.converter.run(this.tokens);
   }
 
   get postfix() {
