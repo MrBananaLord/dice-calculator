@@ -26,7 +26,7 @@ class Calculator {
         this.inputMode();
       }
 
-      this.push(target.html());
+      this.push(target.data("value"));
     } else {
       this[action]();
     }
@@ -49,11 +49,11 @@ class Calculator {
   }
 
   updateEquasion() {
-    this.displayElement.text(this.equasion().infixTokens.map((t) => t.value).join(""));
+    this.displayElement.text(this.equasion().tokens.map((t) => t.value).join(""));
   }
 
   equasion() {
-    return new Equasion(this.tokens);
+    return new Equasion(this.tokenizer.tokens);
   }
 
   calculate() {

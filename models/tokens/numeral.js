@@ -1,6 +1,6 @@
 class Numeral extends Token {
   static canBeInstantiatedFrom(value) {
-    return value.match(/^\d+$/) != null;
+    return String(value).match(/^\d+$/) != null;
   }
 
   get type() {

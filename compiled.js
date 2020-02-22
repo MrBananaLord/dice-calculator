@@ -28,7 +28,7 @@ insertCSS(`
 
 class Token {
   constructor(value) {
-    this.value = value;
+    this.value = String(value);
   }
 
   static canBeInstantiatedFrom(value) {
@@ -103,7 +103,7 @@ class Operator extends Token {
 
 class Adder extends Operator {
   static canBeInstantiatedFrom(value) {
-    return value === '+';
+    return String(value) === '+';
   }
 
   get precedenceScore() {
@@ -125,7 +125,7 @@ class Bracket extends Token {
   }
 
   static canBeInstantiatedFrom(value) {
-    return (this.openingBrackets.concat(this.closingBrackets)).includes(value);
+    return (this.openingBrackets.concat(this.closingBrackets)).includes(String(value));
   }
 
   get type() {
@@ -143,7 +143,7 @@ class Bracket extends Token {
 
 class Divider extends Operator {
   static canBeInstantiatedFrom(value) {
-    return ['/', '÷'].includes(value);
+    return ['/', '÷'].includes(String(value));
   }
 
   get precedenceScore() {
@@ -157,7 +157,7 @@ class Divider extends Operator {
 
 class Multiplier extends Operator {
   static canBeInstantiatedFrom(value) {
-    return ['*', '×'].includes(value);
+    return ['*', '×'].includes(String(value));
   }
 
   get precedenceScore() {
@@ -171,7 +171,7 @@ class Multiplier extends Operator {
 
 class Numeral extends Token {
   static canBeInstantiatedFrom(value) {
-    return value.match(/^\d+$/) != null;
+    return String(value).match(/^\d+$/) != null;
   }
 
   get type() {
@@ -197,7 +197,7 @@ class Numeral extends Token {
 
 class Roll extends Token {
   static canBeInstantiatedFrom(value) {
-    return value.match(/^\d*d\d*$/) != null;
+    return String(value).match(/^\d*d\d*$/) != null;
   }
 
   get type() {
@@ -276,7 +276,7 @@ class Roll extends Token {
 
 class Subtractor extends Operator {
   static canBeInstantiatedFrom(value) {
-    return value === '-';
+    return String(value) === '-';
   }
 
   get precedenceScore() {
@@ -312,6 +312,14 @@ class Tokenizer {
     this.addToken(this.buildToken(character));
   }
 
+  fromString(string) {
+    this.reset();
+
+    string.split("").forEach((character) => this.addCharacter(character));
+
+    return this.tokens;
+  }
+
   addToken(token) {
     if (token.isToken()) { return; }
 
@@ -328,6 +336,10 @@ class Tokenizer {
     }
 
     this.tokens.push(token);
+  }
+
+  reset() {
+    this.tokens = [];
   }
 }
 
@@ -409,20 +421,12 @@ class Resolver {
 }
 
 class Equasion {
-  constructor(string) {
-    this.tokenizer = new Tokenizer();
-
-    string.split("").forEach((character) => {
-      this.add(character);
-    });
-  }
-
-  get infixTokens() {
-    return this.tokenizer.tokens;
+  constructor(tokens) {
+    this.tokens = tokens;
   }
 
   get postfixTokens() {
-    return new Converter(this.infixTokens).run();
+    return new Converter(this.tokens).run();
   }
 
   get postfix() {
@@ -437,10 +441,6 @@ class Equasion {
     }
 
     return result;
-  }
-
-  add(character) {
-    this.tokenizer.addCharacter(character);
   }
 }
 
@@ -512,42 +512,42 @@ class Calculator {
         </div>
       </div>
       <div class="row">
-        <div class="key orange">d4</div>
-        <div class="key orange">d100</div>
-        <div class="key orange">d?</div>
+        <div class="key orange" data-value="d20">d20</div>
+        <div class="key orange" data-value="d6">d6</div>
+        <div class="key orange" data-value="d">d?</div>
         <div class="key upcased red" data-action="revert">del</div>
         <div class="key upcased red" data-action="clear">clr</div>
       </div>
       <div class="row">
-        <div class="key orange">d6</div>
-        <div class="key">1</div>
-        <div class="key">2</div>
-        <div class="key">3</div>
-        <div class="key blue">÷</div>
+        <div class="key orange" data-value="d12">d12</div>
+        <div class="key" data-value="1">1</div>
+        <div class="key" data-value="2">2</div>
+        <div class="key" data-value="3">3</div>
+        <div class="key blue" data-value="+">+</div>
       </div>
       <div class="row">
-        <div class="key orange">d8</div>
-        <div class="key">4</div>
-        <div class="key">5</div>
-        <div class="key">6</div>
-        <div class="key blue">×</div>
+        <div class="key orange" data-value="d10">d10</div>
+        <div class="key" data-value="4">4</div>
+        <div class="key" data-value="5">5</div>
+        <div class="key" data-value="6">6</div>
+        <div class="key blue" data-value="-">-</div>
       </div>
       <div class="row">
-        <div class="key orange">d10</div>
-        <div class="key">7</div>
-        <div class="key">8</div>
-        <div class="key">9</div>
-        <div class="key blue">-</div>
+        <div class="key orange" data-value="d8">d8</div>
+        <div class="key" data-value="7">7</div>
+        <div class="key" data-value="8">8</div>
+        <div class="key" data-value="9">9</div>
+        <div class="key blue" data-value="*">×</div>
       </div>
       <div class="row">
-        <div class="key orange">d12</div>
-        <div class="key">0</div>
-        <div class="key">&#40;</div>
-        <div class="key">&#41;</div>
-        <div class="key blue">+</div>
+        <div class="key orange" data-value="d4">d4</div>
+        <div class="key" data-value="0">0</div>
+        <div class="key" data-value="(">&#40;</div>
+        <div class="key" data-value=")">&#41;</div>
+        <div class="key blue" data-value="/">÷</div>
       </div>
       <div class="row">
-        <div class="key orange">d20</div>
+        <div class="key orange" data-value="d100">d100</div>
         <div class="key calculate upcased green" data-action="calculate">Roll</div>
       </div>
     </div>
@@ -684,7 +684,7 @@ class Calculator {
     this.displayElement = this.element.find(".display .value");
     this.resultElement = this.element.find(".display .result");
 
-    this.queue = [];
+    this.tokenizer = new Tokenizer();
     this.mode  = "input";
   }
 
@@ -697,7 +697,7 @@ class Calculator {
         this.inputMode();
       }
 
-      this.push(target.html());
+      this.push(target.data("value"));
     } else {
       this[action]();
     }
@@ -709,22 +709,22 @@ class Calculator {
 
   inputMode() {
     this.mode = "input";
-    this.queue = [];
+    this.tokenizer.reset();
     this.resultElement.addClass("hidden");
     this.resultElement.find(".regular").text();
     this.updateEquasion()
   }
 
   push(value) {
-    this.queue.push(value);
+    this.tokenizer.addCharacter(value);
   }
 
   updateEquasion() {
-    this.displayElement.text(this.equasion().infixTokens.map((t) => t.value).join(""));
+    this.displayElement.text(this.equasion().tokens.map((t) => t.value).join(""));
   }
 
   equasion() {
-    return new Equasion(this.queue.join(""));
+    return new Equasion(this.tokenizer.tokens);
   }
 
   calculate() {
@@ -740,25 +740,13 @@ class Calculator {
 
   revert() {
     if (this.mode == "input") {
-      this.queue.pop();
+      this.tokenizer.tokens.pop();
     }
   }
 
   updateResults(roll) {
     this.resultElement.removeClass("hidden");
     this.resultElement.find(".regular").text(roll);
-  }
-
-  reroll(e) {
-    e.preventDefault();
-    this.roll(this.dice, this.bonus);
-  }
-
-  roll(dice, bonus) {
-    this.element.removeClass("hidden");
-    this.queue = [dice, "+", bonus];
-    this.updateEquasion();
-    this.calculate();
   }
 
   toggle(e) {

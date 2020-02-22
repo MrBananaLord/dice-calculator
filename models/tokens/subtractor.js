@@ -1,6 +1,6 @@
 class Subtractor extends Operator {
   static canBeInstantiatedFrom(value) {
-    return value === '-';
+    return String(value) === '-';
   }
 
   get precedenceScore() {

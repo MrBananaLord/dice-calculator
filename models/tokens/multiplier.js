@@ -1,6 +1,6 @@
 class Multiplier extends Operator {
   static canBeInstantiatedFrom(value) {
-    return ['*', '×'].includes(value);
+    return ['*', '×'].includes(String(value));
   }
 
   get precedenceScore() {

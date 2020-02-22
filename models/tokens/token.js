@@ -1,6 +1,6 @@
 class Token {
   constructor(value) {
-    this.value = value;
+    this.value = String(value);
   }
 
   static canBeInstantiatedFrom(value) {

@@ -1,6 +1,6 @@
 class Roll extends Token {
   static canBeInstantiatedFrom(value) {
-    return value.match(/^\d*d\d*$/) != null;
+    return String(value).match(/^\d*d\d*$/) != null;
   }
 
   get type() {

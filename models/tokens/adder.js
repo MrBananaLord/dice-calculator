@@ -1,6 +1,6 @@
 class Adder extends Operator {
   static canBeInstantiatedFrom(value) {
-    return value === '+';
+    return String(value) === '+';
   }
 
   get precedenceScore() {

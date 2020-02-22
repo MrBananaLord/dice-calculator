@@ -80,6 +80,15 @@ describe('Tokenizer', () => {
       });
     });
 
+    context('for special roll Token', () => {
+      it('adds Token to queue', () => {
+        let token = new Roll('d');
+        tokenizer.addToken(token);
+
+        chai.expect(tokenizer.tokens).to.deep.equal([token]);
+      });
+    });
+
     context('for other Tokens', () => {
       it('adds Token to queue', () => {
         let token = new Numeral('3');

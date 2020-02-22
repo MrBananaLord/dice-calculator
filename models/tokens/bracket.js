@@ -8,7 +8,7 @@ class Bracket extends Token {
   }
 
   static canBeInstantiatedFrom(value) {
-    return (this.openingBrackets.concat(this.closingBrackets)).includes(value);
+    return (this.openingBrackets.concat(this.closingBrackets)).includes(String(value));
   }
 
   get type() {
