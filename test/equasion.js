@@ -61,6 +61,26 @@ describe('Equasion', () => {
     });
   });
 
+  describe('#valid', () => {
+    context('for invalid equasion', () => {
+      it('is false', () => {
+        var equasion = new Equasion();
+        equasion.fromString('- -');
+
+        chai.expect(equasion.valid).to.equal(false);
+      });
+
+      context('for valid equasion', () => {
+        it('is false', () => {
+          var equasion = new Equasion();
+          equasion.fromString('3 * (2 + 5)');
+
+          chai.expect(equasion.valid).to.equal(true);
+        });
+      });
+    });
+  });
+
   describe('#postfix', () => {
     context('for valid syntax', () => {
       it('returns postfix', () => {

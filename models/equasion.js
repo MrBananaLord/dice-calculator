@@ -1,15 +1,26 @@
 class Equasion {
   constructor() {
     this.tokenizer = new Tokenizer();
-    this.converter = new Converter();
+    this._converter = new Converter();
   }
 
   get postfixTokens() {
-    return this.converter.run(this.tokens);
+    return this.converter.run();
   }
 
   get postfix() {
     return this.postfixTokens.map((t) => t.value).join(' ');
+  }
+
+  get valid() {
+    if (!this.converter.valid) {
+      return false;
+    }
+    else {
+      let result = new Resolver(this.postfixTokens).run();
+
+      return Boolean(!isNaN(result));
+    }
   }
 
   get result() {
@@ -28,6 +39,12 @@ class Equasion {
 
   set tokens(value) {
     this.tokenizer.tokens = value;
+  }
+
+  get converter() {
+    this._converter.tokens = this.tokens;
+
+    return this._converter;
   }
 
   reset() {

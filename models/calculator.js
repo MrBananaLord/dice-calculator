@@ -14,7 +14,7 @@ class Calculator {
     this.resultElement = this.element.find(".display .result");
 
     this.equasion = new Equasion();
-    this.mode  = "input";
+    this.mode = "input";
   }
 
   keyClick(e) {
@@ -49,6 +49,13 @@ class Calculator {
   }
 
   updateEquasionDisplay() {
+    if (!this.equasion.valid) {
+      this.displayElement.addClass('invalid');
+    }
+    else {
+      this.displayElement.removeClass('invalid');
+    }
+
     this.displayElement.text(this.equasion.tokens.map((t) => t.value).join(""));
   }
 

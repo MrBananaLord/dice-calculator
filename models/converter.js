@@ -1,21 +1,34 @@
 class Converter {
   constructor() {
-    this.reset();
+    this._tokens = [];
   }
 
   reset() {
-    this.output    = [];
+    this.output = [];
     this.operators = [];
+  }
+
+  set tokens(value) {
+    this.reset();
+    this._tokens = value;
   }
 
   get lastOperator() {
     return this.operators[this.operators.length - 1];
   }
 
-  run(tokens) {
-    this.reset();
+  get valid() {
+    try {
+      this.run();
+      return true;
+    }
+    catch (error) {
+      return false;
+    }
+  }
 
-    tokens.forEach((token) => {
+  run() {
+    this._tokens.forEach((token) => {
       if (token.isNumber() || token.isRoll()) {
         this.output.push(token);
       }

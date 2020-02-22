@@ -92,6 +92,9 @@
 #rollingStonesCalculator .display div {
   direction: ltr;
 }
+#rollingStonesCalculator .display .invalid {
+  background-color: red;
+}
 #rollingStonesCalculator .display .scrollable {
   width: max-content;
   height: 50px;

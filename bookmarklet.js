@@ -351,22 +351,35 @@ class Tokenizer {
 
 class Converter {
   constructor() {
-    this.reset();
+    this._tokens = [];
   }
 
   reset() {
-    this.output    = [];
+    this.output = [];
     this.operators = [];
+  }
+
+  set tokens(value) {
+    this.reset();
+    this._tokens = value;
   }
 
   get lastOperator() {
     return this.operators[this.operators.length - 1];
   }
 
-  run(tokens) {
-    this.reset();
+  get valid() {
+    try {
+      this.run();
+      return true;
+    }
+    catch (error) {
+      return false;
+    }
+  }
 
-    tokens.forEach((token) => {
+  run() {
+    this._tokens.forEach((token) => {
       if (token.isNumber() || token.isRoll()) {
         this.output.push(token);
       }
@@ -434,15 +447,26 @@ class Resolver {
 class Equasion {
   constructor() {
     this.tokenizer = new Tokenizer();
-    this.converter = new Converter();
+    this._converter = new Converter();
   }
 
   get postfixTokens() {
-    return this.converter.run(this.tokens);
+    return this.converter.run();
   }
 
   get postfix() {
     return this.postfixTokens.map((t) => t.value).join(' ');
+  }
+
+  get valid() {
+    if (!this.converter.valid) {
+      return false;
+    }
+    else {
+      let result = new Resolver(this.postfixTokens).run();
+
+      return Boolean(!isNaN(result));
+    }
   }
 
   get result() {
@@ -461,6 +485,12 @@ class Equasion {
 
   set tokens(value) {
     this.tokenizer.tokens = value;
+  }
+
+  get converter() {
+    this._converter.tokens = this.tokens;
+
+    return this._converter;
   }
 
   reset() {
@@ -681,6 +711,9 @@ class Calculator {
 #rollingStonesCalculator .display div {
   direction: ltr;
 }
+#rollingStonesCalculator .display .invalid {
+  background-color: red;
+}
 #rollingStonesCalculator .display .scrollable {
   width: max-content;
   height: 50px;
@@ -717,7 +750,7 @@ class Calculator {
     this.resultElement = this.element.find(".display .result");
 
     this.equasion = new Equasion();
-    this.mode  = "input";
+    this.mode = "input";
   }
 
   keyClick(e) {
@@ -752,6 +785,13 @@ class Calculator {
   }
 
   updateEquasionDisplay() {
+    if (!this.equasion.valid) {
+      this.displayElement.addClass('invalid');
+    }
+    else {
+      this.displayElement.removeClass('invalid');
+    }
+
     this.displayElement.text(this.equasion.tokens.map((t) => t.value).join(""));
   }
 
