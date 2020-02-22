@@ -427,8 +427,8 @@ class Resolver {
 }
 
 class Equasion {
-  constructor(tokens) {
-    this.tokens = tokens;
+  constructor() {
+    this.tokenizer = new Tokenizer();
   }
 
   get postfixTokens() {
@@ -447,6 +447,26 @@ class Equasion {
     }
 
     return result;
+  }
+
+  get tokens() {
+    return this.tokenizer.tokens;
+  }
+
+  set tokens(value) {
+    this.tokenizer.tokens = value;
+  }
+
+  reset() {
+    this.tokenizer.reset();
+  }
+
+  addCharacter(value) {
+    this.tokenizer.addCharacter(value);
+  }
+
+  fromString(value) {
+    this.tokenizer.fromString(value);
   }
 }
 
@@ -690,7 +710,7 @@ class Calculator {
     this.displayElement = this.element.find(".display .value");
     this.resultElement = this.element.find(".display .result");
 
-    this.tokenizer = new Tokenizer();
+    this.equasion = new Equasion();
     this.mode  = "input";
   }
 
@@ -708,33 +728,29 @@ class Calculator {
       this[action]();
     }
 
-    this.updateEquasion();
+    this.updateEquasionDisplay();
 
     e.stopPropagation();
   }
 
   inputMode() {
     this.mode = "input";
-    this.tokenizer.reset();
+    this.equasion.reset();
     this.resultElement.addClass("hidden");
     this.resultElement.find(".regular").text();
-    this.updateEquasion()
+    this.updateEquasionDisplay()
   }
 
   push(value) {
-    this.tokenizer.addCharacter(value);
+    this.equasion.addCharacter(value);
   }
 
-  updateEquasion() {
-    this.displayElement.text(this.equasion().tokens.map((t) => t.value).join(""));
-  }
-
-  equasion() {
-    return new Equasion(this.tokenizer.tokens);
+  updateEquasionDisplay() {
+    this.displayElement.text(this.equasion.tokens.map((t) => t.value).join(""));
   }
 
   calculate() {
-    let result = this.equasion().result;
+    let result = this.equasion.result;
 
     this.updateResults(result);
     this.mode = "result";
@@ -746,7 +762,7 @@ class Calculator {
 
   revert() {
     if (this.mode == "input") {
-      this.tokenizer.tokens.pop();
+      this.equasion.tokens.pop();
     }
   }
 

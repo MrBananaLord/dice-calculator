@@ -1,6 +1,6 @@
 class Equasion {
-  constructor(tokens) {
-    this.tokens = tokens;
+  constructor() {
+    this.tokenizer = new Tokenizer();
   }
 
   get postfixTokens() {
@@ -19,5 +19,25 @@ class Equasion {
     }
 
     return result;
+  }
+
+  get tokens() {
+    return this.tokenizer.tokens;
+  }
+
+  set tokens(value) {
+    this.tokenizer.tokens = value;
+  }
+
+  reset() {
+    this.tokenizer.reset();
+  }
+
+  addCharacter(value) {
+    this.tokenizer.addCharacter(value);
+  }
+
+  fromString(value) {
+    this.tokenizer.fromString(value);
   }
 }
