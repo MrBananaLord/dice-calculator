@@ -1,18 +1,10 @@
 class Equasion {
-  constructor(string) {
-    this.tokenizer = new Tokenizer();
-
-    string.split("").forEach((character) => {
-      this.add(character);
-    });
-  }
-
-  get infixTokens() {
-    return this.tokenizer.tokens;
+  constructor(tokens) {
+    this.tokens = tokens;
   }
 
   get postfixTokens() {
-    return new Converter(this.infixTokens).run();
+    return new Converter(this.tokens).run();
   }
 
   get postfix() {
@@ -27,9 +19,5 @@ class Equasion {
     }
 
     return result;
-  }
-
-  add(character) {
-    this.tokenizer.addCharacter(character);
   }
 }

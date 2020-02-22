@@ -132,4 +132,36 @@ describe('Tokenizer', () => {
       });
     });
   });
+
+  describe('#reset()', () => {
+    let tokenizer = new Tokenizer();
+
+    beforeEach(() => { tokenizer.tokens = [new Token('s')]; });
+
+    it('removes all tokens from the list', () => {
+      tokenizer.reset();
+
+      chai.expect(tokenizer.tokens).to.deep.equal([]);
+    });
+  });
+
+  describe('#fromString()', () => {
+    let tokenizer = new Tokenizer();
+
+    it('resets the list', () => {
+      tokenizer.tokens = [new Token('s')];
+
+      tokenizer.fromString('');
+
+      chai.expect(tokenizer.tokens).to.deep.equal([]);
+    });
+
+    it('converts the string to token list', () => {
+      let expectedTokens = [new Roll('3d6'), new Adder('+'), new Numeral('2')];
+
+      tokenizer.fromString('3d6+2');
+
+      chai.expect(tokenizer.tokens).to.deep.equal(expectedTokens);
+    });
+  });
 });

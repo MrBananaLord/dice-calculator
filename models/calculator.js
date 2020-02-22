@@ -13,7 +13,7 @@ class Calculator {
     this.displayElement = this.element.find(".display .value");
     this.resultElement = this.element.find(".display .result");
 
-    this.queue = [];
+    this.tokenizer = new Tokenizer();
     this.mode  = "input";
   }
 
@@ -38,14 +38,14 @@ class Calculator {
 
   inputMode() {
     this.mode = "input";
-    this.queue = [];
+    this.tokenizer.reset();
     this.resultElement.addClass("hidden");
     this.resultElement.find(".regular").text();
     this.updateEquasion()
   }
 
   push(value) {
-    this.queue.push(value);
+    this.tokenizer.addCharacter(value);
   }
 
   updateEquasion() {
@@ -53,7 +53,7 @@ class Calculator {
   }
 
   equasion() {
-    return new Equasion(this.queue.join(""));
+    return new Equasion(this.tokens);
   }
 
   calculate() {
@@ -69,25 +69,13 @@ class Calculator {
 
   revert() {
     if (this.mode == "input") {
-      this.queue.pop();
+      this.tokenizer.tokens.pop();
     }
   }
 
   updateResults(roll) {
     this.resultElement.removeClass("hidden");
     this.resultElement.find(".regular").text(roll);
-  }
-
-  reroll(e) {
-    e.preventDefault();
-    this.roll(this.dice, this.bonus);
-  }
-
-  roll(dice, bonus) {
-    this.element.removeClass("hidden");
-    this.queue = [dice, "+", bonus];
-    this.updateEquasion();
-    this.calculate();
   }
 
   toggle(e) {

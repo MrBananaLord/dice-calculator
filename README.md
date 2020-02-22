@@ -16,3 +16,9 @@ Visit `localhost:8080/tests.html` after starting the server.
 - add dice rolls to other pages
 - add dice roll calculator
 - no idea #shrug
+
+### Convert any string into equasion
+given any string try to convert it to tokens and calculate the result
+
+### Use tokens instead of strings when using calculator
+don't parse the string on flu, byt use tokens instead

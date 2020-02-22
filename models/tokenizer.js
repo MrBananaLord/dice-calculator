@@ -21,6 +21,14 @@ class Tokenizer {
     this.addToken(this.buildToken(character));
   }
 
+  fromString(string) {
+    this.reset();
+
+    string.split("").forEach((character) => this.addCharacter(character));
+
+    return this.tokens;
+  }
+
   addToken(token) {
     if (token.isToken()) { return; }
 
@@ -37,5 +45,9 @@ class Tokenizer {
     }
 
     this.tokens.push(token);
+  }
+
+  reset() {
+    this.tokens = [];
   }
 }
