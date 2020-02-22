@@ -50,10 +50,10 @@ class Calculator {
 
   updateEquasionDisplay() {
     if (!this.equasion.valid) {
-      this.displayElement.addClass('invalid');
+      this.element.addClass('invalid');
     }
     else {
-      this.displayElement.removeClass('invalid');
+      this.element.removeClass('invalid');
     }
 
     this.displayElement.text(this.equasion.tokens.map((t) => t.value).join(""));

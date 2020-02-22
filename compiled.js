@@ -697,6 +697,13 @@ class Calculator {
   background-color: #96bf6a;
   color: white;
 }
+#rollingStonesCalculator.invalid .key.calculate {
+  width: 200px;
+  background-color: #bc0f0e;
+  color: white;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
 #rollingStonesCalculator .upcased {
   text-transform: uppercase;
 }
@@ -710,8 +717,8 @@ class Calculator {
 #rollingStonesCalculator .display div {
   direction: ltr;
 }
-#rollingStonesCalculator .display .invalid {
-  background-color: red;
+#rollingStonesCalculator.invalid .display {
+  color: #bc0f0e;
 }
 #rollingStonesCalculator .display .scrollable {
   width: max-content;
@@ -785,10 +792,10 @@ class Calculator {
 
   updateEquasionDisplay() {
     if (!this.equasion.valid) {
-      this.displayElement.addClass('invalid');
+      this.element.addClass('invalid');
     }
     else {
-      this.displayElement.removeClass('invalid');
+      this.element.removeClass('invalid');
     }
 
     this.displayElement.text(this.equasion.tokens.map((t) => t.value).join(""));
