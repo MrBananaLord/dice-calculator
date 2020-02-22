@@ -266,11 +266,16 @@ class Roll extends Token {
   }
 
   requiresPrefixBefore(otherToken) {
-    return otherToken.isRoll() && !this.equalDieSizeWith(otherToken);
+    return (otherToken.isRoll() && !this.equalDieSizeWith(otherToken)) || (otherToken.isBracket() && otherToken.isOpening());
   }
 
   prefixTokenFor(otherToken) {
-    return new Adder('+');
+    if (otherToken.isRoll()) {
+      return new Adder('+');
+    }
+    else {
+      return new Multiplier('×');
+    }
   }
 }
 
@@ -537,14 +542,14 @@ class Calculator {
         <div class="key" data-value="7">7</div>
         <div class="key" data-value="8">8</div>
         <div class="key" data-value="9">9</div>
-        <div class="key blue" data-value="*">×</div>
+        <div class="key blue" data-value="×">×</div>
       </div>
       <div class="row">
         <div class="key orange" data-value="d4">d4</div>
         <div class="key" data-value="0">0</div>
         <div class="key" data-value="(">&#40;</div>
         <div class="key" data-value=")">&#41;</div>
-        <div class="key blue" data-value="/">÷</div>
+        <div class="key blue" data-value="÷">÷</div>
       </div>
       <div class="row">
         <div class="key orange" data-value="d100">d100</div>

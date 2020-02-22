@@ -11,16 +11,3 @@ You might want to run the server to be able to connect to development environmen
 You can have automatic compiling if you want. Just run `bundle exec guard`
 ### Running unit tests
 Visit `localhost:8080/tests.html` after starting the server.
-## TODO's
-- add dice rolls to character page
-- add dice rolls to other pages
-- add dice roll calculator
-- no idea #shrug
-
-### Convert any string into equasion
-given any string try to convert it to tokens and calculate the result
-
-### Use tokens instead of strings when using calculator
-don't parse the string on flu, byt use tokens instead
-
-### Allow merging d with any number, but if there is special roll (mark d? as special) then append numbers until there is another token (non Numeral)

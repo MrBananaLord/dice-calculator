@@ -69,10 +69,15 @@ class Roll extends Token {
   }
 
   requiresPrefixBefore(otherToken) {
-    return otherToken.isRoll() && !this.equalDieSizeWith(otherToken);
+    return (otherToken.isRoll() && !this.equalDieSizeWith(otherToken)) || (otherToken.isBracket() && otherToken.isOpening());
   }
 
   prefixTokenFor(otherToken) {
-    return new Adder('+');
+    if (otherToken.isRoll()) {
+      return new Adder('+');
+    }
+    else {
+      return new Multiplier('×');
+    }
   }
 }
