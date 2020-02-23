@@ -1,0 +1,8 @@
+{
+  "search.exclude": {
+    "**/bookmarklet.js": true,
+    "**/compiled.js": true,
+    "**/jquery.js": true,
+    "**/yarn.lock": true
+  }
+}

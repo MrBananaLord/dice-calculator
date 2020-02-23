@@ -18,7 +18,7 @@ class Roll extends Token {
     }
   }
 
-  get diceQuantity() {
+  get dieQuantity() {
     let result = this.value.match(/^\d+/);
 
     if (result) {
@@ -27,16 +27,6 @@ class Roll extends Token {
     else {
       return 1;
     }
-  }
-
-  resolve() {
-    let result = 0;
-
-    for (let rollIndex = 0; rollIndex < this.diceQuantity; rollIndex++) {
-      result += this.rollOneDie();
-    }
-
-    return result;
   }
 
   rollOneDie() {
@@ -59,9 +49,9 @@ class Roll extends Token {
 
   mergedValuesWith(otherToken) {
     if (this.equalDieSizeWith(otherToken)) {
-      let diceQuantity = this.diceQuantity + otherToken.diceQuantity;
+      let dieQuantity = this.dieQuantity + otherToken.dieQuantity;
 
-      return this.dieSize == 0 ? `${diceQuantity}d` : `${diceQuantity}d${this.dieSize}`;
+      return this.dieSize == 0 ? `${dieQuantity}d` : `${dieQuantity}d${this.dieSize}`;
     }
     else {
       return super.mergedValuesWith(otherToken);
@@ -80,4 +70,15 @@ class Roll extends Token {
       return new Multiplier('×');
     }
   }
+
+  resolve() {
+    let result = 0;
+
+    for (let rollIndex = 0; rollIndex < this.dieQuantity; rollIndex++) {
+      result += this.rollOneDie();
+    }
+
+    return result;
+  }
+
 }

@@ -7,15 +7,15 @@ describe('Operator', () => {
     });
   });
 
-  describe('#isLeftAssociative()', () => {
-    it('returns true', () => {
+  describe('#precedenceScore', () => {
+    it('returns 1', () => {
       let operator = new Operator('');
 
-      chai.expect(operator.isLeftAssociative()).to.equal(true);
+      chai.expect(operator.precedenceScore).to.equal(1);
     });
   });
 
-  describe('#precedences(otherOperator)', () => {
+  describe('#hasSamePrecedenceAs(otherOperator)', () => {
     let operator = new Operator('1');
     let otherOperator = new Operator('2');
 
@@ -38,7 +38,7 @@ describe('Operator', () => {
     });
   });
 
-  describe('#precedences(otherOperator)', () => {
+  describe('#precedes(otherOperator)', () => {
     let operator = new Operator('1');
     let otherOperator = new Operator('2');
 
@@ -47,7 +47,7 @@ describe('Operator', () => {
         sinon.stub(operator, 'precedenceScore').get(() => 2);
         sinon.stub(otherOperator, 'precedenceScore').get(() => 1);
 
-        chai.expect(operator.precedences(otherOperator)).to.equal(true);
+        chai.expect(operator.precedes(otherOperator)).to.equal(true);
       });
     });
 
@@ -56,7 +56,7 @@ describe('Operator', () => {
         sinon.stub(operator, 'precedenceScore').get(() => 1);
         sinon.stub(otherOperator, 'precedenceScore').get(() => 2);
 
-        chai.expect(operator.precedences(otherOperator)).to.equal(false);
+        chai.expect(operator.precedes(otherOperator)).to.equal(false);
       });
     });
 
@@ -65,7 +65,7 @@ describe('Operator', () => {
         sinon.stub(operator, 'precedenceScore').get(() => 2);
         sinon.stub(otherOperator, 'precedenceScore').get(() => 2);
 
-        chai.expect(operator.precedences(otherOperator)).to.equal(false);
+        chai.expect(operator.precedes(otherOperator)).to.equal(false);
       });
     });
   });
@@ -73,19 +73,19 @@ describe('Operator', () => {
   describe('.hasHigherPriorityThan(otherOperator)', () => {
     let operator = new Operator('1');
     let otherOperator = new Operator('2');
-    let precedencesStub = sinon.stub(operator, 'precedences');
+    let precedesStub = sinon.stub(operator, 'precedes');
     let samePrecedenceStub = sinon.stub(operator, 'hasSamePrecedenceAs');
 
-    context('when operator precedences the other', () => {
+    context('when operator precedes the other', () => {
       it('returns true', () => {
-        precedencesStub.withArgs(otherOperator).returns(true);
+        precedesStub.withArgs(otherOperator).returns(true);
 
         chai.expect(operator.hasHigherPriorityThan(otherOperator)).to.equal(true);
       });
     });
 
-    context('when operator does not precedence the other', () => {
-      before(() => { precedencesStub.withArgs(otherOperator).returns(false) });
+    context('when operator does not precede the other', () => {
+      before(() => { precedesStub.withArgs(otherOperator).returns(false) });
 
       context('but operators are not of equal precedence', () => {
         before(() => samePrecedenceStub.withArgs(otherOperator).returns(false));
@@ -116,6 +116,14 @@ describe('Operator', () => {
           });
         });
       });
+    });
+  });
+
+  describe('#isLeftAssociative()', () => {
+    it('returns true', () => {
+      let operator = new Operator('');
+
+      chai.expect(operator.isLeftAssociative()).to.equal(true);
     });
   });
 });

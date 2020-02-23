@@ -6,13 +6,13 @@ describe('Adder', function() {
   });
 
   describe('.canBeInstantiatedFrom()', function() {
-    context('for +', function() {
+    context('for "+"', function() {
       it('returns true', function() {
         chai.expect(Adder.canBeInstantiatedFrom('+')).to.equal(true);
       });
     });
 
-    context('for other character', function() {
+    context('for other characters', function() {
       it('returns false', function() {
         chai.expect(Adder.canBeInstantiatedFrom(']')).to.equal(false);
         chai.expect(Adder.canBeInstantiatedFrom(' ')).to.equal(false);
@@ -35,11 +35,6 @@ describe('Adder', function() {
       let adder = new Adder('+');
 
       chai.expect(adder.resolve(1, 3.5)).to.equal(4.5);
-    });
-
-    it('returns result of a + b', function() {
-      let adder = new Adder('+');
-
       chai.expect(adder.resolve(1.0, 0)).to.equal(1);
     });
   });

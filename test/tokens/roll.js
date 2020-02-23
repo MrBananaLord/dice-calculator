@@ -48,40 +48,26 @@ describe('Roll', () => {
   describe('#dieSize', () => {
     it('returns die size', () => {
       let roll = new Roll('12d6');
-
       chai.expect(roll.dieSize).to.equal(6);
-    });
 
-    it('returns die size', () => {
-      let roll = new Roll('d');
-
+      roll = new Roll('d');
       chai.expect(roll.dieSize).to.equal(0);
-    });
 
-    it('returns die size', () => {
-      let roll = new Roll('d20');
-
+      roll = new Roll('d20');
       chai.expect(roll.dieSize).to.equal(20);
     });
   });
 
-  describe('#diceQuantity', () => {
-    it('returns dice quantity', () => {
+  describe('#dieQuantity', () => {
+    it('returns die quantity', () => {
       let roll = new Roll('12d6');
+      chai.expect(roll.dieQuantity).to.equal(12);
 
-      chai.expect(roll.diceQuantity).to.equal(12);
-    });
+      roll = new Roll('d');
+      chai.expect(roll.dieQuantity).to.equal(1);
 
-    it('returns dice quantity', () => {
-      let roll = new Roll('d');
-
-      chai.expect(roll.diceQuantity).to.equal(1);
-    });
-
-    it('returns dice quantity', () => {
-      let roll = new Roll('d20');
-
-      chai.expect(roll.diceQuantity).to.equal(1);
+      roll = new Roll('d20');
+      chai.expect(roll.dieQuantity).to.equal(1);
     });
   });
 
@@ -98,15 +84,10 @@ describe('Roll', () => {
       let roll = new Roll('12d6');
 
       randomStub.returns(0.5);
-
       chai.expect(roll.rollOneDie()).to.equal(4);
-    });
 
-    it('rolls a die of given size', () => {
-      let roll = new Roll('12d2');
-
+      roll = new Roll('12d2');
       randomStub.returns(0.7);
-
       chai.expect(roll.rollOneDie()).to.equal(2);
     });
 
@@ -128,57 +109,150 @@ describe('Roll', () => {
   });
 
   describe('#mergableWith(otherToken)', () => {
+    let roll = new Roll('1d1');
+
     context('for a Numeral', () => {
       it('returns true', () => {
-        let roll = new Roll('1d1');
-
         chai.expect(roll.mergableWith(new Numeral('2'))).to.equal(true);
+      });
+    });
+
+    context('for a Roll of same value', () => {
+      it('returns true', () => {
+        chai.expect(roll.mergableWith(new Roll('2d1'))).to.equal(true);
+      });
+    });
+
+    context('for a Roll of other value', () => {
+      it('returns false', () => {
+        chai.expect(roll.mergableWith(new Roll('2d2'))).to.equal(false);
       });
     });
 
     context('for other tokens', () => {
       it('returns false', () => {
-        let roll = new Roll('1d1');
-
         chai.expect(roll.mergableWith(new Token('2'))).to.equal(false);
-        chai.expect(roll.mergableWith(new Roll('2d4'))).to.equal(false);
+        chai.expect(roll.mergableWith(new Operator(''))).to.equal(false);
+      });
+    });
+  });
+
+  describe('#equalDieSizeWith(otherToken)', () => {
+    let roll = new Roll('1d1');
+
+    context('for a Roll of same value', () => {
+      it('returns true', () => {
+        chai.expect(roll.mergableWith(new Roll('2d1'))).to.equal(true);
+      });
+    });
+
+    context('for a Roll of other value', () => {
+      it('returns false', () => {
+        chai.expect(roll.mergableWith(new Roll('2d2'))).to.equal(false);
+      });
+    });
+
+    context('for other tokens', () => {
+      it('returns false', () => {
+        chai.expect(roll.mergableWith(new Token('2'))).to.equal(false);
+        chai.expect(roll.mergableWith(new Operator(''))).to.equal(false);
+      });
+    });
+  });
+
+  describe('#mergedValuesWith(otherToken)', () => {
+    let roll = new Roll('1d1');
+
+    context('for a Roll of same value', () => {
+      it('adds the dice together', () => {
+        chai.expect(roll.mergedValuesWith(new Roll('2d1'))).to.equal('3d1');
+      });
+    });
+
+    context('for a Numeral', () => {
+      it('appends the numeral', () => {
+        chai.expect(roll.mergedValuesWith(new Numeral('13'))).to.equal('1d113');
+      });
+    });
+  });
+
+  describe('#requiresPrefixBefore(otherToken)', () => {
+    let roll = new Roll('1d1');
+
+    context('for a Roll of same value', () => {
+      it('returns false', () => {
+        chai.expect(roll.requiresPrefixBefore(new Roll('2d1'))).to.equal(false);
+      });
+    });
+
+    context('for a Roll of other value', () => {
+      it('returns true', () => {
+        chai.expect(roll.requiresPrefixBefore(new Roll('2d2'))).to.equal(true);
+      });
+    });
+
+    context('for an opening Bracket', () => {
+      it('returns true', () => {
+        chai.expect(roll.requiresPrefixBefore(new Bracket('('))).to.equal(true);
+      });
+    });
+
+    context('for a closing Bracket', () => {
+      it('returns false', () => {
+        chai.expect(roll.requiresPrefixBefore(new Bracket(')'))).to.equal(false);
+      });
+    });
+
+    context('for other Tokens', () => {
+      it('returns false', () => {
+        chai.expect(roll.requiresPrefixBefore(new Token(''))).to.equal(false);
+        chai.expect(roll.requiresPrefixBefore(new Operator('+'))).to.equal(false);
+        chai.expect(roll.requiresPrefixBefore(new Numeral('1'))).to.equal(false);
+      });
+    });
+  });
+
+  describe('#prefixTokenFor(otherToken)', () => {
+    let roll = new Roll('1d1');
+
+    context('for a Roll', () => {
+      it('returns an Adder', () => {
+        chai.expect(roll.prefixTokenFor(new Roll('2d4'))).to.deep.equal(new Adder('+'));
+      });
+    });
+
+    context('for an opening Bracket', () => {
+      it('returns a Multiplier', () => {
+        chai.expect(roll.prefixTokenFor(new Bracket('('))).to.deep.equal(new Multiplier('×'));
       });
     });
   });
 
   describe('#resolve()', () => {
-    it('returns sum of all rolls', () => {
-      let roll = new Roll('1d1');
+    context('for a single die', function () {
+      it('returns the roll value', () => {
+        let roll = new Roll('1d1');
 
-      sinon.stub(roll, 'rollOneDie').returns(1);
+        sinon.stub(roll, 'rollOneDie').returns(1);
 
-      chai.expect(roll.resolve()).to.equal(1);
+        chai.expect(roll.resolve()).to.equal(1);
+      });
     });
 
-    it('returns sum of all rolls', () => {
-      let roll = new Roll('4d4');
-      let rollStub = sinon.stub(roll, 'rollOneDie');
+    context('for couple dice', function () {
+      it('returns sum of all rolls', () => {
+        let roll = new Roll('6d6');
+        let rollStub = sinon.stub(roll, 'rollOneDie');
 
-      rollStub.onCall(0).returns(1);
-      rollStub.onCall(1).returns(2);
-      rollStub.onCall(2).returns(3);
-      rollStub.onCall(3).returns(4);
+        rollStub.onCall(0).returns(1);
+        rollStub.onCall(1).returns(2);
+        rollStub.onCall(2).returns(3);
+        rollStub.onCall(3).returns(4);
+        rollStub.onCall(4).returns(6);
+        rollStub.onCall(5).returns(6);
 
-      chai.expect(roll.resolve()).to.equal(10);
-    });
-
-    it('returns sum of all rolls', () => {
-      let roll = new Roll('6d6');
-      let rollStub = sinon.stub(roll, 'rollOneDie');
-
-      rollStub.onCall(0).returns(1);
-      rollStub.onCall(1).returns(2);
-      rollStub.onCall(2).returns(3);
-      rollStub.onCall(3).returns(4);
-      rollStub.onCall(4).returns(6);
-      rollStub.onCall(5).returns(6);
-
-      chai.expect(roll.resolve()).to.equal(22);
+        chai.expect(roll.resolve()).to.equal(22);
+      });
     });
   });
 });

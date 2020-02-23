@@ -81,7 +81,7 @@ class Operator extends Token {
     return 1;
   }
 
-  precedences(otherOperator) {
+  precedes(otherOperator) {
     return this.precedenceScore > otherOperator.precedenceScore;
   }
 
@@ -91,7 +91,7 @@ class Operator extends Token {
 
   hasHigherPriorityThan(otherOperator) {
     return (
-      this.precedences(otherOperator) ||
+      this.precedes(otherOperator) ||
       (this.hasSamePrecedenceAs(otherOperator) && this.isLeftAssociative())
     )
   }
@@ -104,10 +104,6 @@ class Operator extends Token {
 class Adder extends Operator {
   static canBeInstantiatedFrom(value) {
     return String(value) === '+';
-  }
-
-  get precedenceScore() {
-    return 1;
   }
 
   resolve(a, b) {
@@ -215,7 +211,7 @@ class Roll extends Token {
     }
   }
 
-  get diceQuantity() {
+  get dieQuantity() {
     let result = this.value.match(/^\d+/);
 
     if (result) {
@@ -224,16 +220,6 @@ class Roll extends Token {
     else {
       return 1;
     }
-  }
-
-  resolve() {
-    let result = 0;
-
-    for (let rollIndex = 0; rollIndex < this.diceQuantity; rollIndex++) {
-      result += this.rollOneDie();
-    }
-
-    return result;
   }
 
   rollOneDie() {
@@ -256,9 +242,9 @@ class Roll extends Token {
 
   mergedValuesWith(otherToken) {
     if (this.equalDieSizeWith(otherToken)) {
-      let diceQuantity = this.diceQuantity + otherToken.diceQuantity;
+      let dieQuantity = this.dieQuantity + otherToken.dieQuantity;
 
-      return this.dieSize == 0 ? `${diceQuantity}d` : `${diceQuantity}d${this.dieSize}`;
+      return this.dieSize == 0 ? `${dieQuantity}d` : `${dieQuantity}d${this.dieSize}`;
     }
     else {
       return super.mergedValuesWith(otherToken);
@@ -277,15 +263,22 @@ class Roll extends Token {
       return new Multiplier('×');
     }
   }
+
+  resolve() {
+    let result = 0;
+
+    for (let rollIndex = 0; rollIndex < this.dieQuantity; rollIndex++) {
+      result += this.rollOneDie();
+    }
+
+    return result;
+  }
+
 }
 
 class Subtractor extends Operator {
   static canBeInstantiatedFrom(value) {
     return String(value) === '-';
-  }
-
-  get precedenceScore() {
-    return 1;
   }
 
   resolve(a,b) {

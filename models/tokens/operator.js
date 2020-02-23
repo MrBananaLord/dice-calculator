@@ -7,7 +7,7 @@ class Operator extends Token {
     return 1;
   }
 
-  precedences(otherOperator) {
+  precedes(otherOperator) {
     return this.precedenceScore > otherOperator.precedenceScore;
   }
 
@@ -17,7 +17,7 @@ class Operator extends Token {
 
   hasHigherPriorityThan(otherOperator) {
     return (
-      this.precedences(otherOperator) ||
+      this.precedes(otherOperator) ||
       (this.hasSamePrecedenceAs(otherOperator) && this.isLeftAssociative())
     )
   }

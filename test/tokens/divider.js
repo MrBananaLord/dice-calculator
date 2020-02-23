@@ -6,19 +6,19 @@ describe('Divider', function() {
   });
 
   describe('.canBeInstantiatedFrom()', function() {
-    context('for /', function() {
+    context('for "/"', function() {
       it('returns true', function() {
         chai.expect(Divider.canBeInstantiatedFrom('/')).to.equal(true);
       });
     });
 
-    context('for ÷', function() {
+    context('for "÷"', function() {
       it('returns true', function() {
         chai.expect(Divider.canBeInstantiatedFrom('÷')).to.equal(true);
       });
     });
 
-    context('for other character', function() {
+    context('for other characters', function() {
       it('returns false', function() {
         chai.expect(Divider.canBeInstantiatedFrom(']')).to.equal(false);
         chai.expect(Divider.canBeInstantiatedFrom(' ')).to.equal(false);
@@ -41,11 +41,6 @@ describe('Divider', function() {
       let divider = new Divider('/');
 
       chai.expect(divider.resolve(1, 2)).to.equal(0.5);
-    });
-
-    it('returns result of a + b', function() {
-      let divider = new Divider('/');
-
       chai.expect(divider.resolve(9, 3)).to.equal(3);
     });
   });

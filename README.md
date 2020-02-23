@@ -11,3 +11,10 @@ You might want to run the server to be able to connect to development environmen
 You can have automatic compiling if you want. Just run `bundle exec guard`
 ### Running unit tests
 Visit `localhost:8080/tests.html` after starting the server.
+
+empty equasion should be valid
+update the visuals
+remove the bookmarklets logic
+rename the repo
+
+#mergedValiesWith should be changed to #mergeWith which should return the new token
