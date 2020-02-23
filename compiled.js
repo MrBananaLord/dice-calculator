@@ -344,20 +344,22 @@ class Tokenizer {
 class Converter {
   constructor() {
     this._tokens = [];
-  }
-
-  reset() {
-    this.output = [];
-    this.operators = [];
+    this._operators = [];
+    this._output = [];
   }
 
   set tokens(value) {
-    this.reset();
+    this._operators = [];
+    this._output = [];
     this._tokens = value;
   }
 
+  get tokens() {
+    return this._tokens;
+  }
+
   get lastOperator() {
-    return this.operators[this.operators.length - 1];
+    return this._operators[this._operators.length - 1];
   }
 
   get valid() {
@@ -373,40 +375,40 @@ class Converter {
   run() {
     this._tokens.forEach((token) => {
       if (token.isNumber() || token.isRoll()) {
-        this.output.push(token);
+        this._output.push(token);
       }
       else if (token.isOperator()) {
         while (this.lastOperator && !this.lastOperator.isBracket() && this.lastOperator.hasHigherPriorityThan(token)) {
-          this.output.push(this.operators.pop());
+          this._output.push(this._operators.pop());
         }
 
-        this.operators.push(token);
+        this._operators.push(token);
       }
       else if (token.isBracket() && token.isOpening()) {
-        this.operators.push(token);
+        this._operators.push(token);
       }
       else if (token.isBracket() && token.isClosing()) {
         while (this.lastOperator && !this.lastOperator.isBracket()) {
-          this.output.push(this.operators.pop());
+          this._output.push(this._operators.pop());
         }
 
-        if (this.operators.length == 0) {
+        if (this._operators.length == 0) {
           throw new Error("Invalid syntax!");
         }
 
-        this.operators.pop();
+        this._operators.pop();
       }
     });
 
-    while (this.operators.length) {
+    while (this._operators.length) {
       if (this.lastOperator.isBracket()) {
         throw new Error("Invalid syntax!");
       }
 
-      this.output.push(this.operators.pop());
+      this._output.push(this._operators.pop());
     }
 
-    return this.output;
+    return this._output;
   }
 }
 
