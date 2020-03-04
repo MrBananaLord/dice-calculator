@@ -1,8 +1,97 @@
 <html>
-  <head>
+
+<head>
+    <link rel="stylesheet" href="styles/calculator.css">
+
     <script src="models/jquery.js"></script>
-  </head>
-  <body>
-  </body>
+
+    <script src="models/tokens/token.js"></script>
+    <script src="models/tokens/operator.js"></script>
+    <script src="models/tokens/adder.js"></script>
+    <script src="models/tokens/bracket.js"></script>
+    <script src="models/tokens/divider.js"></script>
+    <script src="models/tokens/multiplier.js"></script>
+    <script src="models/tokens/numeral.js"></script>
+    <script src="models/tokens/roll.js"></script>
+    <script src="models/tokens/subtractor.js"></script>
+
+    <script src="models/tokenizer.js"></script>
+    <script src="models/converter.js"></script>
+    <script src="models/resolver.js"></script>
+    <script src="models/equasion.js"></script>
+
+    <script src="models/calculator.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var calculator = new Calculator();
+        });
+    </script>
+</head>
+
+<body>
+    <div id="rollingStonesCalculator" class="rollingStones">
+        <div class="box">
+            <div class="header">
+                <span class="headline">Roll calculator</span>
+            </div>
+            <div class="body">
+                <div class="row display">
+                    <div class="scrollable">
+                        <div class="equasion">
+                            <span class="value"></span>
+                        </div>
+                        <div class="result hidden">
+                            <div>=</div>
+                            <div class="values">
+                                <div class="regular">13</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="key orange" data-value="d20">d20</div>
+                    <div class="key orange" data-value="d6">d6</div>
+                    <div class="key orange" data-value="d">d?</div>
+                    <div class="key upcased red" data-action="revert">del</div>
+                    <div class="key upcased red" data-action="clear">clr</div>
+                </div>
+                <div class="row">
+                    <div class="key orange" data-value="d12">d12</div>
+                    <div class="key" data-value="1">1</div>
+                    <div class="key" data-value="2">2</div>
+                    <div class="key" data-value="3">3</div>
+                    <div class="key blue" data-value="+">+</div>
+                </div>
+                <div class="row">
+                    <div class="key orange" data-value="d10">d10</div>
+                    <div class="key" data-value="4">4</div>
+                    <div class="key" data-value="5">5</div>
+                    <div class="key" data-value="6">6</div>
+                    <div class="key blue" data-value="-">-</div>
+                </div>
+                <div class="row">
+                    <div class="key orange" data-value="d8">d8</div>
+                    <div class="key" data-value="7">7</div>
+                    <div class="key" data-value="8">8</div>
+                    <div class="key" data-value="9">9</div>
+                    <div class="key blue" data-value="×">×</div>
+                </div>
+                <div class="row">
+                    <div class="key orange" data-value="d4">d4</div>
+                    <div class="key" data-value="0">0</div>
+                    <div class="key" data-value="(">&#40;</div>
+                    <div class="key" data-value=")">&#41;</div>
+                    <div class="key blue" data-value="÷">÷</div>
+                </div>
+                <div class="row">
+                    <div class="key orange" data-value="d100">d100</div>
+                    <div class="key calculate upcased green" data-action="calculate">Roll</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>
-<script src="./compiled.js"></script>
+<script
