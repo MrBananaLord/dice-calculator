@@ -13,12 +13,12 @@ body {
 }
 
 #rollingStonesCalculator {
-    width: 250px;
-}
-
-#rollingStonesCalculator .box {
-    margin: 0;
-    background-color: #2a313a;
+    margin: 0 auto;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    min-width: 250px;
+    max-width: 500px;
 }
 
 #rollingStonesCalculator .header {
@@ -28,49 +28,21 @@ body {
     font-weight: bold;
     color: #fff;
     padding: 15px;
+    background-color: #2a313a;
+    line-height: normal;
 }
 
 #rollingStonesCalculator .body {
-    border: none;
-    border-radius: 0 0 1px 1px;
     background-color: white;
-    width: 250px;
-    float: left;
-}
-
-#rollingStonesCalculator .history {
-    background-color: white;
-    float: left;
-    border: 1px solid black;
-}
-
-#rollingStonesCalculator .reroll {
-    border-radius: 2px;
-    background-color: #96bf6b;
-    color: #fff;
-    border: 1px solid transparent;
-    text-transform: uppercase;
-    padding: 9px 15px;
-    transition: all 50ms;
-    cursor: pointer;
-    display: block;
-    margin-top: 15px;
-    text-align: center;
-}
-
-#rollingStonesCalculator .row {
-    height: 50px;
-    width: 250px;
-    text-align: center;
-    line-height: 50px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(50px, 100px));
 }
 
 #rollingStonesCalculator .key {
-    float: left;
-    width: 50px;
     height: 50px;
     background-color: #f1f1f1;
     cursor: pointer;
+    user-select: none;
 }
 
 #rollingStonesCalculator .key.red {
@@ -86,13 +58,13 @@ body {
 }
 
 #rollingStonesCalculator .key.calculate {
-    width: 200px;
     background-color: #96bf6a;
     color: white;
+    grid-column-start: 2;
+    grid-column-end: 6;
 }
 
 #rollingStonesCalculator.invalid .key.calculate {
-    width: 200px;
     background-color: #bc0f0e;
     color: white;
     text-decoration: line-through;
@@ -103,42 +75,45 @@ body {
     text-transform: uppercase;
 }
 
-#rollingStonesCalculator .row.display {
+#rollingStonesCalculator .display {
     overflow: hidden;
     position: relative;
     background-color: #fff;
-    width: 100%;
     text-align: left;
+    direction: rtl;
 }
 
-
-}
 #rollingStonesCalculator .display div {
     direction: ltr;
 }
+
 #rollingStonesCalculator.invalid .display {
     color: #bc0f0e;
 }
+
 #rollingStonesCalculator .display .scrollable {
     width: max-content;
     height: 50px;
     white-space: nowrap;
     overflow: unset;
 }
+
 #rollingStonesCalculator .display .equasion {
     padding: 0 5px 0 10px;
     float: left;
     font-weight: normal;
 }
+
 #rollingStonesCalculator .display .result {
     float: right;
     padding-right: 10px;
-    height: 50px;
 }
+
 #rollingStonesCalculator .display .result div {
     float: left;
     text-align: center;
 }
+
 #rollingStonesCalculator .display .result .values .regular {
     padding-left: 5px;
 }
