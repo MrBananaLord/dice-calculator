@@ -12,3 +12,4 @@ empty equasion should be valid
 update the visuals
 
 #mergedValuesWith should be changed to #mergeWith which should return the new token
+allow typing in the equasion

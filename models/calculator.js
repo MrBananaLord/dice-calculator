@@ -1,11 +1,9 @@
 class Calculator {
     constructor() {
         this.element = $("#rollingStonesCalculator");
-        this.element.find(".box div").click(e => e.stopPropagation());
-        this.element.find(".reroll").click(e => this.reroll(e));
         this.element.find(".key").click(e => this.keyClick(e));
 
-        this.displayElement = this.element.find(".display .value");
+        this.displayElement = this.element.find(".display input");
         this.resultElement = this.element.find(".display .result");
 
         this.equasion = new Equasion();
@@ -34,8 +32,7 @@ class Calculator {
     inputMode() {
         this.mode = "input";
         this.equasion.reset();
-        this.resultElement.addClass("hidden");
-        this.resultElement.find(".regular").text();
+        this.resultElement.text("");
         this.updateEquasionDisplay()
     }
 
@@ -50,7 +47,7 @@ class Calculator {
             this.element.removeClass('invalid');
         }
 
-        this.displayElement.text(this.equasion.tokens.map((t) => t.value).join(""));
+        this.displayElement.val(this.equasion.tokens.map((t) => t.value).join(""));
     }
 
     calculate() {
@@ -71,7 +68,6 @@ class Calculator {
     }
 
     updateResults(roll) {
-        this.resultElement.removeClass("hidden");
-        this.resultElement.find(".regular").text(roll);
+        this.resultElement.text(`\xa0= ${roll}`);
     }
 }
