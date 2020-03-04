@@ -1,7 +1,7 @@
     body {
         background-color: rgba(0, 0, 0, 0.35);
         font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
-        font-size: 14px;
+        font-size: 1em;
         font-weight: bold;
         background-color: white;
         color: inherit;
@@ -14,32 +14,32 @@
     
     #rollingStonesCalculator {
         margin: 0 auto;
-        height: 50px;
+        height: 4em;
         text-align: center;
-        line-height: 50px;
-        min-width: 250px;
-        max-width: 500px;
+        line-height: 4em;
+        min-width: 20em;
+        max-width: 40em;
     }
     
     #rollingStonesCalculator .header {
         text-align: left;
-        font-size: 20px;
+        font-size: 1.5em;
         text-transform: uppercase;
         font-weight: bold;
         color: #fff;
-        padding: 15px;
+        padding: 0 1em;
+        height: 3em;
         background-color: #2a313a;
-        line-height: normal;
     }
     
     #rollingStonesCalculator .body {
         background-color: white;
         display: grid;
-        grid-template-columns: repeat(5, minmax(50px, 100px));
+        grid-template-columns: repeat(5, minmax(4em, 8em));
     }
     
     #rollingStonesCalculator .key {
-        height: 50px;
+        height: 4em;
         background-color: #f1f1f1;
         cursor: pointer;
         user-select: none;
@@ -78,6 +78,8 @@
     #rollingStonesCalculator .display {
         background-color: #fff;
         display: flex;
+        line-height: 4em;
+        height: 4em;
     }
     
     #rollingStonesCalculator.invalid .display {
@@ -87,10 +89,9 @@
     #rollingStonesCalculator .display input.equasion {
         font-weight: normal;
         border: none;
-        line-height: 50px;
-        padding: 0 0 0 10px;
+        padding: 0 0 0 1em;
         font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
-        font-size: 14px;
+        font-size: 1em;
         text-align: right;
         flex: 1;
     }
@@ -100,14 +101,6 @@
     }
     
     #rollingStonesCalculator .display .result {
-        padding-right: 10px;
-    }
-    
-    #rollingStonesCalculator .display .result div {
-        float: left;
-        text-align: center;
-    }
-    
-    #rollingStonesCalculator .display .result .values .regular {
-        padding-left: 5px;
+        padding-right: 1em;
+        line-height: 4em;
     }
