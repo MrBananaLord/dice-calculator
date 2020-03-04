@@ -4,7 +4,8 @@ For fun reasons I want to build the calculator with support for dice rolls
 ### Running the code
 Open `./index.html`
 ### Running unit tests
-Open `./tests.html`
+- Run `yarn` in main directory
+- Open `./tests.html`
 
 # TODO
 empty equasion should be valid

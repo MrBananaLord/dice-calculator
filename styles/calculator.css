@@ -1,38 +1,23 @@
-.rollingStones {
+body {
+    background-color: rgba(0, 0, 0, 0.35);
     font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
     font-size: 14px;
     font-weight: bold;
     background-color: white;
     color: inherit;
+    margin: 0;
 }
 
-.rollingStones .hidden,
-.rollingStones.hidden {
+.hidden {
     display: none !important;
 }
 
-.rollingStones a {
-    text-decoration: none;
-    color: inherit;
-}
-
 #rollingStonesCalculator {
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.35);
+    width: 250px;
 }
 
 #rollingStonesCalculator .box {
-    margin-left: auto;
-    margin-right: auto;
-    width: 250px;
-    box-shadow: 0px 0px 20px 2px rgb(0, 0, 0);
-    border-radius: 2px;
-    margin-top: 100px;
+    margin: 0;
     background-color: #2a313a;
 }
 
@@ -49,6 +34,14 @@
     border: none;
     border-radius: 0 0 1px 1px;
     background-color: white;
+    width: 250px;
+    float: left;
+}
+
+#rollingStonesCalculator .history {
+    background-color: white;
+    float: left;
+    border: 1px solid black;
 }
 
 #rollingStonesCalculator .reroll {
@@ -70,10 +63,6 @@
     width: 250px;
     text-align: center;
     line-height: 50px;
-}
-
-#rollingStonesCalculator .display {
-    background-color: #fff;
 }
 
 #rollingStonesCalculator .key {
@@ -114,46 +103,42 @@
     text-transform: uppercase;
 }
 
-#rollingStonesCalculator .display {
-    text-align: right;
+#rollingStonesCalculator .row.display {
     overflow: hidden;
-    width: 250px;
-    direction: rtl;
     position: relative;
+    background-color: #fff;
+    width: 100%;
+    text-align: left;
 }
 
+
+}
 #rollingStonesCalculator .display div {
     direction: ltr;
 }
-
 #rollingStonesCalculator.invalid .display {
     color: #bc0f0e;
 }
-
 #rollingStonesCalculator .display .scrollable {
     width: max-content;
     height: 50px;
     white-space: nowrap;
     overflow: unset;
 }
-
 #rollingStonesCalculator .display .equasion {
     padding: 0 5px 0 10px;
     float: left;
     font-weight: normal;
 }
-
 #rollingStonesCalculator .display .result {
     float: right;
     padding-right: 10px;
     height: 50px;
 }
-
 #rollingStonesCalculator .display .result div {
     float: left;
     text-align: center;
 }
-
 #rollingStonesCalculator .display .result .values .regular {
     padding-left: 5px;
 }

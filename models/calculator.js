@@ -1,9 +1,7 @@
 class Calculator {
     constructor() {
         this.element = $("#rollingStonesCalculator");
-        this.element.click(e => this.toggle(e));
         this.element.find(".box div").click(e => e.stopPropagation());
-        this.element.find(".close").click(e => this.toggle(e));
         this.element.find(".reroll").click(e => this.reroll(e));
         this.element.find(".key").click(e => this.keyClick(e));
 
@@ -75,10 +73,5 @@ class Calculator {
     updateResults(roll) {
         this.resultElement.removeClass("hidden");
         this.resultElement.find(".regular").text(roll);
-    }
-
-    toggle(e) {
-        this.element.toggleClass("hidden");
-        e.preventDefault();
     }
 }
