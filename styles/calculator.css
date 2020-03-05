@@ -1,7 +1,7 @@
     body {
         background-color: rgba(0, 0, 0, 0.35);
         font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
-        font-size: 14px;
+        font-size: 16px;
         font-weight: bold;
         background-color: white;
         color: inherit;
@@ -14,9 +14,8 @@
 
     #rollingStonesCalculator {
         margin: 0 auto;
-        height: 50px;
         text-align: center;
-        line-height: 50px;
+        line-height: 60px;
         min-width: 320px;
         max-width: 425px;
     }
@@ -27,7 +26,7 @@
         text-transform: uppercase;
         font-weight: bold;
         color: #fff;
-        padding: 15px;
+        padding: 20px;
         background-color: #2a313a;
         line-height: normal;
     }
@@ -39,10 +38,21 @@
     }
 
     #rollingStonesCalculator .key {
-        height: 50px;
+        height: 60px;
+        line-height: 60px;
         background-color: #f1f1f1;
         cursor: pointer;
         user-select: none;
+    }
+
+    @media (hover: hover) {
+        #rollingStonesCalculator .key:hover {
+            background-color: #d1d1d1;
+        }
+    }
+
+    #rollingStonesCalculator .key:active {
+        background-color: #b1b1b1;
     }
 
     #rollingStonesCalculator .key.red {
@@ -78,6 +88,7 @@
     #rollingStonesCalculator .display {
         background-color: #fff;
         display: flex;
+        height: 60px;
     }
 
     #rollingStonesCalculator.invalid .display {
@@ -87,10 +98,10 @@
     #rollingStonesCalculator .display input.equasion {
         font-weight: normal;
         border: none;
-        line-height: 50px;
+        line-height: 60px;
         padding: 0 0 0 10px;
         font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
-        font-size: 14px;
+        font-size: 16px;
         text-align: right;
         flex: 1;
         border-radius: 0;
@@ -103,5 +114,4 @@
 
     #rollingStonesCalculator .display .result {
         padding-right: 10px;
-        line-height: 50px;
     }
