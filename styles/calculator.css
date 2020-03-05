@@ -7,20 +7,20 @@
         color: inherit;
         margin: 0;
     }
-    
+
     .hidden {
         display: none !important;
     }
-    
+
     #rollingStonesCalculator {
         margin: 0 auto;
         height: 50px;
         text-align: center;
         line-height: 50px;
-        min-width: 250px;
-        max-width: 500px;
+        min-width: 320px;
+        max-width: 425px;
     }
-    
+
     #rollingStonesCalculator .header {
         text-align: left;
         font-size: 20px;
@@ -31,59 +31,59 @@
         background-color: #2a313a;
         line-height: normal;
     }
-    
+
     #rollingStonesCalculator .body {
         background-color: white;
         display: grid;
         grid-template-columns: repeat(5, minmax(50px, 100px));
     }
-    
+
     #rollingStonesCalculator .key {
         height: 50px;
         background-color: #f1f1f1;
         cursor: pointer;
         user-select: none;
     }
-    
+
     #rollingStonesCalculator .key.red {
         color: #bc0f0e;
     }
-    
+
     #rollingStonesCalculator .key.orange {
         color: #e68412;
     }
-    
+
     #rollingStonesCalculator .key.blue {
         color: #127bc4;
     }
-    
+
     #rollingStonesCalculator .key.calculate {
         background-color: #96bf6a;
         color: white;
         grid-column-start: 2;
         grid-column-end: 6;
     }
-    
+
     #rollingStonesCalculator.invalid .key.calculate {
         background-color: #bc0f0e;
         color: white;
         text-decoration: line-through;
         cursor: not-allowed;
     }
-    
+
     #rollingStonesCalculator .upcased {
         text-transform: uppercase;
     }
-    
+
     #rollingStonesCalculator .display {
         background-color: #fff;
         display: flex;
     }
-    
+
     #rollingStonesCalculator.invalid .display {
         color: #bc0f0e;
     }
-    
+
     #rollingStonesCalculator .display input.equasion {
         font-weight: normal;
         border: none;
@@ -93,21 +93,15 @@
         font-size: 14px;
         text-align: right;
         flex: 1;
+        border-radius: 0;
+        margin: 0;
     }
-    
+
     #rollingStonesCalculator .display input:focus {
         outline: none;
     }
-    
+
     #rollingStonesCalculator .display .result {
         padding-right: 10px;
-    }
-    
-    #rollingStonesCalculator .display .result div {
-        float: left;
-        text-align: center;
-    }
-    
-    #rollingStonesCalculator .display .result .values .regular {
-        padding-left: 5px;
+        line-height: 50px;
     }
