@@ -47,12 +47,18 @@
 
     @media (hover: hover) {
         #rollingStonesCalculator .key:hover {
-            background-color: #d1d1d1;
+            filter: brightness(90%);
+        }
+        #rollingStonesCalculator .key.calculate:hover {
+            filter: brightness(90%);
         }
     }
 
     #rollingStonesCalculator .key:active {
-        background-color: #b1b1b1;
+        filter: brightness(80%);
+    }
+    #rollingStonesCalculator .key.calculate:active {
+        filter: brightness(80%);
     }
 
     #rollingStonesCalculator .key.red {
