@@ -2,16 +2,15 @@
         background-color: rgba(0, 0, 0, 0.35);
         font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
         font-size: 16px;
-        font-weight: bold;
         background-color: white;
         color: inherit;
         margin: 0;
     }
-
+    
     .hidden {
         display: none !important;
     }
-
+    
     #rollingStonesCalculator {
         margin: 0 auto;
         text-align: center;
@@ -19,7 +18,7 @@
         min-width: 320px;
         max-width: 425px;
     }
-
+    
     #rollingStonesCalculator .header {
         text-align: left;
         font-size: 20px;
@@ -30,13 +29,13 @@
         background-color: #2a313a;
         line-height: normal;
     }
-
+    
     #rollingStonesCalculator .body {
         background-color: white;
         display: grid;
         grid-template-columns: repeat(5, minmax(50px, 100px));
     }
-
+    
     #rollingStonesCalculator .key {
         height: 60px;
         line-height: 60px;
@@ -44,7 +43,7 @@
         cursor: pointer;
         user-select: none;
     }
-
+    
     @media (hover: hover) {
         #rollingStonesCalculator .key:hover {
             filter: brightness(90%);
@@ -53,54 +52,55 @@
             filter: brightness(90%);
         }
     }
-
+    
     #rollingStonesCalculator .key:active {
         filter: brightness(80%);
     }
+    
     #rollingStonesCalculator .key.calculate:active {
         filter: brightness(80%);
     }
-
+    
     #rollingStonesCalculator .key.red {
         color: #bc0f0e;
     }
-
+    
     #rollingStonesCalculator .key.orange {
         color: #e68412;
     }
-
+    
     #rollingStonesCalculator .key.blue {
         color: #127bc4;
     }
-
+    
     #rollingStonesCalculator .key.calculate {
         background-color: #96bf6a;
         color: white;
         grid-column-start: 2;
         grid-column-end: 6;
     }
-
+    
     #rollingStonesCalculator.invalid .key.calculate {
         background-color: #bc0f0e;
         color: white;
         text-decoration: line-through;
         cursor: not-allowed;
     }
-
+    
     #rollingStonesCalculator .upcased {
         text-transform: uppercase;
     }
-
+    
     #rollingStonesCalculator .display {
         background-color: #fff;
         display: flex;
         height: 60px;
     }
-
+    
     #rollingStonesCalculator.invalid .display {
         color: #bc0f0e;
     }
-
+    
     #rollingStonesCalculator .display input.equasion {
         font-weight: normal;
         border: none;
@@ -113,11 +113,11 @@
         border-radius: 0;
         margin: 0;
     }
-
+    
     #rollingStonesCalculator .display input:focus {
         outline: none;
     }
-
+    
     #rollingStonesCalculator .display .result {
         padding-right: 10px;
     }
