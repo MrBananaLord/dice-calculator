@@ -4,6 +4,9 @@ class Calculator {
         this.element.find(".key").click(e => this.keyClick(e));
 
         this.displayElement = this.element.find(".display input");
+        this.displayElement.click(e => this.handleInput(e));
+        this.displayElement.keyup(e => this.handleInput(e));
+
         this.resultElement = this.element.find(".display .result");
         this.calculateElement = this.element.find(".key.calculate");
 
@@ -34,6 +37,7 @@ class Calculator {
         this.mode = "input";
         this.equasion.reset();
         this.resultElement.text("");
+        this.displayElement.focus();
         this.update()
     }
 
@@ -75,5 +79,20 @@ class Calculator {
 
     updateResults(roll) {
         this.resultElement.text(`\xa0= ${roll}`);
+    }
+
+    handleInput(e) {
+        if (e.which == 13) {
+            // Enter
+            this.calculate();
+        } else {
+            this.resultElement.text("");
+
+            this.equasion.fromString(this.displayElement.val());
+
+            this.update();
+        }
+
+        e.stopPropagation();
     }
 }
