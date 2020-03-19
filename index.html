@@ -22,6 +22,7 @@
     <script src="models/resolver.js"></script>
     <script src="models/equasion.js"></script>
 
+    <script src="models/history.js"></script>
     <script src="models/calculator.js"></script>
 
     <script type="text/javascript">
@@ -31,21 +32,11 @@
             // Initial focus
             window.calculator.displayElement.focus();
         });
-
-        $(document).keyup(function(e) {
-            if (e.which == 13) {
-                // Enter
-                calculator.calculate();
-            } else if (e.which == 191) {
-                // Slash "/"
-                calculator.inputMode();
-            }
-        });
     </script>
 </head>
 
 <body>
-    <div id="rollingStonesCalculator" class="rollingStones">
+    <div id="rollingStonesCalculator">
         <div class="header">
             <span class="headline">Roll calculator</span>
         </div>
@@ -82,6 +73,7 @@
             <div class="key orange" data-value="d4">d4</div>
             <div class="key calculate upcased disabled" data-action="calculate">Roll</div>
         </div>
+        <div class="history"></div>
     </div>
 </body>
 
