@@ -5,12 +5,13 @@ class Calculator {
 
         this.displayElement = this.element.find(".display input");
         this.displayElement.click(e => this.handleInput(e));
-        this.displayElement.keyup(e => this.handleInput(e));
+        $(window).keyup(e => this.handleInput(e));
 
         this.resultElement = this.element.find(".display .result");
         this.calculateElement = this.element.find(".key.calculate");
 
         this.equasion = new Equasion();
+        this.history = new History();
         this.mode = "input";
     }
 
@@ -63,6 +64,7 @@ class Calculator {
             let result = this.equasion.result;
 
             this.updateResults(result);
+            this.history.push(this.equasion);
             this.mode = "result";
         }
     }
@@ -85,6 +87,9 @@ class Calculator {
         if (e.which == 13) {
             // Enter
             this.calculate();
+        } else if (e.which == 191) {
+            // Slash "/"
+            calculator.inputMode();
         } else {
             this.resultElement.text("");
 
