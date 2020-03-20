@@ -67,11 +67,11 @@
     }
     
     #rollingStonesCalculator .key.red {
-        color: bc0f0e;
+        color: #bc0f0e;
     }
     
     #rollingStonesCalculator .key.orange {
-        color: bc0f0e;
+        color: #bc0f0e;
     }
     
     #rollingStonesCalculator .key.blue {
@@ -128,4 +128,9 @@
     
     #rollingStonesCalculator .display .result {
         padding-right: 10px;
+    }
+    
+    #rollingStonesCalculator .history div {
+        line-height: 40px;
+        background-color: #f1f1f1;
     }
