@@ -12,7 +12,17 @@ class Calculator {
 
         this.equasion = new Equasion();
         this.history = new History();
+
         this.mode = "input";
+
+        this.history.displayElement.children("div").click(e => this.loadFromHistory(e));
+    }
+
+    loadFromHistory(e) {
+        this.inputMode();
+        this.equasion.fromString(e.target.innerText);
+        this.update();
+        e.stopPropagation();
     }
 
     keyClick(e) {
@@ -39,7 +49,7 @@ class Calculator {
         this.equasion.reset();
         this.resultElement.text("");
         this.displayElement.focus();
-        this.update()
+        this.update();
     }
 
     push(value) {
@@ -56,8 +66,10 @@ class Calculator {
             this.element.addClass('invalid');
         }
 
-        this.displayElement.val(this.equasion.tokens.map((t) => t.value).join(""));
+        this.displayElement.val(this.equasion.toString());
     }
+
+    // actions
 
     calculate() {
         if (this.equasion.valid) {
@@ -68,6 +80,20 @@ class Calculator {
             this.mode = "result";
         }
     }
+
+    showHistory() {
+        // this.history.focus();
+    }
+
+    showFavourites() {
+
+    }
+
+    showChains() {
+
+    }
+
+    // other
 
     clear() {
         this.inputMode();
