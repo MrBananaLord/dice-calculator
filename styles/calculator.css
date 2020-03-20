@@ -48,6 +48,7 @@
         #rollingStonesCalculator .key:hover {
             filter: brightness(90%);
         }
+        #rollingStonesCalculator .key.disabled:hover,
         #rollingStonesCalculator .key.calculate.disabled:hover,
         #rollingStonesCalculator.invalid .key.calculate:hover {
             filter: none;
@@ -80,21 +81,17 @@
     #rollingStonesCalculator .key.calculate {
         background-color: #96bf6a;
         color: white;
-        grid-column-start: 2;
-        grid-column-end: 6;
     }
     
     #rollingStonesCalculator.invalid .key.calculate {
         background-color: bc0f0e;
         color: white;
-        text-decoration: line-through;
         cursor: not-allowed;
     }
     
-    #rollingStonesCalculator .key.calculate.disabled {
+    #rollingStonesCalculator .key.disabled {
         background-color: gray;
         color: black;
-        text-decoration: line-through;
         cursor: not-allowed;
     }
     

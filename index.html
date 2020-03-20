@@ -3,6 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="styles/calculator.css">
 
     <script src="models/jquery.js"></script>
@@ -41,6 +42,7 @@
             <span class="headline">Roll calculator</span>
         </div>
         <div class="display">
+            <i class="glyphicon glyphicon-alert"></i>
             <input type="value" class="equasion">
             <div class="result"></div>
         </div>
@@ -71,6 +73,9 @@
             <div class="key" data-value=")">&#41;</div>
             <div class="key blue" data-value="÷">÷</div>
             <div class="key orange" data-value="d4">d4</div>
+            <div class="key disabled material-icons" data-action="showHistory">history</div>
+            <div class="key disabled material-icons" data-action="showFavourites">star</div>
+            <div class="key disabled material-icons" data-action="showChains">link</div>
             <div class="key calculate upcased disabled" data-action="calculate">Roll</div>
         </div>
         <div class="history"></div>

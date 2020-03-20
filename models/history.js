@@ -1,15 +1,17 @@
 class History {
     constructor() {
         this.displayElement = $("#rollingStonesCalculator .history");
-        this.elements = [];
         this.storage = window.localStorage;
+
+        this.elements = JSON.parse(this.storage["history"]) || [];
+        this.elements.forEach((e) => this.displayElement.append(`<div>${e}</div>`));
     }
 
-    push(element) {
-        this.elements.push(element);
+    push(equasion) {
+        this.elements.unshift(equasion.toString());
 
         if (this.elements.length > 10) {
-            this.elements.shift();
+            this.elements.pop();
         }
 
         this.storage['history'] = JSON.stringify(this.elements);
@@ -17,15 +19,13 @@ class History {
         this.updateDisplay();
     }
 
-    limitExceeded() {
-
-    }
-
     updateDisplay() {
         if (this.displayElement.children().length > 10) {
             this.displayElement.children().last().remove();
         }
 
-        this.displayElement.prepend(`<div>${this.elements[0].tokens.map((t) => t.value).join("")}</div>`);
+        if (this.elements.length > 0) {
+            this.displayElement.prepend(`<div>${this.elements[0]}</div>`);
+        }
     }
 }
