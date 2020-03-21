@@ -4,6 +4,7 @@ class Calculator {
         this.element.find(".key").click(e => this.keyClick(e));
 
         this.displayElement = this.element.find(".display input");
+        this.displayElement.focus();
         this.displayElement.click(e => this.handleInput(e));
         $(window).keyup(e => this.handleInput(e));
 
@@ -11,11 +12,9 @@ class Calculator {
         this.calculateElement = this.element.find(".key.calculate");
 
         this.equasion = new Equasion();
-        this.history = new History();
+        this.history = new History(this);
 
         this.mode = "input";
-
-        this.history.displayElement.children("div").click(e => this.loadFromHistory(e));
     }
 
     loadFromHistory(e) {
@@ -23,6 +22,10 @@ class Calculator {
         this.equasion.fromString(e.target.innerText);
         this.update();
         e.stopPropagation();
+    }
+
+    hideMenus() {
+        this.history.hide();
     }
 
     keyClick(e) {

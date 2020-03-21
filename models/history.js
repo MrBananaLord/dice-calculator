@@ -1,15 +1,54 @@
 class History {
-    constructor() {
+    constructor(calculator) {
+        this.calculator = calculator;
+        this.visible = false;
+
         this.displayElement = $("#rollingStonesCalculator .history");
-        this.toggleKey = $("#rollingStonesCalculator .key[data-action='showHistory']");
+        this.toggleElement = $("#rollingStonesCalculator .key[data-action='showHistory']");
         this.storage = window.localStorage;
 
         this.elements = JSON.parse(this.storage["history"]) || [];
         this.elements.forEach((e) => this.displayElement.append(`<div>${e}</div>`));
 
-        if (this.elements.length > 0) {
-            this.toggleKey.removeClass("disabled");
+        this.updateToggleElement();
+
+        this.displayElement.children("div").click(e => this.calculator.loadFromHistory(e));
+        this.toggleElement.click((e) => this.toggle());
+    }
+
+    hasElements() {
+        return this.elements.length > 0;
+    }
+
+    updateToggleElement() {
+        if (this.hasElements()) {
+            this.toggleElement.removeClass("disabled");
+        } else {
+            this.toggleElement.addClass("disabled");
         }
+    }
+
+    toggle() {
+        if (this.visible) {
+            this.hide();
+        } else {
+            this.activate();
+        }
+    }
+
+    hide() {
+        this.displayElement.addClass("hidden");
+        this.toggleElement.removeClass("active");
+
+        this.visible = false;
+    }
+
+    activate() {
+        this.calculator.hideMenus();
+        this.displayElement.removeClass("hidden");
+        this.toggleElement.addClass("active");
+
+        this.visible = true;
     }
 
     push(equasion) {
@@ -29,8 +68,10 @@ class History {
             this.displayElement.children().last().remove();
         }
 
-        if (this.elements.length > 0) {
+        if (this.hasElements()) {
             this.displayElement.prepend(`<div>${this.elements[0]}</div>`);
         }
+
+        this.updateToggleElement();
     }
 }

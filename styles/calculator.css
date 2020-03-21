@@ -45,7 +45,9 @@
     }
     
     @media (hover: hover) {
-        #rollingStonesCalculator .key:hover {
+        #rollingStonesCalculator .key:hover,
+        #rollingStonesCalculator .key.menu-toggle:hover,
+        #rollingStonesCalculator .history div:hover {
             filter: brightness(90%);
         }
         #rollingStonesCalculator .key.disabled:hover,
@@ -89,8 +91,9 @@
         cursor: not-allowed;
     }
     
-    #rollingStonesCalculator .key.disabled {
-        background-color: gray;
+    #rollingStonesCalculator .key.disabled,
+    #rollingStonesCalculator .key.menu-toggle.disabled {
+        background-color: #c6c6c6;
         color: black;
         cursor: not-allowed;
     }
@@ -131,6 +134,10 @@
     }
     
     #rollingStonesCalculator .history div {
-        line-height: 40px;
-        background-color: #f1f1f1;
+        line-height: 45px;
+        background-color: white;
+    }
+    
+    #rollingStonesCalculator .key.menu-toggle.active {
+        background-color: white;
     }

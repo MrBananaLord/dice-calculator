@@ -29,9 +29,6 @@
     <script type="text/javascript">
         $(document).ready(function() {
             window.calculator = new Calculator();
-
-            // Initial focus
-            window.calculator.displayElement.focus();
         });
     </script>
 </head>
@@ -73,12 +70,12 @@
             <div class="key" data-value=")">&#41;</div>
             <div class="key blue" data-value="÷">÷</div>
             <div class="key orange" data-value="d4">d4</div>
-            <div class="key disabled material-icons" data-action="showHistory">history</div>
-            <div class="key disabled material-icons" data-action="showFavourites">star</div>
-            <div class="key disabled material-icons" data-action="showChains">link</div>
+            <div class="key menu-toggle disabled material-icons" data-action="showHistory">history</div>
+            <div class="key menu-toggle disabled material-icons" data-action="showFavourites">star</div>
+            <div class="key menu-toggle disabled material-icons" data-action="showChains">link</div>
             <div class="key calculate upcased disabled" data-action="calculate">Roll</div>
         </div>
-        <div class="history"></div>
+        <div class="history hidden"></div>
     </div>
 </body>
 
