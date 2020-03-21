@@ -8,12 +8,22 @@ class History {
         this.storage = window.localStorage;
 
         this.elements = JSON.parse(this.storage["history"]) || [];
-        this.elements.forEach((e) => this.displayElement.append(`<div>${e}</div>`));
+        this.elements.forEach((e) => this.displayElement.append(this.elementHTML(e)));
 
         this.updateToggleElement();
 
-        this.displayElement.children("div").click(e => this.calculator.loadFromHistory(e));
-        this.toggleElement.click((e) => this.toggle());
+        this.displayElement.on("click", ".element .value", e => this.load(e));
+        this.displayElement.on("click", ".element .reroll", e => this.reroll(e));
+        this.toggleElement.on("click", (e) => this.toggle());
+    }
+
+    load(e) {
+        this.calculator.loadFromHistory($(e.target).parent(".element").data("value"));
+    }
+
+    reroll(e) {
+        this.calculator.loadFromHistory($(e.target).parent(".element").data("value"));
+        this.calculator.calculate();
     }
 
     hasElements() {
@@ -31,7 +41,7 @@ class History {
     toggle() {
         if (this.visible) {
             this.hide();
-        } else {
+        } else if (this.hasElements()) {
             this.activate();
         }
     }
@@ -71,9 +81,18 @@ class History {
         }
 
         if (this.hasElements()) {
-            this.displayElement.prepend(`<div>${this.elements[0]}</div>`);
+            this.displayElement.prepend(this.elementHTML(this.elements[0]));
         }
 
         this.updateToggleElement();
+    }
+
+    elementHTML(value) {
+        return `
+            <div class="element" data-value="${value}">
+                <div class="value">${value}</div>
+                <div class="reroll material-icons">replay</div>
+            </div>
+        `;
     }
 }

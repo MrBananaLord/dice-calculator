@@ -1,143 +1,156 @@
-    body {
-        background-color: rgba(0, 0, 0, 0.35);
-        font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
-        font-size: 16px;
-        background-color: white;
-        color: inherit;
-        margin: 0;
+body {
+    background-color: rgba(0, 0, 0, 0.35);
+    font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
+    font-size: 16px;
+    background-color: white;
+    color: inherit;
+    margin: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#rollingStonesCalculator {
+    margin: 0 auto;
+    text-align: center;
+    line-height: 60px;
+    min-width: 320px;
+    max-width: 425px;
+}
+
+#rollingStonesCalculator .header {
+    text-align: left;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+    padding: 20px;
+    background-color: #2a313a;
+    line-height: normal;
+}
+
+#rollingStonesCalculator .body {
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(50px, 100px));
+}
+
+#rollingStonesCalculator .material-icons {
+    line-height: inherit;
+}
+
+#rollingStonesCalculator .key {
+    height: 60px;
+    line-height: 60px;
+    background-color: #eee;
+    cursor: pointer;
+    user-select: none;
+}
+
+@media (hover: hover) {
+    #rollingStonesCalculator .key:hover {
+        background-color: #ddd;
     }
-    
-    .hidden {
-        display: none !important;
+    #rollingStonesCalculator .key.calculate:hover {
+        background-color: aquamarine;
     }
-    
-    #rollingStonesCalculator {
-        margin: 0 auto;
-        text-align: center;
-        line-height: 60px;
-        min-width: 320px;
-        max-width: 425px;
+    #rollingStonesCalculator .key.menu-toggle:hover,
+    #rollingStonesCalculator .key.menu-toggle.active:hover,
+    #rollingStonesCalculator .history .value:hover {
+        background-color: pink;
     }
-    
-    #rollingStonesCalculator .header {
-        text-align: left;
-        font-size: 20px;
-        text-transform: uppercase;
-        font-weight: bold;
-        color: #fff;
-        padding: 20px;
-        background-color: #2a313a;
-        line-height: normal;
+    #rollingStonesCalculator .history .reroll:hover {
+        background-color: aquamarine;
     }
-    
-    #rollingStonesCalculator .body {
-        background-color: white;
-        display: grid;
-        grid-template-columns: repeat(5, minmax(50px, 100px));
+    #rollingStonesCalculator .key.disabled:hover,
+    #rollingStonesCalculator .key.calculate.disabled:hover {
+        background-color: #ccc;
     }
-    
-    #rollingStonesCalculator .key {
-        height: 60px;
-        line-height: 60px;
-        background-color: #f1f1f1;
-        cursor: pointer;
-        user-select: none;
+    #rollingStonesCalculator.invalid .key.calculate:hover {
+        background-color: #bc0f0e;
     }
-    
-    @media (hover: hover) {
-        #rollingStonesCalculator .key:hover,
-        #rollingStonesCalculator .key.menu-toggle:hover,
-        #rollingStonesCalculator .history div:hover {
-            filter: brightness(90%);
-        }
-        #rollingStonesCalculator .key.disabled:hover,
-        #rollingStonesCalculator .key.calculate.disabled:hover,
-        #rollingStonesCalculator.invalid .key.calculate:hover {
-            filter: none;
-        }
-        #rollingStonesCalculator .key.calculate:hover {
-            filter: brightness(90%);
-        }
-    }
-    
-    #rollingStonesCalculator .key:active {
-        filter: brightness(80%);
-    }
-    
-    #rollingStonesCalculator .key.calculate:active {
-        filter: brightness(80%);
-    }
-    
-    #rollingStonesCalculator .key.red {
-        color: #bc0f0e;
-    }
-    
-    #rollingStonesCalculator .key.orange {
-        color: #bc0f0e;
-    }
-    
-    #rollingStonesCalculator .key.blue {
-        color: #127bc4;
-    }
-    
-    #rollingStonesCalculator .key.calculate {
-        background-color: #96bf6a;
-        color: white;
-    }
-    
-    #rollingStonesCalculator.invalid .key.calculate {
-        background-color: bc0f0e;
-        color: white;
-        cursor: not-allowed;
-    }
-    
-    #rollingStonesCalculator .key.disabled,
-    #rollingStonesCalculator .key.menu-toggle.disabled {
-        background-color: #c6c6c6;
-        color: black;
-        cursor: not-allowed;
-    }
-    
-    #rollingStonesCalculator .upcased {
-        text-transform: uppercase;
-    }
-    
-    #rollingStonesCalculator .display {
-        background-color: #fff;
-        display: flex;
-        height: 60px;
-    }
-    
-    #rollingStonesCalculator.invalid .display {
-        color: #bc0f0e;
-    }
-    
-    #rollingStonesCalculator .display input.equasion {
-        font-weight: normal;
-        border: none;
-        line-height: 60px;
-        padding: 0 0 0 10px;
-        font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
-        font-size: 16px;
-        text-align: right;
-        flex: 1;
-        border-radius: 0;
-        margin: 0;
-    }
-    
-    #rollingStonesCalculator .display input:focus {
-        outline: none;
-    }
-    
-    #rollingStonesCalculator .display .result {
-        padding-right: 10px;
-    }
-    
-    #rollingStonesCalculator .history div {
-        line-height: 45px;
-        background-color: white;
-    }
-    
-    #rollingStonesCalculator .key.menu-toggle.active {
-        background-color: white;
-    }
+}
+
+#rollingStonesCalculator .key.red {
+    color: #bc0f0e;
+}
+
+#rollingStonesCalculator .key.orange {
+    color: #bc0f0e;
+}
+
+#rollingStonesCalculator .key.blue {
+    color: #127bc4;
+}
+
+#rollingStonesCalculator .key.calculate {
+    background-color: mediumaquamarine;
+}
+
+#rollingStonesCalculator.invalid .key.calculate {
+    background-color: bc0f0e;
+    color: white;
+    cursor: not-allowed;
+}
+
+#rollingStonesCalculator .key.disabled,
+#rollingStonesCalculator .key.menu-toggle.disabled {
+    background-color: #ccc;
+    color: black;
+    cursor: not-allowed;
+}
+
+#rollingStonesCalculator .upcased {
+    text-transform: uppercase;
+}
+
+#rollingStonesCalculator .display {
+    background-color: #fff;
+    display: flex;
+    height: 60px;
+}
+
+#rollingStonesCalculator.invalid .display {
+    color: #bc0f0e;
+}
+
+#rollingStonesCalculator .display input.equasion {
+    font-weight: normal;
+    border: none;
+    line-height: 60px;
+    padding: 0 0 0 10px;
+    font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
+    font-size: 16px;
+    text-align: right;
+    flex: 1;
+    border-radius: 0;
+    margin: 0;
+}
+
+#rollingStonesCalculator .display input:focus {
+    outline: none;
+}
+
+#rollingStonesCalculator .display .result {
+    padding-right: 10px;
+}
+
+#rollingStonesCalculator .history .element {
+    line-height: 45px;
+    background-color: white;
+    display: flex;
+    cursor: pointer;
+}
+
+#rollingStonesCalculator .history .element .value {
+    flex: 80%;
+}
+
+#rollingStonesCalculator .history .element .reroll {
+    flex: 20%;
+}
+
+#rollingStonesCalculator .key.menu-toggle.active {
+    background-color: white;
+}

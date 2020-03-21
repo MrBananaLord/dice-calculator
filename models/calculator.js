@@ -1,11 +1,11 @@
 class Calculator {
     constructor() {
         this.element = $("#rollingStonesCalculator");
-        this.element.find(".key").click(e => this.keyClick(e));
+        this.element.on("click", ".key", e => this.keyClick(e));
 
         this.displayElement = this.element.find(".display input");
         this.displayElement.focus();
-        this.displayElement.click(e => this.handleInput(e));
+        this.displayElement.on("click", e => this.handleInput(e));
         $(window).keyup(e => this.handleInput(e));
 
         this.resultElement = this.element.find(".display .result");
@@ -17,11 +17,10 @@ class Calculator {
         this.mode = "input";
     }
 
-    loadFromHistory(e) {
+    loadFromHistory(value) {
         this.inputMode();
-        this.equasion.fromString(e.target.innerText);
+        this.equasion.fromString(value.toString());
         this.update();
-        e.stopPropagation();
     }
 
     hideMenus() {
