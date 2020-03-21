@@ -52,15 +52,17 @@ class History {
     }
 
     push(equasion) {
-        this.elements.unshift(equasion.toString());
+        if (this.elements[0] != equasion.toString()) {
+            this.elements.unshift(equasion.toString());
 
-        if (this.elements.length > 10) {
-            this.elements.pop();
+            if (this.elements.length > 10) {
+                this.elements = this.elements.slice(0, 10);
+            }
+
+            this.storage['history'] = JSON.stringify(this.elements);
+
+            this.updateDisplay();
         }
-
-        this.storage['history'] = JSON.stringify(this.elements);
-
-        this.updateDisplay();
     }
 
     updateDisplay() {
