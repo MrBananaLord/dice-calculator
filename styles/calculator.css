@@ -2,7 +2,7 @@ body {
     background-color: rgba(0, 0, 0, 0.35);
     font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
     font-size: 16px;
-    background-color: white;
+    background-color: aliceblue;
     color: inherit;
     margin: 0;
 }
@@ -50,7 +50,7 @@ body {
 
 @media (hover: hover) {
     #rollingStonesCalculator .key:hover {
-        background-color: #ddd;
+        background-color: pink;
     }
     #rollingStonesCalculator .key.calculate:hover {
         background-color: aquamarine;
@@ -70,6 +70,17 @@ body {
     #rollingStonesCalculator.invalid .key.calculate:hover {
         background-color: #bc0f0e;
     }
+}
+
+#rollingStonesCalculator .key.key.menu-toggle:active:not(.disabled),
+#rollingStonesCalculator .history .value:active,
+#rollingStonesCalculator .key:active {
+    background-color: palevioletred;
+}
+
+#rollingStonesCalculator .history .reroll:active,
+#rollingStonesCalculator .key.calculate:active {
+    background-color: teal;
 }
 
 #rollingStonesCalculator .key.red {
@@ -137,7 +148,6 @@ body {
 }
 
 #rollingStonesCalculator .history .element {
-    line-height: 45px;
     background-color: white;
     display: flex;
     cursor: pointer;

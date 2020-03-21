@@ -50,7 +50,6 @@ class Calculator {
         this.mode = "input";
         this.equasion.reset();
         this.resultElement.text("");
-        this.displayElement.focus();
         this.update();
     }
 

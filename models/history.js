@@ -7,7 +7,10 @@ class History {
         this.toggleElement = $("#rollingStonesCalculator .key[data-action='showHistory']");
         this.storage = window.localStorage;
 
-        this.elements = JSON.parse(this.storage["history"]) || [];
+        this.elements = [];
+        if (this.storage["history"].length > 0) {
+            this.elements = JSON.parse(this.storage["history"]).slice(0, 10);
+        }
         this.elements.forEach((e) => this.displayElement.append(this.elementHTML(e)));
 
         this.updateToggleElement();
