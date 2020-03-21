@@ -72,17 +72,6 @@ body {
     }
 }
 
-#rollingStonesCalculator .key.key.menu-toggle:active:not(.disabled),
-#rollingStonesCalculator .history .value:active,
-#rollingStonesCalculator .key:active {
-    background-color: palevioletred;
-}
-
-#rollingStonesCalculator .history .reroll:active,
-#rollingStonesCalculator .key.calculate:active {
-    background-color: teal;
-}
-
 #rollingStonesCalculator .key.red {
     color: #bc0f0e;
 }
