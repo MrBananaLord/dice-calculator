@@ -42,8 +42,6 @@ class Calculator {
         }
 
         this.update();
-
-        e.stopPropagation();
     }
 
     inputMode() {
@@ -124,7 +122,5 @@ class Calculator {
 
             this.update();
         }
-
-        e.stopPropagation();
     }
 }

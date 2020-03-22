@@ -19,7 +19,7 @@ body {
     max-width: 425px;
 }
 
-#rollingStonesCalculator .header {
+.header {
     text-align: left;
     font-size: 20px;
     text-transform: uppercase;
@@ -30,92 +30,97 @@ body {
     line-height: normal;
 }
 
-#rollingStonesCalculator .body {
+.body {
     background-color: white;
     display: grid;
     grid-template-columns: repeat(5, minmax(50px, 100px));
 }
 
-#rollingStonesCalculator .material-icons {
+.material-icons {
     line-height: inherit;
 }
 
-#rollingStonesCalculator .key {
+.key {
     height: 60px;
     line-height: 60px;
     background-color: #eee;
     cursor: pointer;
     user-select: none;
+    transition: filter 0.3s;
+}
+
+.clickable:active {
+    filter: brightness(75%);
 }
 
 @media (hover: hover) {
-    #rollingStonesCalculator .key:hover {
+    .key:hover {
         background-color: pink;
     }
-    #rollingStonesCalculator .key.calculate:hover {
+    .key.calculate:hover {
         background-color: aquamarine;
     }
-    #rollingStonesCalculator .key.menu-toggle:hover,
-    #rollingStonesCalculator .key.menu-toggle.active:hover,
-    #rollingStonesCalculator .history .value:hover {
+    .key.menu-toggle:hover,
+    .key.menu-toggle.active:hover,
+    .history .value:hover {
         background-color: pink;
     }
-    #rollingStonesCalculator .history .reroll:hover {
+    .history .reroll:hover {
         background-color: aquamarine;
     }
-    #rollingStonesCalculator .key.disabled:hover,
-    #rollingStonesCalculator .key.calculate.disabled:hover {
+    .key.disabled:hover,
+    .key.calculate.disabled:hover {
         background-color: #ccc;
     }
-    #rollingStonesCalculator.invalid .key.calculate:hover {
+    .invalid .key.calculate:hover {
         background-color: #bc0f0e;
     }
 }
 
-#rollingStonesCalculator .key.red {
+.key.red {
     color: #bc0f0e;
 }
 
-#rollingStonesCalculator .key.orange {
+.key.orange {
     color: #bc0f0e;
 }
 
-#rollingStonesCalculator .key.blue {
+.key.blue {
     color: #127bc4;
 }
 
-#rollingStonesCalculator .key.calculate {
+.key.calculate {
     background-color: mediumaquamarine;
 }
 
-#rollingStonesCalculator.invalid .key.calculate {
+.invalid .key.calculate {
     background-color: bc0f0e;
     color: white;
     cursor: not-allowed;
 }
 
-#rollingStonesCalculator .key.disabled,
-#rollingStonesCalculator .key.menu-toggle.disabled {
+.key.disabled,
+.key.menu-toggle.disabled {
     background-color: #ccc;
     color: black;
     cursor: not-allowed;
 }
 
-#rollingStonesCalculator .upcased {
+.upcased {
     text-transform: uppercase;
 }
 
-#rollingStonesCalculator .display {
+.display {
     background-color: #fff;
     display: flex;
     height: 60px;
 }
 
-#rollingStonesCalculator.invalid .display {
+.invalid .display {
     color: #bc0f0e;
 }
 
-#rollingStonesCalculator .display input.equasion {
+.display input.equasion {
     font-weight: normal;
     border: none;
     line-height: 60px;
@@ -128,28 +133,30 @@ body {
     margin: 0;
 }
 
-#rollingStonesCalculator .display input:focus {
+.display input:focus {
     outline: none;
 }
 
-#rollingStonesCalculator .display .result {
+.display .result {
     padding-right: 10px;
 }
 
-#rollingStonesCalculator .history .element {
+.history .element {
     background-color: white;
     display: flex;
     cursor: pointer;
 }
 
-#rollingStonesCalculator .history .element .value {
+.history .value {
     flex: 80%;
+    background-color: inherit;
 }
 
-#rollingStonesCalculator .history .element .reroll {
+.history .reroll {
     flex: 20%;
+    background-color: inherit;
 }
 
-#rollingStonesCalculator .key.menu-toggle.active {
+.key.menu-toggle.active {
     background-color: white;
 }

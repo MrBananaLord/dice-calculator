@@ -93,8 +93,8 @@ class History {
     elementHTML(value) {
         return `
             <div class="element" data-value="${value}">
-                <div class="value">${value}</div>
-                <div class="reroll material-icons">replay</div>
+                <div class="clickable value">${value}</div>
+                <div class="clickable reroll material-icons">replay</div>
             </div>
         `;
     }
