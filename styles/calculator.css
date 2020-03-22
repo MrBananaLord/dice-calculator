@@ -7,10 +7,6 @@ body {
     margin: 0;
 }
 
-.hidden {
-    display: none !important;
-}
-
 #rollingStonesCalculator {
     margin: 0 auto;
     text-align: center;
@@ -46,7 +42,6 @@ body {
     background-color: #eee;
     cursor: pointer;
     user-select: none;
-    transition: filter 0.3s;
 }
 
 .clickable:active {
@@ -139,6 +134,17 @@ body {
 
 .display .result {
     padding-right: 10px;
+}
+
+.history {
+    overflow: hidden;
+    transition: max-height 0.3s;
+    height: auto;
+    max-height: 600px;
+}
+
+.history.hidden {
+    max-height: 0;
 }
 
 .history .element {
