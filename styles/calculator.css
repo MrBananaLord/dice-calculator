@@ -20,7 +20,7 @@ body {
     font-size: 20px;
     text-transform: uppercase;
     font-weight: bold;
-    color: #fff;
+    color: white;
     padding: 20px;
     background-color: #2a313a;
     line-height: normal;
@@ -36,7 +36,8 @@ body {
     line-height: inherit;
 }
 
-.key {
+.key,
+.menu-toggle {
     height: 60px;
     line-height: 60px;
     background-color: #eee;
@@ -55,12 +56,13 @@ body {
     .key.calculate:hover {
         background-color: aquamarine;
     }
-    .key.menu-toggle:hover,
-    .key.menu-toggle.active:hover,
-    .history .value:hover {
+    .menu-toggle:hover,
+    .menu-toggle.active:hover,
+    .menu .favourite:hover,
+    .menu .value:hover {
         background-color: pink;
     }
-    .history .reroll:hover {
+    .menu .roll:hover {
         background-color: aquamarine;
     }
     .key.disabled:hover,
@@ -68,20 +70,20 @@ body {
         background-color: #ccc;
     }
     .invalid .key.calculate:hover {
-        background-color: #bc0f0e;
+        background-color: crimson;
     }
 }
 
 .key.red {
-    color: #bc0f0e;
+    color: crimson;
 }
 
 .key.orange {
-    color: #bc0f0e;
+    color: tomato;
 }
 
 .key.blue {
-    color: #127bc4;
+    color: royalblue;
 }
 
 .key.calculate {
@@ -95,7 +97,7 @@ body {
 }
 
 .key.disabled,
-.key.menu-toggle.disabled {
+.menu-toggle.disabled {
     background-color: #ccc;
     color: black;
     cursor: not-allowed;
@@ -136,33 +138,38 @@ body {
     padding-right: 10px;
 }
 
-.history {
+.menu {
     overflow: hidden;
     transition: max-height 0.3s;
     height: auto;
     max-height: 600px;
 }
 
-.history.hidden {
+.menu.hidden {
     max-height: 0;
 }
 
-.history .element {
+.menu .element {
     background-color: white;
     display: flex;
     cursor: pointer;
 }
 
-.history .value {
-    flex: 80%;
+.menu .value {
+    flex: 70%;
     background-color: inherit;
 }
 
-.history .reroll {
+.menu .favourite {
+    flex: 10%;
+    background-color: inherit;
+}
+
+.menu .roll {
     flex: 20%;
     background-color: inherit;
 }
 
-.key.menu-toggle.active {
+.menu-toggle.active {
     background-color: white;
 }

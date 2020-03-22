@@ -1,46 +1,60 @@
 class Calculator {
     constructor() {
         this.element = $("#rollingStonesCalculator");
-        this.element.on("click", ".key", e => this.keyClick(e));
-
         this.displayElement = this.element.find(".display input");
-        this.displayElement.focus();
-        this.displayElement.on("click", e => this.handleInput(e));
-        $(window).keyup(e => this.handleInput(e));
-
         this.resultElement = this.element.find(".display .result");
         this.calculateElement = this.element.find(".key.calculate");
 
         this.equasion = new Equasion();
-        this.history = new History(this);
+        this.history = new History();
+        this.favourites = new Favourites(this);
 
         this.mode = "input";
+        this.displayElement.focus();
+
+        $(document).on("click", "[data-action='loadEquasion']", e => this.loadEquasion(e));
+        $(document).on("click", "[data-action='roll']", e => this.roll(e));
+        $(document).on("click", "[data-action='revert']", e => this.revert(e));
+        $(document).on("click", "[data-action='clear']", e => this.clear(e));
+        $(document).on("click", "[data-action='appendSymbol']", e => this.appendSymbol(e));
+        $(document).on("click", "[data-action='calculate']", e => this.calculate(e));
+        $(document).on("click", "[data-action='toggleMenu']", e => this.toggleMenu(e));
+        $(document).on("keyup", e => this.handleInput(e));
+
     }
 
-    loadFromHistory(value) {
+    toggleMenu(e) {
+        let targetMenu = this[$(e.target).data("value")];
+        let activeMenu = [this.history, this.favourites].find(e => e.visible);
+
+        if (targetMenu === activeMenu) {
+            targetMenu.hide();
+        } else if (activeMenu) {
+            activeMenu.hide();
+            setTimeout(() => targetMenu.activate(), 300);
+        } else {
+            targetMenu.activate();
+        }
+    }
+
+    loadEquasion(e) {
         this.inputMode();
-        this.equasion.fromString(value.toString());
+        this.equasion.fromString($(e.target).data("value").toString());
         this.update();
     }
 
-    hideMenus() {
-        this.history.hide();
+    roll(e) {
+        this.loadEquasion(e);
+        this.calculate();
     }
 
-    keyClick(e) {
+    appendSymbol(e) {
         let target = $(e.target);
-        let action = target.data("action");
-
-        if (action == null) {
-            if (this.mode == "result") {
-                this.inputMode();
-            }
-
-            this.push(target.data("value"));
-        } else {
-            this[action]();
+        if (this.mode == "result") {
+            this.inputMode();
         }
 
+        this.push(target.data("value"));
         this.update();
     }
 
@@ -66,9 +80,8 @@ class Calculator {
         }
 
         this.displayElement.val(this.equasion.toString());
-    }
 
-    // actions
+    }
 
     calculate() {
         if (this.equasion.valid) {
@@ -79,20 +92,6 @@ class Calculator {
             this.mode = "result";
         }
     }
-
-    showHistory() {
-        // this.history.focus();
-    }
-
-    showFavourites() {
-
-    }
-
-    showChains() {
-
-    }
-
-    // other
 
     clear() {
         this.inputMode();

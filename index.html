@@ -24,6 +24,7 @@
     <script src="models/equasion.js"></script>
 
     <script src="models/history.js"></script>
+    <script src="models/favourites.js"></script>
     <script src="models/calculator.js"></script>
 
     <script type="text/javascript">
@@ -44,38 +45,39 @@
             <div class="result"></div>
         </div>
         <div class="body">
-            <div class="clickable key orange" data-value="d20">d20</div>
-            <div class="clickable key orange" data-value="d100">d100</div>
-            <div class="clickable key orange" data-value="d">d?</div>
-            <div class="clickable key upcased red" data-action="revert">del</div>
-            <div class="clickable key upcased red" data-action="clear">clr</div>
-            <div class="clickable key orange" data-value="d12">d12</div>
-            <div class="clickable key" data-value="1">1</div>
-            <div class="clickable key" data-value="2">2</div>
-            <div class="clickable key" data-value="3">3</div>
-            <div class="clickable key blue" data-value="+">+</div>
-            <div class="clickable key orange" data-value="d10">d10</div>
-            <div class="clickable key" data-value="4">4</div>
-            <div class="clickable key" data-value="5">5</div>
-            <div class="clickable key" data-value="6">6</div>
-            <div class="clickable key blue" data-value="-">-</div>
-            <div class="clickable key orange" data-value="d8">d8</div>
-            <div class="clickable key" data-value="7">7</div>
-            <div class="clickable key" data-value="8">8</div>
-            <div class="clickable key" data-value="9">9</div>
-            <div class="clickable key blue" data-value="×">×</div>
-            <div class="clickable key orange" data-value="d6">d6</div>
-            <div class="clickable key" data-value="0">0</div>
-            <div class="clickable key" data-value="(">&#40;</div>
-            <div class="clickable key" data-value=")">&#41;</div>
-            <div class="clickable key blue" data-value="÷">÷</div>
-            <div class="clickable key orange" data-value="d4">d4</div>
-            <div class="clickable key menu-toggle disabled material-icons" data-action="showHistory">history</div>
-            <div class="clickable key menu-toggle disabled material-icons" data-action="showFavourites">star</div>
-            <div class="clickable key menu-toggle disabled material-icons" data-action="showChains">link</div>
-            <div class="clickable key calculate upcased disabled" data-action="calculate">Roll</div>
+            <div data-action="appendSymbol" data-value="d20" class="clickable key orange">d20</div>
+            <div data-action="appendSymbol" data-value="d100" class="clickable key orange">d100</div>
+            <div data-action="appendSymbol" data-value="d" class="clickable key orange">d?</div>
+            <div data-action="revert" class="clickable key upcased red">del</div>
+            <div data-action="clear" class="clickable key upcased red">clr</div>
+            <div data-action="appendSymbol" data-value="d12" class="clickable key orange">d12</div>
+            <div data-action="appendSymbol" data-value="1" class="clickable key">1</div>
+            <div data-action="appendSymbol" data-value="2" class="clickable key">2</div>
+            <div data-action="appendSymbol" data-value="3" class="clickable key">3</div>
+            <div data-action="appendSymbol" data-value="+" class="clickable key blue">+</div>
+            <div data-action="appendSymbol" data-value="d10" class="clickable key orange">d10</div>
+            <div data-action="appendSymbol" data-value="4" class="clickable key">4</div>
+            <div data-action="appendSymbol" data-value="5" class="clickable key">5</div>
+            <div data-action="appendSymbol" data-value="6" class="clickable key">6</div>
+            <div data-action="appendSymbol" data-value="-" class="clickable key blue">-</div>
+            <div data-action="appendSymbol" data-value="d8" class="clickable key orange">d8</div>
+            <div data-action="appendSymbol" data-value="7" class="clickable key">7</div>
+            <div data-action="appendSymbol" data-value="8" class="clickable key">8</div>
+            <div data-action="appendSymbol" data-value="9" class="clickable key">9</div>
+            <div data-action="appendSymbol" data-value="×" class="clickable key blue">×</div>
+            <div data-action="appendSymbol" data-value="d6" class="clickable key orange">d6</div>
+            <div data-action="appendSymbol" data-value="0" class="clickable key">0</div>
+            <div data-action="appendSymbol" data-value="(" class="clickable key">&#40;</div>
+            <div data-action="appendSymbol" data-value=")" class="clickable key">&#41;</div>
+            <div data-action="appendSymbol" data-value="÷" class="clickable key blue">÷</div>
+            <div data-action="appendSymbol" data-value="d4" class="clickable key orange">d4</div>
+            <div data-action="toggleMenu" data-value="history" class="clickable key menu-toggle disabled material-icons">history</div>
+            <div data-action="toggleMenu" data-value="favourites" class="clickable key menu-toggle disabled material-icons">star</div>
+            <div data-action="toggleMenu" data-value="chains" class="clickable key menu-toggle disabled material-icons">link</div>
+            <div data-action="calculate" class="clickable key calculate upcased disabled">Roll</div>
         </div>
-        <div class="history hidden"></div>
+        <div class="menu history hidden"></div>
+        <div class="menu favourites hidden"></div>
     </div>
 </body>
 
