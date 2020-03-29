@@ -10,10 +10,9 @@ class History {
         if (this.storage["history"]) {
             this.elements = JSON.parse(this.storage["history"]).slice(0, 10);
         }
-        this.elements.forEach((e) => this.displayElement.append(this.elementHTML(e)));
+        this.elements.forEach((e) => this.displayElement.append(this.itemHTML(e)));
 
         this.updateToggleElement();
-        // $(document).on("click", "[data-action='addFavourite']", this.addElement(e));
     }
 
     hasElements() {
@@ -45,8 +44,8 @@ class History {
     }
 
     push(equasion) {
-        if (this.elements[0] != equasion.toString()) {
-            this.elements.unshift(equasion.toString());
+        if (this.elements.length == 0 || this.elements[0].value != equasion.toString()) {
+            this.elements.unshift({ value: equasion.toString() });
 
             if (this.elements.length > 10) {
                 this.elements = this.elements.slice(0, 10);
@@ -64,18 +63,18 @@ class History {
         }
 
         if (this.hasElements()) {
-            this.displayElement.prepend(this.elementHTML(this.elements[0]));
+            this.displayElement.prepend(this.itemHTML(this.elements[0]));
         }
 
         this.updateToggleElement();
     }
 
-    elementHTML(value) {
+    itemHTML(item) {
         return `
             <div class="element">
-                <div class="clickable value"                    data-value="${value}" data-action="loadEquasion">${value}</div>
-                <div class="clickable material-icons favourite" data-value="${value}" data-action="addFavourite">star_border</div>
-                <div class="clickable material-icons roll"      data-value="${value}" data-action="roll"        >replay</div>
+                <div class="clickable value"                    data-value="${item.value}" data-action="loadEquasion">${item.value}</div>
+                <div class="clickable material-icons favourite" data-value="${item.value}" data-action="addFavourite">star_border</div>
+                <div class="clickable material-icons roll"      data-value="${item.value}" data-action="roll"        >replay</div>
             </div>
         `;
     }

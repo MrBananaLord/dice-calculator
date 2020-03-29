@@ -59,6 +59,7 @@ body {
     .menu-toggle:hover,
     .menu-toggle.active:hover,
     .menu .favourite:hover,
+    .menu .edit:hover,
     .menu .value:hover {
         background-color: pink;
     }
@@ -160,7 +161,8 @@ body {
     background-color: inherit;
 }
 
-.menu .favourite {
+.menu .favourite,
+.menu .edit {
     flex: 10%;
     background-color: inherit;
 }

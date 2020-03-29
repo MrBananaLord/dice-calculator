@@ -6,28 +6,23 @@ class Favourites {
         this.toggleElement = $("[data-action='toggleMenu'][data-value='favourites']");
         this.storage = window.localStorage;
 
-        this.elements = [];
+        this.items = [];
         if (this.storage["favourites"]) {
-            this.elements = JSON.parse(this.storage["favourites"]).slice(0, 10);
+            this.items = JSON.parse(this.storage["favourites"]).slice(0, 10);
         }
-        this.elements.forEach((e) => this.displayElement.append(this.elementHTML(e)));
+        this.items.forEach((e) => this.displayElement.append(this.itemHTML(e)));
 
-        this.updateToggleElement();
+        this.updateToggleItem();
 
         $(document).on("click", "[data-action='addFavourite']", e => this.addFavourite(e));
     }
 
-    roll(e) {
-        // this.calculator.loadFromHistory($(e.target).parent(".element").data("value"));
-        // this.calculator.calculate();
+    hasItems() {
+        return this.items.length > 0;
     }
 
-    hasElements() {
-        return this.elements.length > 0;
-    }
-
-    updateToggleElement() {
-        if (this.hasElements()) {
+    updateToggleItem() {
+        if (this.hasItems()) {
             this.toggleElement.removeClass("disabled");
         } else {
             this.toggleElement.addClass("disabled");
@@ -51,14 +46,14 @@ class Favourites {
     addFavourite(e) {
         let equasion = $(e.target).data("value");
 
-        if (this.elements[0] != equasion.toString()) {
-            this.elements.unshift(equasion.toString());
+        if (this.items.length == 0 || this.items[0].value != equasion.toString()) {
+            this.items.unshift({ value: equasion.toString(), name: equasion.toString() });
 
-            if (this.elements.length > 10) {
-                this.elements = this.elements.slice(0, 10);
+            if (this.items.length > 10) {
+                this.items = this.items.slice(0, 10);
             }
 
-            this.storage['favourites'] = JSON.stringify(this.elements);
+            this.storage['favourites'] = JSON.stringify(this.items);
 
             this.updateDisplay();
         }
@@ -69,18 +64,19 @@ class Favourites {
             this.displayElement.children().last().remove();
         }
 
-        if (this.hasElements()) {
-            this.displayElement.prepend(this.elementHTML(this.elements[0]));
+        if (this.hasItems()) {
+            this.displayElement.prepend(this.itemHTML(this.items[0]));
         }
 
-        this.updateToggleElement();
+        this.updateToggleItem();
     }
 
-    elementHTML(value) {
+    itemHTML(item) {
         return `
             <div class="element">
-                <div class="clickable value"                    data-value="${value}" data-action="loadEquasion">${value}</div>
-                <div class="clickable material-icons roll"      data-value="${value}" data-action="roll"        >replay</div>
+                <div class="clickable value"                 data-value="${item.value}" data-action="loadEquasion">${item.value}</div>
+                <div class="clickable material-icons edit"   data-value="${item.name}" data-action="renameFavourite">edit</div>
+                <div class="clickable material-icons roll"   data-value="${item.value}" data-action="roll">replay</div>
             </div>
         `;
     }
