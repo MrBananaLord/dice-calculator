@@ -50,12 +50,7 @@ body {
 }
 
 @media (hover: hover) {
-    .key:hover {
-        background-color: pink;
-    }
-    .key.calculate:hover {
-        background-color: aquamarine;
-    }
+    .key:hover,
     .menu-toggle:hover,
     .menu-toggle.active:hover,
     .menu .favourite:hover,
@@ -63,6 +58,8 @@ body {
     .menu .value:hover {
         background-color: pink;
     }
+    .key.calculate:hover,
+    .menu .submit:hover,
     .menu .roll:hover {
         background-color: aquamarine;
     }
@@ -70,7 +67,8 @@ body {
     .key.calculate.disabled:hover {
         background-color: #ccc;
     }
-    .invalid .key.calculate:hover {
+    .invalid .key.calculate:hover,
+    .menu .delete:hover {
         background-color: crimson;
     }
 }
@@ -118,7 +116,7 @@ body {
     color: #bc0f0e;
 }
 
-.display input.equasion {
+input {
     font-weight: normal;
     border: none;
     line-height: 60px;
@@ -131,7 +129,7 @@ body {
     margin: 0;
 }
 
-.display input:focus {
+input:focus {
     outline: none;
 }
 
@@ -141,7 +139,7 @@ body {
 
 .menu {
     overflow: hidden;
-    transition: max-height 0.3s;
+    /* transition: max-height 0.3s; */
     height: auto;
     max-height: 600px;
 }
@@ -157,21 +155,65 @@ body {
 }
 
 .menu .value {
-    flex: 70%;
+    flex: 60%;
     background-color: inherit;
 }
 
 .menu .favourite,
-.menu .edit {
-    flex: 10%;
+.menu .edit,
+.menu .delete {
+    flex: 20%;
     background-color: inherit;
 }
 
-.menu .roll {
+.menu .roll,
+.menu .submit {
     flex: 20%;
     background-color: inherit;
 }
 
 .menu-toggle.active {
     background-color: white;
+}
+
+.menu.favourites .element .editor {
+    display: none;
+    background-color: none;
+}
+
+.menu.favourites .element .viewer {
+    display: flex;
+    width: 100%;
+    background-color: inherit;
+}
+
+.menu.favourites .element.editing .editor {
+    display: flex;
+    width: 100%;
+}
+
+.menu.favourites .element.editing .viewer {
+    display: none;
+}
+
+.menu.favourites .element .submit {
+    background-color: white;
+}
+
+.menu.favourites .element .name {
+    height: 40px;
+    line-height: 46px;
+    display: block;
+    width: 100%;
+    background-color: none;
+}
+
+.menu.favourites .element .equasion {
+    height: 20px;
+    line-height: 8px;
+    font-size: 12px;
+    color: gray;
+    display: block;
+    width: 100%;
+    background-color: none;
 }

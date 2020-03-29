@@ -31,7 +31,7 @@ class Calculator {
             targetMenu.hide();
         } else if (activeMenu) {
             activeMenu.hide();
-            setTimeout(() => targetMenu.activate(), 300);
+            targetMenu.activate();
         } else {
             targetMenu.activate();
         }

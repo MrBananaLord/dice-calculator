@@ -72,8 +72,8 @@ class History {
     itemHTML(item) {
         return `
             <div class="element">
-                <div class="clickable value"                    data-value="${item.value}" data-action="loadEquasion">${item.value}</div>
                 <div class="clickable material-icons favourite" data-value="${item.value}" data-action="addFavourite">star_border</div>
+                <div class="clickable value"                    data-value="${item.value}" data-action="loadEquasion">${item.value}</div>
                 <div class="clickable material-icons roll"      data-value="${item.value}" data-action="roll"        >replay</div>
             </div>
         `;
