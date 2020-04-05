@@ -156,53 +156,78 @@ input:focus {
 
 .menu .value {
     flex: 60%;
-    background-color: inherit;
+    background-color: white;
 }
 
 .menu .favourite,
 .menu .edit,
 .menu .delete {
     flex: 20%;
-    background-color: inherit;
+    background-color: white;
 }
 
 .menu .roll,
 .menu .submit {
     flex: 20%;
-    background-color: inherit;
+    background-color: white;
 }
 
 .menu-toggle.active {
     background-color: white;
 }
 
-.menu.favourites .element .editor {
+.menu .element .editor,
+.menu .element .favourites {
     display: none;
     background-color: none;
 }
 
-.menu.favourites .element .viewer {
+.menu .element .viewer {
     display: flex;
     width: 100%;
     background-color: inherit;
 }
 
-.menu.favourites .element.editing .editor {
+.menu .element.editing .editor {
     display: flex;
     width: 100%;
 }
 
-.menu.favourites .element.editing .viewer {
+.menu .element.editing .favourites {
+    display: block;
+}
+
+.menu .element .favourites .favourite {
+    display: flex;
+}
+
+.menu .element .favourites .icon {
+    flex: 20%;
+}
+
+.menu .element .favourites .name {
+    flex: 80%;
+}
+
+.menu .element.editing .viewer {
     display: none;
 }
 
-.menu.favourites .element .submit {
-    background-color: white;
+.menu .element .name {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding-left: 10px;
 }
 
 .menu.favourites .element .name {
     height: 40px;
     line-height: 46px;
+}
+
+.menu .element .equasion {
+    font-size: 12px;
+    color: gray;
     display: block;
     width: 100%;
     background-color: none;
@@ -211,9 +236,43 @@ input:focus {
 .menu.favourites .element .equasion {
     height: 20px;
     line-height: 8px;
-    font-size: 12px;
-    color: gray;
+}
+
+.menu.chains .element {
     display: block;
-    width: 100%;
-    background-color: none;
+}
+
+.menu .element .small-header {
+    background-color: #eee;
+    height: 30px;
+    line-height: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #888;
+}
+
+.chain-rolls .chain-roll {
+    display: flex;
+}
+
+.chain-rolls .material-icons {
+    height: 30px;
+    line-height: 30px;
+    flex: 20%;
+}
+
+.chain-rolls .material-icons.arrow {
+    flex: 10%;
+}
+
+.chain-rolls .roll-name {
+    flex: 50%;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    text-align: left;
+}
+
+.chain-rolls.hidden {
+    display: none;
 }

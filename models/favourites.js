@@ -115,12 +115,12 @@ class Favourites {
         return `
             <div class="element" data-id="${item.id}">
                 <div class="editor">
-                    <div class="clickable material-icons delete" data-target="${item.id}" data-action="deleteFavourite">delete</div>
+                    <div class="clickable material-icons submit" data-target="${item.id}" data-action="updateFavourite">check</div>
                     <div class="value">
                         <input class="name" type="value" value="${item.name}">
                         <input class="equasion" type="value" value="${item.value}">
                     </div>
-                    <div class="clickable material-icons submit" data-target="${item.id}" data-action="updateFavourite">check</div>
+                    <div class="clickable material-icons delete" data-target="${item.id}" data-action="deleteFavourite">delete</div>
                 </div>
                 <div class="viewer">
                     <div class="clickable material-icons edit" data-target="${item.id}"   data-action="editFavourite">edit</div>

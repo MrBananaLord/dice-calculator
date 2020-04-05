@@ -26,6 +26,7 @@
     <script src="models/id.js"></script>
     <script src="models/history.js"></script>
     <script src="models/favourites.js"></script>
+    <script src="models/chains.js"></script>
     <script src="models/calculator.js"></script>
 
     <script type="text/javascript">
@@ -74,11 +75,14 @@
             <div data-action="appendSymbol" data-value="d4" class="clickable key orange">d4</div>
             <div data-action="toggleMenu" data-value="history" class="clickable key menu-toggle disabled material-icons">history</div>
             <div data-action="toggleMenu" data-value="favourites" class="clickable key menu-toggle disabled material-icons">star</div>
-            <div data-action="toggleMenu" data-value="chains" class="clickable key menu-toggle disabled material-icons">link</div>
+            <div data-action="toggleMenu" data-value="chains" class="clickable key menu-toggle material-icons">link</div>
             <div data-action="calculate" class="clickable key calculate upcased disabled">Roll</div>
         </div>
         <div class="menu history hidden"></div>
         <div class="menu favourites hidden"></div>
+        <div class="menu chains hidden">
+            <div class="element clickable material-icons submit" data-action="createChain">add</div>
+        </div>
     </div>
 </body>
 
