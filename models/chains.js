@@ -5,6 +5,7 @@ class Chains {
         this.displayElement = $(".chains");
         this.toggleElement = $("[data-action='toggleMenu'][data-value='chains']");
         this.storage = window.localStorage;
+        this.equasion = new Equasion();
 
         this.items = [];
         if (this.storage["chains"]) {
@@ -19,6 +20,7 @@ class Chains {
         $(document).on("click", "[data-action='addFavouriteToChain']", e => this.addFavouriteToChain(e));
         $(document).on("click", "[data-action='removeRollFromChain']", e => this.removeRollFromChain(e));
         $(document).on("click", "[data-action='toggleChainRolls']", e => this.toggleChainRolls(e));
+        $(document).on("click", "[data-action='executeChain']", e => this.executeChain(e));
     }
 
     get favourites() {
@@ -103,6 +105,20 @@ class Chains {
         rollElement.remove();
     }
 
+    executeChain(e) {
+        let element = $(e.target).parents("div.element[data-id]");
+        let id = element.data("id");
+        let chain = this.items.find(item => item.id == id);
+
+        element.find(".chain-rolls").removeClass("hidden");
+
+        chain.rolls.forEach(roll => {
+            let result = this.equasion.fromString(roll.value).result;
+
+            element.find(`.chain-roll[data-id="${roll.id}"] .result`).html(result);
+        })
+    }
+
     toggleChainRolls(e) {
         let element = $(e.target).parents("div.element[data-id]");
 
@@ -140,8 +156,12 @@ class Chains {
         <div class="chain-roll" data-id="${roll.id}">
             <div class="reorder clickable material-icons">reorder</div>
             <div class="arrow material-icons">subdirectory_arrow_right</div>
-            <div class="roll-name">${roll.name}</div>
-            <div class="clickable material-icons delete" data-action="removeRollFromChain">delete</div>
+            <div class="roll-name">
+                <span>${roll.name}</spane>
+                <span class="roll-value">(${roll.value})</span>
+            </div>
+            <div class="result"></div>
+            <div class="hidden clickable material-icons delete" data-action="removeRollFromChain">delete</div>
         </div>
         `;
     }
@@ -161,7 +181,7 @@ class Chains {
                     <div class="clickable value" data-action="toggleChainRolls">
                         <div class="name">${item.name}</div>
                     </div>
-                    <div class="clickable material-icons roll" value="${item.value}" data-action="roll">replay</div>
+                    <div class="clickable material-icons roll" data-action="executeChain">replay</div>
                 </div>
                 <div class="chain-rolls hidden">
                     ${item.rolls.map(roll => this.chainRollHTML(roll)).join("")}

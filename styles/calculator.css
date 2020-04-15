@@ -271,18 +271,31 @@ input:focus {
 }
 
 .chain-rolls .roll-name {
-    flex: 70%;
+    flex: 50%;
     display: block;
     height: 30px;
     line-height: 30px;
     text-align: left;
 }
 
-.editing .chain-rolls .roll-name {
-    flex: 50%;
+.chain-rolls .roll-name .roll-value {
+    font-size: 12px;
+    color: gray;
+    background-color: none;
 }
 
 .chain-rolls .material-icons.delete {
+    display: none;
+}
+
+.chain-rolls .result {
+    flex: 20%;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+}
+
+.editing .chain-rolls .result {
     display: none;
 }
 

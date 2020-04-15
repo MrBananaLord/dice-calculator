@@ -56,6 +56,8 @@ class Equasion {
 
     fromString(value) {
         this.tokenizer.fromString(value);
+
+        return this;
     }
 
     toString() {
