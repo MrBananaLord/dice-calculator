@@ -231,12 +231,17 @@ input:focus {
     display: block;
     width: 100%;
     background-color: none;
+    text-align: left;
+    padding-left: 10px;
 }
 
 .menu.favourites .element .equasion {
     height: 20px;
     line-height: 8px;
 }
+
+
+/* CHAINS */
 
 .menu.chains .element {
     display: block;
@@ -266,13 +271,29 @@ input:focus {
 }
 
 .chain-rolls .roll-name {
-    flex: 50%;
+    flex: 70%;
     display: block;
     height: 30px;
     line-height: 30px;
     text-align: left;
 }
 
+.editing .chain-rolls .roll-name {
+    flex: 50%;
+}
+
+.chain-rolls .material-icons.delete {
+    display: none;
+}
+
+.editing .chain-rolls .material-icons.delete {
+    display: block;
+}
+
 .chain-rolls.hidden {
     display: none;
+}
+
+.chain-rolls .reorder {
+    color: white;
 }

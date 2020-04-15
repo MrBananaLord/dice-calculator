@@ -10,13 +10,14 @@ class Chains {
         if (this.storage["chains"]) {
             this.items = JSON.parse(this.storage["chains"]).slice(0, 10);
         }
-        this.items.reverse().forEach((e) => this.displayElement.prepend(this.itemHTML(e)));
+        this.items.forEach((e) => this.displayElement.prepend(this.itemHTML(e)));
 
         $(document).on("click", "[data-action='createChain']", e => this.createChain(e));
         $(document).on("click", "[data-action='editChain']", e => this.editChain(e));
         $(document).on("click", "[data-action='updateChain']", e => this.updateChain(e));
         $(document).on("click", "[data-action='deleteChain']", e => this.deleteChain(e));
         $(document).on("click", "[data-action='addFavouriteToChain']", e => this.addFavouriteToChain(e));
+        $(document).on("click", "[data-action='removeRollFromChain']", e => this.removeRollFromChain(e));
         $(document).on("click", "[data-action='toggleChainRolls']", e => this.toggleChainRolls(e));
     }
 
@@ -47,7 +48,7 @@ class Chains {
         element.addClass("editing");
         input.blur().focus().val(originalValue);
 
-        element.find(".chain-rolls").toggleClass("hidden");
+        element.find(".chain-rolls").removeClass("hidden");
     }
 
     updateChain(e) {
@@ -62,7 +63,6 @@ class Chains {
         element.replaceWith(this.itemHTML(item));
     }
 
-
     deleteChain(e) {
         let element = $(e.target).parents("div.element[data-id]");
         let id = element.data("id");
@@ -76,18 +76,31 @@ class Chains {
     addFavouriteToChain(e) {
         let element = $(e.target).parents("div.element[data-id]");
         let id = element.data("id");
-        let item = this.items.find(item => item.id == id);
+        let chain = this.items.find(item => item.id == id);
 
         let favouriteId = $(e.target).parents("div.favourite[data-id]").data("id");
         let favouriteItem = this.favourites.find(item => item.id == favouriteId);
 
         favouriteItem.id = ID();
-        item.rolls.unshift(favouriteItem);
-        item.rolls = item.rolls.slice(0, 10);
+        chain.rolls.unshift(favouriteItem);
 
         this.storage['chains'] = JSON.stringify(this.items);
 
         element.find(".chain-rolls").append(this.chainRollHTML(favouriteItem));
+    }
+
+    removeRollFromChain(e) {
+        let element = $(e.target).parents("div.element[data-id]");
+        let id = element.data("id");
+        let chain = this.items.find(item => item.id == id);
+
+        let rollElement = $(e.target).parents("div.chain-roll[data-id]");
+        let rollId = rollElement.data("id");
+
+        chain.rolls = chain.rolls.filter(roll => roll.id != rollId);
+        this.storage['chains'] = JSON.stringify(this.items);
+
+        rollElement.remove();
     }
 
     toggleChainRolls(e) {
@@ -125,10 +138,10 @@ class Chains {
     chainRollHTML(roll) {
         return `
         <div class="chain-roll" data-id="${roll.id}">
-            <div class="clickable material-icons">reorder</div>
+            <div class="reorder clickable material-icons">reorder</div>
             <div class="arrow material-icons">subdirectory_arrow_right</div>
             <div class="roll-name">${roll.name}</div>
-            <div class="clickable material-icons">delete</div>
+            <div class="clickable material-icons delete" data-action="removeRollFromChain">delete</div>
         </div>
         `;
     }
