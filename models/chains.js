@@ -5,7 +5,6 @@ class Chains {
         this.displayElement = $(".chains");
         this.toggleElement = $("[data-action='toggleMenu'][data-value='chains']");
         this.storage = window.localStorage;
-        this.favourites = new Favourites();
 
         this.items = [];
         if (this.storage["chains"]) {
@@ -19,6 +18,10 @@ class Chains {
         $(document).on("click", "[data-action='deleteChain']", e => this.deleteChain(e));
         $(document).on("click", "[data-action='addFavouriteToChain']", e => this.addFavouriteToChain(e));
         $(document).on("click", "[data-action='toggleChainRolls']", e => this.toggleChainRolls(e));
+    }
+
+    get favourites() {
+        return JSON.parse(this.storage["favourites"]).slice(0, 10);
     }
 
     createChain(e) {
@@ -76,7 +79,7 @@ class Chains {
         let item = this.items.find(item => item.id == id);
 
         let favouriteId = $(e.target).parents("div.favourite[data-id]").data("id");
-        let favouriteItem = this.favourites.items.find(item => item.id == favouriteId);
+        let favouriteItem = this.favourites.find(item => item.id == favouriteId);
 
         favouriteItem.id = ID();
         item.rolls.unshift(favouriteItem);
@@ -152,7 +155,7 @@ class Chains {
                 </div>
                 <div class="favourites">
                     <div class="small-header">Favourites:</div>
-                    ${this.favourites.items.map(favourite => `
+                    ${this.favourites.map(favourite => `
                         <div class="favourite" data-id="${favourite.id}" data-action="addFavouriteToChain">
                             <div class="name">${favourite.name}</div>
                             <div class="icon material-icons">add</div>

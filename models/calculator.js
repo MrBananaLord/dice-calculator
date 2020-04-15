@@ -8,7 +8,7 @@ class Calculator {
         this.equasion = new Equasion();
         this.history = new History();
         this.favourites = new Favourites();
-        this.chains = new Chains(this);
+        this.chains = new Chains();
 
         this.mode = "input";
         this.displayElement.focus();
