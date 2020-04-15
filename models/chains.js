@@ -24,7 +24,11 @@ class Chains {
     }
 
     get favourites() {
-        return JSON.parse(this.storage["favourites"]).slice(0, 10);
+        if (this.storage["favourites"]) {
+            return JSON.parse(this.storage["favourites"]).slice(0, 10);
+        } else {
+            return [];
+        }
     }
 
     createChain(e) {
