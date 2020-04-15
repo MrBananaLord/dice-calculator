@@ -32,7 +32,7 @@ class Chains {
     }
 
     createChain(e) {
-        this.items.unshift({ id: ID(), name: "New Chain", rolls: [] });
+        this.items.unshift({ id: ID(), name: "New Group", rolls: [] });
 
         if (this.items.length > 10) {
             this.items = this.items.slice(0, 10);
