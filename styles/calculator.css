@@ -247,13 +247,51 @@ input:focus {
     display: block;
 }
 
-.menu .element .small-header {
-    background-color: #eee;
+.menu.groups .recommendations {
+    width: 80%;
+    float: right;
+}
+
+.menu.groups .recommendations {
+    display: none;
+}
+
+.menu.groups .editing .recommendations {
+    display: block;
+}
+
+.menu.groups .recommendations .favourite {
     height: 30px;
     line-height: 30px;
+}
+
+.menu.groups .recommendations .favourite .roll-name {
+    text-align: left;
+    flex: 90%;
+}
+
+.menu.groups .recommendations .favourite .icon {
+    flex: 10%;
+}
+
+.menu .element .small-header {
+    height: 30px;
+    line-height: 30px;
+    border-top: 2px dashed mediumaquamarine;
+    padding-top: 5px;
+}
+
+.menu .element .small-header div {
     text-transform: uppercase;
     font-weight: bold;
     color: #888;
+    text-align: left;
+    float: left;
+    padding-left: 5px;
+}
+
+.menu .element .small-header .material-icons {
+    text-transform: none;
 }
 
 .group-rolls .group-roll {
@@ -266,11 +304,11 @@ input:focus {
     flex: 20%;
 }
 
-.group-rolls .material-icons.arrow {
+.group .material-icons.arrow {
     flex: 10%;
 }
 
-.group-rolls .roll-name {
+.group .roll-name {
     flex: 50%;
     display: block;
     height: 30px;
@@ -278,7 +316,7 @@ input:focus {
     text-align: left;
 }
 
-.group-rolls .roll-name .roll-value {
+.group .roll-name .roll-value {
     font-size: 12px;
     color: gray;
     background-color: none;
