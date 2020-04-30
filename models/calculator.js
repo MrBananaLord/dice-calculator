@@ -8,7 +8,7 @@ class Calculator {
         this.equasion = new Equasion();
         this.history = new History();
         this.favourites = new Favourites();
-        this.chains = new Chains();
+        this.groups = new Groups();
 
         this.mode = "input";
         this.displayElement.focus();
@@ -26,7 +26,7 @@ class Calculator {
 
     toggleMenu(e) {
         let targetMenu = this[$(e.target).data("value")];
-        let activeMenu = [this.history, this.favourites, this.chains].find(e => e.visible);
+        let activeMenu = [this.history, this.favourites, this.groups].find(e => e.visible);
 
         if (targetMenu === activeMenu) {
             targetMenu.hide();

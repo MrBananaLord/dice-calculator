@@ -243,7 +243,7 @@ input:focus {
 
 /* CHAINS */
 
-.menu.chains .element {
+.menu.groups .element {
     display: block;
 }
 
@@ -256,21 +256,21 @@ input:focus {
     color: #888;
 }
 
-.chain-rolls .chain-roll {
+.group-rolls .group-roll {
     display: flex;
 }
 
-.chain-rolls .material-icons {
+.group-rolls .material-icons {
     height: 30px;
     line-height: 30px;
     flex: 20%;
 }
 
-.chain-rolls .material-icons.arrow {
+.group-rolls .material-icons.arrow {
     flex: 10%;
 }
 
-.chain-rolls .roll-name {
+.group-rolls .roll-name {
     flex: 50%;
     display: block;
     height: 30px;
@@ -278,35 +278,35 @@ input:focus {
     text-align: left;
 }
 
-.chain-rolls .roll-name .roll-value {
+.group-rolls .roll-name .roll-value {
     font-size: 12px;
     color: gray;
     background-color: none;
 }
 
-.chain-rolls .material-icons.delete {
+.group-rolls .material-icons.delete {
     display: none;
 }
 
-.chain-rolls .result {
+.group-rolls .result {
     flex: 20%;
     display: block;
     height: 30px;
     line-height: 30px;
 }
 
-.editing .chain-rolls .result {
+.editing .group-rolls .result {
     display: none;
 }
 
-.editing .chain-rolls .material-icons.delete {
+.editing .group-rolls .material-icons.delete {
     display: block;
 }
 
-.chain-rolls.hidden {
+.group-rolls.hidden {
     display: none;
 }
 
-.chain-rolls .reorder {
+.group-rolls .reorder {
     color: white;
 }
