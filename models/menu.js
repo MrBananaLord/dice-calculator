@@ -1,33 +1,18 @@
-class History {
-    get classNamespace() {
-        return "history";
-    }
-
+class Menu {
     constructor() {
         this.visible = false;
 
-        this.displayElement = $(`.${this.classNamespace}`);
-        this.toggleElement = $(`[data-action='toggleMenu'][data-value='${this.classNamespace}']`);
+        this.displayElement = $(".history");
+        this.toggleElement = $("[data-action='toggleMenu'][data-value='history']");
+        this.storage = window.localStorage;
 
-        this.elements = this.loadElements();
-        this.elements.forEach((e) => this.displayElement.append(this.itemHTML(e)));
-        this.updateToggleElement();
-    }
-
-    get storage() {
-        return window.localStorage[this.classNamespace];
-    }
-
-    set storage(value) {
-        window.localStorage[this.classNamespace] = value;
-    }
-
-    loadElements() {
-        if (this.storage) {
-            return JSON.parse(this.storage).slice(0, 10);
-        } else {
-            return [];
+        this.elements = [];
+        if (this.storage["history"]) {
+            this.elements = JSON.parse(this.storage["history"]).slice(0, 10);
         }
+        this.elements.forEach((e) => this.displayElement.append(this.itemHTML(e)));
+
+        this.updateToggleElement();
     }
 
     hasElements() {
@@ -66,7 +51,7 @@ class History {
                 this.elements = this.elements.slice(0, 10);
             }
 
-            this.storage = JSON.stringify(this.elements);
+            this.storage['history'] = JSON.stringify(this.elements);
 
             this.updateDisplay();
         }
