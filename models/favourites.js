@@ -1,49 +1,13 @@
-class Favourites {
-    constructor() {
-        this.visible = false;
+class Favourites extends Menu {
+    get classNamespace() {
+        return "favourites";
+    }
 
-        this.displayElement = $(".favourites");
-        this.toggleElement = $("[data-action='toggleMenu'][data-value='favourites']");
-        this.storage = window.localStorage;
-
-        this.items = [];
-        if (this.storage["favourites"]) {
-            this.items = JSON.parse(this.storage["favourites"]).slice(0, 10);
-        }
-        this.items.forEach((e) => this.displayElement.append(this.itemHTML(e)));
-
-        this.updateToggleItem();
-
+    registerEventBindings() {
         $(document).on("click", "[data-action='addFavourite']", e => this.addFavourite(e));
         $(document).on("click", "[data-action='editFavourite']", e => this.editFavourite(e));
         $(document).on("click", "[data-action='updateFavourite']", e => this.updateFavourite(e));
         $(document).on("click", "[data-action='deleteFavourite']", e => this.deleteFavourite(e));
-    }
-
-    hasItems() {
-        return this.items.length > 0;
-    }
-
-    updateToggleItem() {
-        if (this.hasItems()) {
-            this.toggleElement.removeClass("disabled");
-        } else {
-            this.toggleElement.addClass("disabled");
-        }
-    }
-
-    hide() {
-        this.displayElement.addClass("hidden");
-        this.toggleElement.removeClass("active");
-
-        this.visible = false;
-    }
-
-    activate() {
-        this.displayElement.removeClass("hidden");
-        this.toggleElement.addClass("active");
-
-        this.visible = true;
     }
 
     addFavourite(e) {
@@ -56,8 +20,7 @@ class Favourites {
                 this.items = this.items.slice(0, 10);
             }
 
-            this.storage['favourites'] = JSON.stringify(this.items);
-
+            this.saveItems();
             this.addItemToDisplay();
         }
     }
@@ -81,8 +44,7 @@ class Favourites {
         item.name = wrapper.find("input.name").val();
         item.value = wrapper.find("input.equasion").val();
 
-        this.storage['favourites'] = JSON.stringify(this.items);
-
+        this.saveItems();
         wrapper.replaceWith(this.itemHTML(item));
     }
 
@@ -91,23 +53,10 @@ class Favourites {
         let wrapper = $(`div.element[data-id="${id}"]`);
 
         this.items = this.items.filter(e => e.id != id);
-        this.storage['favourites'] = JSON.stringify(this.items);
+        this.saveItems();
 
         wrapper.remove();
-
-        this.updateToggleItem();
-    }
-
-    addItemToDisplay() {
-        if (this.displayElement.children().length > 10) {
-            this.displayElement.children().last().remove();
-        }
-
-        if (this.hasItems()) {
-            this.displayElement.prepend(this.itemHTML(this.items[0]));
-        }
-
-        this.updateToggleItem();
+        this.updateToggleElement();
     }
 
     itemHTML(item) {

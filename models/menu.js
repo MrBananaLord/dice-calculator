@@ -2,25 +2,44 @@ class Menu {
     constructor() {
         this.visible = false;
 
-        this.displayElement = $(".history");
-        this.toggleElement = $("[data-action='toggleMenu'][data-value='history']");
-        this.storage = window.localStorage;
+        this.displayElement = $(`.${this.classNamespace}`);
+        this.toggleElement = $(`[data-action='toggleMenu'][data-value='${this.classNamespace}']`);
 
-        this.elements = [];
-        if (this.storage["history"]) {
-            this.elements = JSON.parse(this.storage["history"]).slice(0, 10);
-        }
-        this.elements.forEach((e) => this.displayElement.append(this.itemHTML(e)));
-
+        this.items = this.loadItems();
+        this.items.forEach((e) => this.displayElement.append(this.itemHTML(e)));
         this.updateToggleElement();
+
+        this.registerEventBindings();
     }
 
-    hasElements() {
-        return this.elements.length > 0;
+    get storage() {
+        return window.localStorage[this.classNamespace];
+    }
+
+    set storage(value) {
+        window.localStorage[this.classNamespace] = value;
+    }
+
+    registerEventBindings() {}
+
+    loadItems() {
+        if (this.storage) {
+            return JSON.parse(this.storage).slice(0, 10);
+        } else {
+            return [];
+        }
+    }
+
+    saveItems() {
+        this.storage = JSON.stringify(this.items);
+    }
+
+    hasItems() {
+        return this.items.length > 0;
     }
 
     updateToggleElement() {
-        if (this.hasElements()) {
+        if (this.hasItems()) {
             this.toggleElement.removeClass("disabled");
         } else {
             this.toggleElement.addClass("disabled");
@@ -35,7 +54,7 @@ class Menu {
     }
 
     activate() {
-        if (this.hasElements()) {
+        if (this.hasItems()) {
             this.displayElement.removeClass("hidden");
             this.toggleElement.addClass("active");
 
@@ -43,39 +62,15 @@ class Menu {
         }
     }
 
-    push(equasion) {
-        if (this.elements.length == 0 || this.elements[0].value != equasion.toString()) {
-            this.elements.unshift({ value: equasion.toString() });
-
-            if (this.elements.length > 10) {
-                this.elements = this.elements.slice(0, 10);
-            }
-
-            this.storage['history'] = JSON.stringify(this.elements);
-
-            this.updateDisplay();
-        }
-    }
-
-    updateDisplay() {
+    addItemToDisplay() {
         if (this.displayElement.children().length > 10) {
             this.displayElement.children().last().remove();
         }
 
-        if (this.hasElements()) {
-            this.displayElement.prepend(this.itemHTML(this.elements[0]));
+        if (this.hasItems()) {
+            this.displayElement.prepend(this.itemHTML(this.items[0]));
         }
 
         this.updateToggleElement();
-    }
-
-    itemHTML(item) {
-        return `
-            <div class="element">
-                <div class="clickable material-icons favourite" data-value="${item.value}" data-action="addFavourite">star_border</div>
-                <div class="clickable value"                    data-value="${item.value}" data-action="loadEquasion">${item.value}</div>
-                <div class="clickable material-icons roll"      data-value="${item.value}" data-action="roll"        >replay</div>
-            </div>
-        `;
     }
 }
