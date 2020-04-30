@@ -6,10 +6,10 @@ class Menu {
         this.toggleElement = $(`[data-action='toggleMenu'][data-value='${this.classNamespace}']`);
 
         this.items = this.loadItems();
-        this.items.forEach((e) => this.displayElement.append(this.itemHTML(e)));
+        this.items.forEach((item) => this.addItemToDisplay(item));
         this.updateToggleElement();
 
-        this.registerEventBindings();
+        this.afterInitialize();
     }
 
     get storage() {
@@ -20,7 +20,7 @@ class Menu {
         window.localStorage[this.classNamespace] = value;
     }
 
-    registerEventBindings() {}
+    afterInitialize() {}
 
     loadItems() {
         if (this.storage) {
@@ -60,17 +60,5 @@ class Menu {
 
             this.visible = true;
         }
-    }
-
-    addItemToDisplay() {
-        if (this.displayElement.children().length > 10) {
-            this.displayElement.children().last().remove();
-        }
-
-        if (this.hasItems()) {
-            this.displayElement.prepend(this.itemHTML(this.items[0]));
-        }
-
-        this.updateToggleElement();
     }
 }

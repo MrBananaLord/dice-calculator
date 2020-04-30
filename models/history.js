@@ -5,15 +5,29 @@ class History extends Menu {
 
     push(equasion) {
         if (this.items.length == 0 || this.items[0].value != equasion.toString()) {
-            this.items.unshift({ id: ID(), value: equasion.toString() });
+            let item = { id: ID(), value: equasion.toString() };
+
+            this.items.push(item);
 
             if (this.items.length > 10) {
-                this.items = this.items.slice(0, 10);
+                this.items.shift();
             }
 
             this.saveItems();
-            this.addItemToDisplay();
+            this.addItemToDisplay(item);
         }
+    }
+
+    addItemToDisplay(item) {
+        if (this.displayElement.children().length > 10) {
+            this.displayElement.children().last().remove();
+        }
+
+        if (this.hasItems()) {
+            this.displayElement.prepend(this.itemHTML(item));
+        }
+
+        this.updateToggleElement();
     }
 
     itemHTML(item) {

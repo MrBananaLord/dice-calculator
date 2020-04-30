@@ -1,18 +1,9 @@
-class Groups {
-    constructor() {
-        this.visible = false;
+class Groups extends Menu {
+    get classNamespace() {
+        return "groups";
+    }
 
-        this.displayElement = $(".groups");
-        this.toggleElement = $("[data-action='toggleMenu'][data-value='groups']");
-        this.storage = window.localStorage;
-        this.equasion = new Equasion();
-
-        this.items = [];
-        if (this.storage["groups"]) {
-            this.items = JSON.parse(this.storage["groups"]).slice(0, 10);
-        }
-        this.items.forEach((e) => this.displayElement.prepend(this.itemHTML(e)));
-
+    afterInitialize() {
         $(document).on("click", "[data-action='createGroup']", e => this.createGroup(e));
         $(document).on("click", "[data-action='editGroup']", e => this.editGroup(e));
         $(document).on("click", "[data-action='updateGroup']", e => this.updateGroup(e));
@@ -24,23 +15,25 @@ class Groups {
     }
 
     get favourites() {
-        if (this.storage["favourites"]) {
-            return JSON.parse(this.storage["favourites"]).slice(0, 10);
+        if (window.localStorage["favourites"]) {
+            return JSON.parse(window.localStorage["favourites"]).slice(0, 10);
         } else {
             return [];
         }
     }
 
     createGroup(e) {
-        this.items.unshift({ id: ID(), name: "New Group", rolls: [] });
+        if (this.items.length >= 10) {
+            alert("Reached maximum saved favourites!");
+        } else {
+            let item = { id: ID(), name: "New Group", rolls: [] };
 
-        if (this.items.length > 10) {
-            this.items = this.items.slice(0, 10);
+            this.items.push(item);
+
+            this.saveItems();
+
+            this.addItemToDisplay(item);
         }
-
-        this.storage["groups"] = JSON.stringify(this.items);
-
-        this.addItemToDisplay();
     }
 
     editGroup(e) {
@@ -64,7 +57,7 @@ class Groups {
 
         item.name = element.find("input.name").val();
 
-        this.storage['groups'] = JSON.stringify(this.items);
+        this.saveItems();
 
         element.replaceWith(this.itemHTML(item));
     }
@@ -74,7 +67,7 @@ class Groups {
         let id = element.data("id");
 
         this.items = this.items.filter(item => item.id != id);
-        this.storage['groups'] = JSON.stringify(this.items);
+        this.saveItems();
 
         element.remove();
     }
@@ -90,7 +83,7 @@ class Groups {
         favouriteItem.id = ID();
         group.rolls.unshift(favouriteItem);
 
-        this.storage['groups'] = JSON.stringify(this.items);
+        this.saveItems();
 
         element.find(".group-rolls").append(this.groupRollHTML(favouriteItem));
     }
@@ -104,7 +97,7 @@ class Groups {
         let rollId = rollElement.data("id");
 
         group.rolls = group.rolls.filter(roll => roll.id != rollId);
-        this.storage['groups'] = JSON.stringify(this.items);
+        this.saveItems();
 
         rollElement.remove();
     }
@@ -129,30 +122,12 @@ class Groups {
         element.find(".group-rolls").toggleClass("hidden");
     }
 
-    hasItems() {
-        return this.items.length > 0;
-    }
-
-    hide() {
-        this.displayElement.addClass("hidden");
-        this.toggleElement.removeClass("active");
-
-        this.visible = false;
-    }
-
-    activate() {
-        this.displayElement.removeClass("hidden");
-        this.toggleElement.addClass("active");
-
-        this.visible = true;
-    }
-
-    addItemToDisplay() {
+    addItemToDisplay(item) {
         if (this.displayElement.children().length > 11) {
             this.displayElement.children(":nth-last-child(2)").remove();
         }
 
-        $(this.itemHTML(this.items[0])).insertBefore(this.displayElement.find("[data-action='createGroup']"));
+        $(this.itemHTML(item)).insertBefore(this.displayElement.find("[data-action='createGroup']"));
     }
 
     groupRollHTML(roll) {
@@ -171,7 +146,7 @@ class Groups {
     }
 
     itemHTML(item) {
-            return `
+        return `
             <div class="group element" data-id="${item.id}">
                 <div class="editor">
                     <div class="clickable material-icons submit" data-action="updateGroup">check</div>

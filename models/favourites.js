@@ -3,7 +3,7 @@ class Favourites extends Menu {
         return "favourites";
     }
 
-    registerEventBindings() {
+    afterInitialize() {
         $(document).on("click", "[data-action='addFavourite']", e => this.addFavourite(e));
         $(document).on("click", "[data-action='editFavourite']", e => this.editFavourite(e));
         $(document).on("click", "[data-action='updateFavourite']", e => this.updateFavourite(e));
@@ -13,15 +13,14 @@ class Favourites extends Menu {
     addFavourite(e) {
         let equasion = $(e.target).data("value");
 
-        if (this.items.length == 0 || this.items[0].value != equasion.toString()) {
-            this.items.unshift({ id: ID(), value: equasion.toString(), name: equasion.toString() });
-
-            if (this.items.length > 10) {
-                this.items = this.items.slice(0, 10);
-            }
+        if (this.items.length >= 10) {
+            alert("Reached maximum saved favourites!");
+        } else if (this.items.length == 0 || this.items[0].value != equasion.toString()) {
+            let item = { id: ID(), value: equasion.toString(), name: equasion.toString() };
+            this.items.push(item);
 
             this.saveItems();
-            this.addItemToDisplay();
+            this.addItemToDisplay(item);
         }
     }
 
@@ -58,6 +57,15 @@ class Favourites extends Menu {
         wrapper.remove();
         this.updateToggleElement();
     }
+
+    addItemToDisplay(item) {
+        if (this.hasItems()) {
+            this.displayElement.append(this.itemHTML(item));
+        }
+
+        this.updateToggleElement();
+    }
+
 
     itemHTML(item) {
         // migrate to use only target-id
