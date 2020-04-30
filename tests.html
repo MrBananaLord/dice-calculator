@@ -1,55 +1,60 @@
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <title>Mocha Tests</title>
-  <link href="styles/mocha.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <title>Mocha Tests</title>
+    <link href="styles/mocha.css" rel="stylesheet" />
 </head>
+
 <body>
-  <div id="mocha">
-    <a href="/tests.html">
-      <h1>All Tests</h1>
-    </a>
-  </div>
+    <div id="mocha">
+        <a href="/tests.html">
+            <h1>All Tests</h1>
+        </a>
+    </div>
 
-  <script src="node_modules/mocha/mocha.js"></script>
-  <script src="node_modules/chai/chai.js"></script>
-  <script src="node_modules/sinon/pkg/sinon.js"></script>
+    <script src="node_modules/mocha/mocha.js"></script>
+    <script src="node_modules/chai/chai.js"></script>
+    <script src="node_modules/sinon/pkg/sinon.js"></script>
 
-  <script src="models/tokens/token.js"></script>
-  <script src="models/tokens/operator.js"></script>
-  <script src="models/tokens/adder.js"></script>
-  <script src="models/tokens/bracket.js"></script>
-  <script src="models/tokens/divider.js"></script>
-  <script src="models/tokens/multiplier.js"></script>
-  <script src="models/tokens/numeral.js"></script>
-  <script src="models/tokens/subtractor.js"></script>
-  <script src="models/tokens/roll.js"></script>
+    <script src="lib/tokens/token.js"></script>
+    <script src="lib/tokens/operator.js"></script>
+    <script src="lib/tokens/adder.js"></script>
+    <script src="lib/tokens/bracket.js"></script>
+    <script src="lib/tokens/divider.js"></script>
+    <script src="lib/tokens/multiplier.js"></script>
+    <script src="lib/tokens/numeral.js"></script>
+    <script src="lib/tokens/subtractor.js"></script>
+    <script src="lib/tokens/roll.js"></script>
 
-  <script src="models/tokenizer.js"></script>
-  <script src="models/converter.js"></script>
-  <script src="models/resolver.js"></script>
-  <script src="models/equasion.js"></script>
+    <script src="lib/tokenizer.js"></script>
+    <script src="lib/converter.js"></script>
+    <script src="lib/resolver.js"></script>
+    <script src="lib/equasion.js"></script>
 
-  <script>mocha.setup('bdd')</script>
+    <script>
+        mocha.setup('bdd')
+    </script>
 
-  <script src="test/equasion.js"></script>
-  <script src="test/tokenizer.js"></script>
-  <script src="test/converter.js"></script>
+    <script src="test/equasion.js"></script>
+    <script src="test/tokenizer.js"></script>
+    <script src="test/converter.js"></script>
 
-  <script src="test/tokens/token.js"></script>
-  <script src="test/tokens/operator.js"></script>
-  <script src="test/tokens/roll.js"></script>
-  <script src="test/tokens/adder.js"></script>
-  <script src="test/tokens/bracket.js"></script>
-  <script src="test/tokens/divider.js"></script>
-  <script src="test/tokens/multiplier.js"></script>
-  <script src="test/tokens/numeral.js"></script>
-  <script src="test/tokens/subtractor.js"></script>
+    <script src="test/tokens/token.js"></script>
+    <script src="test/tokens/operator.js"></script>
+    <script src="test/tokens/roll.js"></script>
+    <script src="test/tokens/adder.js"></script>
+    <script src="test/tokens/bracket.js"></script>
+    <script src="test/tokens/divider.js"></script>
+    <script src="test/tokens/multiplier.js"></script>
+    <script src="test/tokens/numeral.js"></script>
+    <script src="test/tokens/subtractor.js"></script>
 
-  <script>
-    mocha.checkLeaks();
-    mocha.globals(['jQuery']);
-    mocha.run();
-  </script>
+    <script>
+        mocha.checkLeaks();
+        mocha.globals(['jQuery']);
+        mocha.run();
+    </script>
 </body>
+
 </html>
