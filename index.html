@@ -6,29 +6,36 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="styles/calculator.css">
 
-    <script src="models/jquery.js"></script>
+    <script src="lib/jquery.js"></script>
 
-    <script src="models/tokens/token.js"></script>
-    <script src="models/tokens/operator.js"></script>
-    <script src="models/tokens/adder.js"></script>
-    <script src="models/tokens/bracket.js"></script>
-    <script src="models/tokens/divider.js"></script>
-    <script src="models/tokens/multiplier.js"></script>
-    <script src="models/tokens/numeral.js"></script>
-    <script src="models/tokens/roll.js"></script>
-    <script src="models/tokens/subtractor.js"></script>
+    <script src="lib/tokens/token.js"></script>
+    <script src="lib/tokens/operator.js"></script>
+    <script src="lib/tokens/adder.js"></script>
+    <script src="lib/tokens/bracket.js"></script>
+    <script src="lib/tokens/divider.js"></script>
+    <script src="lib/tokens/multiplier.js"></script>
+    <script src="lib/tokens/numeral.js"></script>
+    <script src="lib/tokens/roll.js"></script>
+    <script src="lib/tokens/subtractor.js"></script>
 
-    <script src="models/tokenizer.js"></script>
-    <script src="models/converter.js"></script>
-    <script src="models/resolver.js"></script>
-    <script src="models/equasion.js"></script>
+    <script src="lib/tokenizer.js"></script>
+    <script src="lib/converter.js"></script>
+    <script src="lib/resolver.js"></script>
+    <script src="lib/equasion.js"></script>
 
-    <script src="models/id.js"></script>
-    <script src="models/menu.js"></script>
-    <script src="models/history.js"></script>
-    <script src="models/favourites.js"></script>
-    <script src="models/groups.js"></script>
-    <script src="models/calculator.js"></script>
+    <script src="lib/id.js"></script>
+
+    <script src="lib/models/model.js"></script>
+    <script src="lib/models/history.js"></script>
+    <script src="lib/models/favourite.js"></script>
+    <script src="lib/models/group.js"></script>
+
+    <script src="lib/menus/menu.js"></script>
+    <script src="lib/menus/historyMenu.js"></script>
+    <script src="lib/menus/favouritesMenu.js"></script>
+    <script src="lib/menus/groupsMenu.js"></script>
+
+    <script src="lib/calculator.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -74,9 +81,9 @@
             <div data-action="appendSymbol" data-value=")" class="clickable key">&#41;</div>
             <div data-action="appendSymbol" data-value="÷" class="clickable key blue">÷</div>
             <div data-action="appendSymbol" data-value="d4" class="clickable key orange">d4</div>
-            <div data-action="toggleMenu" data-value="history" class="clickable key menu-toggle disabled material-icons">history</div>
-            <div data-action="toggleMenu" data-value="favourites" class="clickable key menu-toggle disabled material-icons">star</div>
-            <div data-action="toggleMenu" data-value="groups" class="clickable key menu-toggle material-icons">link</div>
+            <div data-action="toggleMenu" data-value="historyMenu" class="clickable key menu-toggle disabled material-icons">history</div>
+            <div data-action="toggleMenu" data-value="favouritesMenu" class="clickable key menu-toggle disabled material-icons">star</div>
+            <div data-action="toggleMenu" data-value="groupsMenu" class="clickable key menu-toggle material-icons">link</div>
             <div data-action="calculate" class="clickable key calculate upcased disabled">Roll</div>
         </div>
         <div class="menu history hidden"></div>
