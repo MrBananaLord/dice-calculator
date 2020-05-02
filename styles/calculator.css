@@ -55,7 +55,8 @@ body {
     .menu-toggle.active:hover,
     .menu .favourite:hover,
     .menu .edit:hover,
-    .menu .value:hover {
+    .menu .value:hover,
+    .recommendation:hover {
         background-color: pink;
     }
     .key.calculate:hover,
@@ -137,15 +138,8 @@ input:focus {
     padding-right: 10px;
 }
 
-.menu {
-    overflow: hidden;
-    /* transition: max-height 0.3s; */
-    height: auto;
-    max-height: 600px;
-}
-
 .menu.hidden {
-    max-height: 0;
+    display: none;
 }
 
 .menu .element {
@@ -195,10 +189,6 @@ input:focus {
 
 .menu .element.editing .favourites {
     display: block;
-}
-
-.menu .element .favourites .favourite {
-    display: flex;
 }
 
 .menu .element .favourites .icon {
@@ -260,24 +250,24 @@ input:focus {
     display: block;
 }
 
-.menu.groups .recommendations .favourite {
+.menu.groups .recommendations .recommendation {
     height: 30px;
     line-height: 30px;
+    display: flex;
 }
 
-.menu.groups .recommendations .favourite .roll-name {
+.menu.groups .recommendations .recommendation .roll-name {
     text-align: left;
     flex: 90%;
 }
 
-.menu.groups .recommendations .favourite .icon {
+.menu.groups .recommendations .recommendation .icon {
     flex: 10%;
 }
 
 .menu .element .small-header {
     height: 30px;
     line-height: 30px;
-    border-top: 2px dashed mediumaquamarine;
     padding-top: 5px;
     display: flex;
 }
@@ -288,10 +278,6 @@ input:focus {
     color: #888;
     text-align: left;
     padding-left: 5px;
-}
-
-.menu .element .small-header .material-icons {
-    text-transform: none;
 }
 
 .group-rolls .group-roll {
