@@ -15,17 +15,6 @@ body {
     max-width: 425px;
 }
 
-.header {
-    text-align: left;
-    font-size: 20px;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: white;
-    padding: 20px;
-    background-color: #2a313a;
-    line-height: normal;
-}
-
 .body {
     background-color: white;
     display: grid;
