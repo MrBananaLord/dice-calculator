@@ -52,14 +52,36 @@
             <div class="result"></div>
         </div>
         <div class="body">
-            <div data-action="appendSymbol" data-value="d20" class="clickable key orange">d20</div>
-            <div data-action="appendSymbol" data-value="d100" class="clickable key orange">d100</div>
-            <div data-action="appendSymbol" data-value="d" class="clickable key orange">d?</div>
+            <div data-action="appendSymbol" data-value="d20" class="clickable key">
+                <div class="die d20">
+                    <div class="cutter shadow"></div>
+                    <div class="cutter shadow light"></div>
+                    <div class="cutter shadow dark"></div>
+                    <div class="cutter"></div>
+                    <div class="value">20</div>
+                </div>
+            </div>
+            <div data-action="appendSymbol" data-value="d100" class="clickable key">
+                <div class="die dx">
+                    <div class="cutter"></div>
+                    <div class="value">100</div>
+                </div>
+            </div>
+            <div data-action="appendSymbol" data-value="d" class="clickable key">
+                <div class="die dx">
+                    <div class="cutter"></div>
+                    <div class="value">?</div>
+                </div>
+            </div>
             <div data-action="revert" class="clickable key upcased red">del</div>
             <div data-action="clear" class="clickable key upcased red">clr</div>
             <div data-action="appendSymbol" data-value="d12" class="clickable key">
-                <div class="die">
-                    <div class="cutter decagon">12</div>
+                <div class="die d12">
+                    <div class="cutter shadow"></div>
+                    <div class="cutter shadow light"></div>
+                    <div class="cutter shadow dark"></div>
+                    <div class="cutter"></div>
+                    <div class="value">12</div>
                 </div>
             </div>
             <div data-action="appendSymbol" data-value="1" class="clickable key">1</div>
@@ -67,8 +89,11 @@
             <div data-action="appendSymbol" data-value="3" class="clickable key">3</div>
             <div data-action="appendSymbol" data-value="+" class="clickable key blue">+</div>
             <div data-action="appendSymbol" data-value="d10" class="clickable key">
-                <div class="die">
-                    <div class="cutter octagon">10</div>
+                <div class="die d10">
+                    <div class="cutter shadow"></div>
+                    <div class="cutter shadow dark"></div>
+                    <div class="cutter"></div>
+                    <div class="value">10</div>
                 </div>
             </div>
             <div data-action="appendSymbol" data-value="4" class="clickable key">4</div>
@@ -76,8 +101,11 @@
             <div data-action="appendSymbol" data-value="6" class="clickable key">6</div>
             <div data-action="appendSymbol" data-value="-" class="clickable key blue">-</div>
             <div data-action="appendSymbol" data-value="d8" class="clickable key">
-                <div class="die">
-                    <div class="cutter hexagon">8</div>
+                <div class="die d8">
+                    <div class="cutter shadow"></div>
+                    <div class="cutter shadow dark"></div>
+                    <div class="cutter"></div>
+                    <div class="value">8</div>
                 </div>
             </div>
             <div data-action="appendSymbol" data-value="7" class="clickable key">7</div>
@@ -85,9 +113,11 @@
             <div data-action="appendSymbol" data-value="9" class="clickable key">9</div>
             <div data-action="appendSymbol" data-value="×" class="clickable key blue">×</div>
             <div data-action="appendSymbol" data-value="d6" class="clickable key">
-                <div class="die">
-                    <div class="cutter square shadow"></div>
-                    <div class="cutter square">6</div>
+                <div class="die d6">
+                    <div class="cutter shadow"></div>
+                    <div class="cutter shadow dark"></div>
+                    <div class="cutter"></div>
+                    <div class="value">6</div>
                 </div>
             </div>
             <div data-action="appendSymbol" data-value="0" class="clickable key">0</div>
@@ -95,9 +125,10 @@
             <div data-action="appendSymbol" data-value=")" class="clickable key">&#41;</div>
             <div data-action="appendSymbol" data-value="÷" class="clickable key blue">÷</div>
             <div data-action="appendSymbol" data-value="d4" class="clickable key">
-                <div class="die">
-                    <div class="cutter triangle shadow"></div>
-                    <div class="cutter triangle">4</div>
+                <div class="die d4">
+                    <div class="cutter shadow dark"></div>
+                    <div class="cutter"></div>
+                    <div class="value">4</div>
                 </div>
             </div>
             <div data-action="toggleMenu" data-value="historyMenu" class="clickable key menu-toggle disabled material-icons">history</div>
