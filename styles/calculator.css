@@ -9,7 +9,7 @@ body {
 .body {
     background-color: white;
     display: grid;
-    grid-template-columns: repeat(5, minmax(50px, 100px));
+    grid-template-columns: repeat(4, minmax(50px, 100px));
 }
 
 #rollingStonesCalculator {
@@ -17,7 +17,7 @@ body {
     text-align: center;
     line-height: 60px;
     min-width: 320px;
-    max-width: 425px;
+    max-width: 400px;
 }
 
 .material-icons {
@@ -36,6 +36,15 @@ body {
 
 div {
     user-select: none;
+}
+
+.key.plus,
+.key.minus {
+    grid-column: span 2;
+}
+
+.key.calculate {
+    grid-column: span 4;
 }
 
 .clickable {
