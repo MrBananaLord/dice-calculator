@@ -1,10 +1,16 @@
 body {
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: rgb(0, 0, 0, 0.35);
     font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
     font-size: 16px;
     background-color: aliceblue;
     color: inherit;
     margin: 0;
+}
+
+.body {
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(50px, 100px));
 }
 
 #rollingStonesCalculator {
@@ -13,12 +19,6 @@ body {
     line-height: 60px;
     min-width: 320px;
     max-width: 425px;
-}
-
-.body {
-    background-color: white;
-    display: grid;
-    grid-template-columns: repeat(5, minmax(50px, 100px));
 }
 
 .material-icons {
@@ -34,6 +34,14 @@ body {
     user-select: none;
 }
 
+div {
+    user-select: none;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
 .clickable:active {
     filter: brightness(75%);
 }
@@ -42,9 +50,9 @@ body {
     .key:hover,
     .menu-toggle:hover,
     .menu-toggle.active:hover,
-    .menu .favourite:hover,
+    .menu .clickable.favourite:hover,
     .menu .edit:hover,
-    .menu .value:hover,
+    .menu .details:hover,
     .recommendation:hover {
         background-color: pink;
     }
@@ -80,7 +88,6 @@ body {
 }
 
 .invalid .key.calculate {
-    background-color: bc0f0e;
     color: white;
     cursor: not-allowed;
 }
@@ -110,13 +117,12 @@ input {
     font-weight: normal;
     border: none;
     line-height: 60px;
-    padding: 0 0 0 10px;
+    margin: 0 0 0 10px;
     font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
     font-size: 16px;
     text-align: right;
     flex: 1;
     border-radius: 0;
-    margin: 0;
 }
 
 input:focus {
@@ -124,7 +130,7 @@ input:focus {
 }
 
 .display .result {
-    padding-right: 10px;
+    margin-right: 10px;
 }
 
 .menu.hidden {
@@ -134,12 +140,12 @@ input:focus {
 .menu .element {
     background-color: white;
     display: flex;
-    cursor: pointer;
 }
 
-.menu .value {
+.menu .details {
     flex: 60%;
     background-color: white;
+    text-align: left;
 }
 
 .menu .favourite,
@@ -162,7 +168,6 @@ input:focus {
 .menu .element .editor,
 .menu .element .favourites {
     display: none;
-    background-color: none;
 }
 
 .menu .element .viewer {
@@ -192,14 +197,18 @@ input:focus {
     display: none;
 }
 
-.menu .element .name {
-    display: block;
-    width: 100%;
-    text-align: left;
-    padding-left: 10px;
+.menu .element input.name {
+    padding-left: 0;
 }
 
-.menu.favourites .element .name {
+.menu .element .name {
+    padding-left: 10px;
+    text-align: left;
+    display: block;
+    background-color: inherit;
+}
+
+.menu .element.favourite .details .name {
     height: 40px;
     line-height: 46px;
 }
@@ -209,18 +218,14 @@ input:focus {
     color: gray;
     display: block;
     width: 100%;
-    background-color: none;
     text-align: left;
-    padding-left: 10px;
+    margin-left: 10px;
 }
 
-.menu.favourites .element .equasion {
+.menu .element .equasion {
     height: 20px;
     line-height: 8px;
 }
-
-
-/* CHAINS */
 
 .menu.groups .element {
     display: block;
@@ -257,7 +262,7 @@ input:focus {
 .menu .element .small-header {
     height: 30px;
     line-height: 30px;
-    padding-top: 5px;
+    margin-top: 5px;
     display: flex;
 }
 
@@ -266,7 +271,7 @@ input:focus {
     font-weight: bold;
     color: #888;
     text-align: left;
-    padding-left: 5px;
+    margin-left: 5px;
 }
 
 .group-rolls .group-roll {
@@ -294,7 +299,6 @@ input:focus {
 .group .roll-name .roll-value {
     font-size: 12px;
     color: gray;
-    background-color: none;
 }
 
 .group-rolls .material-icons.delete {
