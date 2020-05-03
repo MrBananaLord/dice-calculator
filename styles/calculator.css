@@ -90,6 +90,7 @@ div {
 .invalid .key.calculate {
     color: white;
     cursor: not-allowed;
+    background-color: crimson;
 }
 
 .key.disabled,
