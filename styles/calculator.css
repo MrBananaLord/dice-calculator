@@ -109,12 +109,16 @@ div {
     display: none;
 }
 
+.display input.equasion.advanced {
+    display: none;
+}
+
 #rollingStonesCalculator.advanced .key.advanced {
     display: block;
 }
 
-#rollingStonesCalculator.advanced .key.simple {
-    display: none;
+#rollingStonesCalculator.advanced .display input.equasion.advanced {
+    display: block;
 }
 
 
@@ -148,12 +152,15 @@ input:focus {
     outline: none;
 }
 
-#rollingStonesCalculator.simple input.equasion {
-    display: none;
-}
-
-#rollingStonesCalculator.advanced input.equasion {
+.display input.equasion {
     display: block;
+    width: 100%;
+    padding: 0 5px;
+    margin: 0;
+    color: #888;
+    text-align: center;
+    height: 30px;
+    line-height: 40px;
 }
 
 .display .equasion {
