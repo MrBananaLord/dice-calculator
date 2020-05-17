@@ -58,16 +58,14 @@ div {
     .menu .clickable.option:hover,
     .menu .edit:hover,
     .menu .details:hover,
+    .key.calculate:hover,
+    .menu .submit:hover,
+    .menu .roll:hover,
     .recommendation:hover {
         background-color: pink;
     }
-    .key.calculate:hover,
-    .menu .submit:hover,
-    .menu .roll:hover {
-        background-color: aquamarine;
-    }
-    .key.disabled:hover,
-    .key.calculate.disabled:hover {
+    .key.disabled.key.calculate:hover,
+    .key.disabled:hover {
         background-color: #ccc;
     }
     .invalid .key.calculate:hover,
@@ -88,14 +86,13 @@ div {
     color: royalblue;
 }
 
-.key.calculate {
-    background-color: mediumaquamarine;
+.invalid .key.calculate {
+    cursor: not-allowed;
 }
 
-.invalid .key.calculate {
-    color: white;
+.key.disabled.calculate {
     cursor: not-allowed;
-    background-color: crimson;
+    background-color: #eee;
 }
 
 .key.disabled,
