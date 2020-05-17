@@ -24,6 +24,9 @@ body {
     line-height: inherit;
 }
 
+
+/* keys */
+
 .key,
 .menu-toggle {
     height: 60px;
@@ -102,6 +105,21 @@ div {
     cursor: not-allowed;
 }
 
+.key.advanced {
+    display: none;
+}
+
+#rollingStonesCalculator.advanced .key.advanced {
+    display: block;
+}
+
+#rollingStonesCalculator.advanced .key.simple {
+    display: none;
+}
+
+
+/* misc */
+
 .upcased {
     text-transform: uppercase;
 }
@@ -139,6 +157,9 @@ input:focus {
 .hidden {
     display: none;
 }
+
+
+/* menus */
 
 .menu .element {
     background-color: white;
