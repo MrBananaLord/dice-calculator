@@ -126,8 +126,6 @@ div {
 
 .display {
     background-color: #fff;
-    display: flex;
-    height: 60px;
 }
 
 .invalid .display {
@@ -150,8 +148,25 @@ input:focus {
     outline: none;
 }
 
-.display .result {
-    margin-right: 10px;
+#rollingStonesCalculator.simple input.equasion {
+    display: none;
+}
+
+#rollingStonesCalculator.advanced input.equasion {
+    display: block;
+}
+
+.display .equasion {
+    line-height: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.display .equasion .token {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
 }
 
 .hidden {
